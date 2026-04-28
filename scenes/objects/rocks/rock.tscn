@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cjkrdk8jkxwys"]
+
+[ext_resource type="Texture2D" uid="uid://bmbg7ixb3ext3" path="res://assets/game/objects/basic_grass_biome.png" id="1_70ahf"]
+[ext_resource type="Shader" uid="uid://dwa6wnsw8c4v6" path="res://scenes/objects/shake.gdshader" id="1_bntui"]
+[ext_resource type="PackedScene" uid="uid://b5gn77pahn5x2" path="res://scenes/component/hurt_component.tscn" id="2_aw33s"]
+[ext_resource type="Script" uid="uid://dbfyw7mwsit2t" path="res://scenes/objects/rocks/rock.gd" id="2_f5itc"]
+[ext_resource type="PackedScene" uid="uid://by6dm2yaljs1r" path="res://scenes/component/damage_component.tscn" id="4_bntui"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8i8v8"]
+resource_local_to_scene = true
+shader = ExtResource("1_bntui")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw33s"]
+atlas = ExtResource("1_70ahf")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70ahf"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_msy0l"]
+radius = 6.0
+
+[node name="Rock" type="Sprite2D" unique_id=427993961]
+material = SubResource("ShaderMaterial_8i8v8")
+position = Vector2(-1, -2)
+texture = SubResource("AtlasTexture_aw33s")
+script = ExtResource("2_f5itc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1724260986]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=60300963]
+shape = SubResource("CircleShape2D_70ahf")
+
+[node name="HurtComponent" parent="." unique_id=1351863596 instance=ExtResource("2_aw33s")]
+tool = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=1232130303]
+visible = false
+shape = SubResource("CircleShape2D_msy0l")
+debug_color = Color(0.92949235, 0.1787835, 0.49875456, 0.41960785)
+
+[node name="DamageComponent" parent="." unique_id=596083132 instance=ExtResource("4_bntui")]
+max_damage = 5

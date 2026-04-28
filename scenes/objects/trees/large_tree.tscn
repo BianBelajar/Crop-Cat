@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bmbg7ixb3ext3" path="res://assets/game/objects/basic_grass_biome.png" id="1_wjqkr"]
 [ext_resource type="Script" uid="uid://8le1fjtvg2fx" path="res://scenes/objects/trees/large_tree.gd" id="2_wjqkr"]
 [ext_resource type="PackedScene" uid="uid://b5gn77pahn5x2" path="res://scenes/component/hurt_component.tscn" id="3_6vpey"]
-[ext_resource type="Shader" uid="uid://dwa6wnsw8c4v6" path="res://scenes/objects/trees/tree_shake.gdshader" id="3_f4wgc"]
+[ext_resource type="Shader" uid="uid://dwa6wnsw8c4v6" path="res://scenes/objects/shake.gdshader" id="3_f4wgc"]
 [ext_resource type="PackedScene" uid="uid://by6dm2yaljs1r" path="res://scenes/component/damage_component.tscn" id="4_0ia52"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6vpey"]
@@ -25,7 +25,7 @@ shader_parameter/shake_speed = 20.0
 radius = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au4vd"]
-size = Vector2(18, 22)
+size = Vector2(14, 16)
 
 [node name="LargeTree" type="Sprite2D" unique_id=1818133563]
 material = SubResource("ShaderMaterial_6vpey")
@@ -45,7 +45,7 @@ position = Vector2(0, 1)
 tool = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent" unique_id=361285686]
-position = Vector2(0, 1)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_au4vd")
 debug_color = Color(0.800802, 0.23571002, 0.85708994, 0.41960785)
 

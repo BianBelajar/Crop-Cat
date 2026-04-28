@@ -8,7 +8,6 @@ var current_node_state : NodeState
 var current_node_state_name : String
 var parent_node_name: String
 
-
 func _ready() -> void:
 	parent_node_name = get_parent().name
 	
@@ -32,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	if current_node_state:
 		current_node_state._on_physics_process(delta)
 		current_node_state._on_next_transitions()
-		#print(parent_node_name, " Current State: ", current_node_state_name)
+		print(parent_node_name, " Current State: ", current_node_state_name)
 
 
 func transition_to(node_state_name : String) -> void:
