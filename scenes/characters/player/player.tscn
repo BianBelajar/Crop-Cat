@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://3amrr0hbtm31"]
 
+[ext_resource type="Script" uid="uid://kn8ysl3ywod4" path="res://scenes/characters/player/player.gd" id="1_6avc5"]
 [ext_resource type="Texture2D" uid="uid://crmoxeoy8ucqs" path="res://assets/game/characters/basic_character_sprite.png" id="1_t61fv"]
 [ext_resource type="Texture2D" uid="uid://cum4aj82bbssb" path="res://assets/game/characters/character_sprite.png" id="2_686vu"]
 [ext_resource type="Script" uid="uid://chh7u6vacd8mt" path="res://scripts/state_machine/node_state_machine.gd" id="3_hss88"]
@@ -393,12 +394,14 @@ animations = [{
 radius = 8.0
 
 [node name="Player" type="CharacterBody2D" unique_id=778784355]
+script = ExtResource("1_6avc5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880103568]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_omk8d")
-animation = &"idle_front"
+animation = &"idle_back"
 autoplay = "idle_front"
+frame_progress = 0.5805944
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1985638005]
 position = Vector2(0, -8)
