@@ -403,13 +403,13 @@ radius = 3.0
 [node name="Player" type="CharacterBody2D" unique_id=778784355]
 collision_layer = 2
 script = ExtResource("1_6avc5")
-current_tool = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880103568]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_omk8d")
-animation = &"idle_front"
+animation = &"walk_left"
 autoplay = "idle_front"
+frame_progress = 0.6686156
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1985638005]
 position = Vector2(0, -4)
@@ -447,7 +447,6 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
 [node name="HitComponents" parent="." unique_id=625718729 instance=ExtResource("10_3xnwo")]
 y_sort_enabled = true
-current_tool = 1
 
 [node name="HitComponentCollisionShape2D" type="CollisionShape2D" parent="HitComponents" unique_id=1616971322]
 shape = SubResource("CircleShape2D_djydg")

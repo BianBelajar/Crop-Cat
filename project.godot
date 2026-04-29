@@ -14,6 +14,11 @@ config/name="CropCat"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ToolManager="*uid://cnmtwmxxhmt6w"
+InventoryManager="*uid://buoubpy0hie8x"
+
 [display]
 
 window/size/viewport_width=640

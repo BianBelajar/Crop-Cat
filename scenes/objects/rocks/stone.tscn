@@ -11,9 +11,11 @@ region = Rect2(114, 18, 10, 8)
 radius = 4.0
 
 [node name="Stone" type="Sprite2D" unique_id=1067511969]
+y_sort_enabled = true
 texture = SubResource("AtlasTexture_dgxlj")
 
 [node name="CollectibleComponent" parent="." unique_id=1480014232 instance=ExtResource("2_k7uky")]
+y_sort_enabled = true
 collectable_name = "stone"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent" unique_id=2075323466]

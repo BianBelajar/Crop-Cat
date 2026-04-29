@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dut4v33fc4g78"]
+
+[ext_resource type="Texture2D" uid="uid://flthx0e4ue6k" path="res://assets/game/objects/basic_plant.png" id="1_w1edi"]
+[ext_resource type="PackedScene" uid="uid://dachoh6n0gxdg" path="res://scenes/component/collectible_component.tscn" id="2_of7pp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gha8t"]
+radius = 6.0
+
+[node name="WheatHarvest" type="Sprite2D" unique_id=512185441]
+y_sort_enabled = true
+texture = ExtResource("1_w1edi")
+hframes = 6
+vframes = 2
+frame = 5
+
+[node name="CollectibleComponent" parent="." unique_id=1480014232 instance=ExtResource("2_of7pp")]
+y_sort_enabled = true
+collectable_name = "wheat"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent" unique_id=1559363345]
+shape = SubResource("CircleShape2D_gha8t")
