@@ -23,11 +23,11 @@ func _on_physics_process(_delta : float) -> void:
 
 func _on_next_transitions() -> void:
 	if idle_state_timeout:
-		transition.emit("Walk")
+		transition.emit("walk")
 
 
 func _on_enter() -> void:
-	animated_sprite_2d.play("Idle")
+	animated_sprite_2d.play("idle")
 	
 	idle_state_timeout = false
 	idle_state_timer.start()
