@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cggryi570rotr" path="res://assets/ui/basic_ui_sprite.png" id="1_r6d4f"]
 [ext_resource type="FontVariation" uid="uid://djxury3uvxqqa" path="res://assets/ui/fonts/zx_palm_variation.tres" id="2_rr7v1"]
+[ext_resource type="FontFile" uid="uid://c3g2sp2jgje4u" path="res://assets/ui/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_s3hsv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rr7v1"]
 atlas = ExtResource("1_r6d4f")
@@ -13,6 +14,66 @@ texture_margin_left = 7.0
 texture_margin_top = 7.0
 texture_margin_right = 7.0
 texture_margin_bottom = 7.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a22q5"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2sve"]
+atlas = SubResource("CompressedTexture2D_a22q5")
+region = Rect2(59, 11, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y10rl"]
+texture = SubResource("AtlasTexture_r2sve")
+region_rect = Rect2(0, 0, 26, 26)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8dbq0"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qclwp"]
+atlas = SubResource("CompressedTexture2D_8dbq0")
+region = Rect2(59, 59, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qrihc"]
+texture = SubResource("AtlasTexture_qclwp")
+region_rect = Rect2(0, 0, 26, 26)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hvejl"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kw81"]
+atlas = SubResource("CompressedTexture2D_hvejl")
+region = Rect2(59, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1c706"]
+texture = SubResource("AtlasTexture_3kw81")
+region_rect = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3t4va"]
+atlas = ExtResource("1_r6d4f")
+region = Rect2(59, 155, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a24es"]
+texture = SubResource("AtlasTexture_3t4va")
+region_rect = Rect2(0, 0, 26, 26)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o763n"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0skk"]
+atlas = SubResource("CompressedTexture2D_o763n")
+region = Rect2(59, 59, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qwegf"]
+texture = SubResource("AtlasTexture_q0skk")
+region_rect = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jvfr"]
+atlas = ExtResource("1_r6d4f")
+region = Rect2(504, 131, 35, 18)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r2sve"]
+texture = SubResource("AtlasTexture_1jvfr")
+region_rect = Rect2(0, 0, 35, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6d4f"]
 atlas = ExtResource("1_r6d4f")
@@ -100,6 +161,17 @@ region_rect = Rect2(0, 0, 26, 28)
 [resource]
 DarkWoodPanel/base_type = &"PanelContainer"
 DarkWoodPanel/styles/panel = SubResource("StyleBoxTexture_s3hsv")
+DayAndNightButton/base_type = &"Button"
+DayAndNightButton/styles/disabled = SubResource("StyleBoxTexture_y10rl")
+DayAndNightButton/styles/focus = SubResource("StyleBoxTexture_qrihc")
+DayAndNightButton/styles/hover = SubResource("StyleBoxTexture_1c706")
+DayAndNightButton/styles/normal = SubResource("StyleBoxTexture_a24es")
+DayAndNightButton/styles/pressed = SubResource("StyleBoxTexture_qwegf")
+DayAndNightCounterPanel/base_type = &"PanelContainer"
+DayAndNightCounterPanel/styles/panel = SubResource("StyleBoxTexture_r2sve")
+DayAndNightLAbel/base_type = &"Label"
+DayAndNightLAbel/font_sizes/font_size = 18
+DayAndNightLAbel/fonts/font = ExtResource("2_s3hsv")
 InventoryItemPanel/base_type = &"PanelContainer"
 InventoryItemPanel/styles/panel = SubResource("StyleBoxTexture_rr7v1")
 InventoryLabel/base_type = &"Label"
