@@ -58,6 +58,7 @@ animations = [{
 radius = 7.0
 
 [node name="Cow" type="CharacterBody2D" unique_id=1005591227]
+collision_layer = 64
 script = ExtResource("1_j7g5r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=713773591]
@@ -65,7 +66,7 @@ position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_cgos1")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.31486833
+frame_progress = 0.898941
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=719317513]
 position = Vector2(0, -8)
@@ -73,7 +74,9 @@ shape = SubResource("CircleShape2D_cgos1")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=132169272]
 navigation_layers = 2
+path_postprocessing = 1
 avoidance_enabled = true
+debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="." unique_id=1424050967 node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("2_ilrem")
