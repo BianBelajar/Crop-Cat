@@ -5,6 +5,15 @@ enum Tools {
 	AxeWood,
 	TillGround,
 	WaterCrops,
-	PlantCorn,
+	PlantWheat,
 	PlantTomato
+}
+
+enum GrowthStates {
+	Seed,
+	Germination,
+	Vegetative,
+	Reproductive,
+	Maturity,
+	Harvesting
 }
