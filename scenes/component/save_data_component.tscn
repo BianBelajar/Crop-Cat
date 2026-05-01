@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dhrwcfmfvlm06"]
+
+[ext_resource type="Script" uid="uid://bxbigqifs5kra" path="res://scenes/component/save_data_component.gd" id="1_6m0o3"]
+
+[node name="SaveDataComponent" type="Node" unique_id=725590635]
+script = ExtResource("1_6m0o3")

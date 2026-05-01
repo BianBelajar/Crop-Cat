@@ -1,0 +1,15 @@
+~ start
+
+Paman Ben: [[Hai|Hallo]], senang akhrinya paman bertemu dengan dirimu.
+Paman Ben: Selamat datang diperkebunan paman.
+Paman Ben: Disini paman akan mengajarimu cara nya kita berternak dan bertani!
+Paman Ben: Sebelum paman memberikan alat dan bibit, paman akan menjelaskan caranya bertani.
+Paman Ben: Hal pertama yang perlu dilakukan sebelum bertani adalah kamu harus menentukan tempat yang cocok untuk menanam setelah kamu menemukan tempat yang cocok maka pacul lah petak itu..
+Paman Ben: Setelah kamu memacul beberapa petak makan tanamlah bibit tomat dan padi tersebut.
+Paman Ben: Lalu siram tanaman tersebut agar tumbuh subur!
+- Menegerti dan siap menanam.
+	Paman Ben: Akan ada masanya tumbuhan kita terkena hama maka persiapkan diri mu ya!
+	do GameDialogueManager.action_give_crop_seeds()
+- Belum siap.
+
+=> END

@@ -80,7 +80,7 @@ button_group = SubResource("ButtonGroup_gbtgy")
 icon = SubResource("AtlasTexture_bdu3n")
 icon_alignment = 1
 
-[node name="ToolCorn" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1438592470]
+[node name="ToolWheat" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1438592470]
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 theme_type_variation = &"ToolButton"
@@ -101,5 +101,5 @@ icon_alignment = 1
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolAxe" to="." method="_on_tool_axe_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolTilling" to="." method="_on_tool_tilling_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolWatering" to="." method="_on_tool_watering_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/ToolCorn" to="." method="_on_tool_corn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ToolWheat" to="." method="_on_tool_corn_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolTomato" to="." method="_on_tool_tomato_pressed"]
