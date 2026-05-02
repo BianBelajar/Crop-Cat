@@ -1,4 +1,4 @@
-class_name TileMapLayerDataResouce
+class_name TileMapLayerDataResource
 extends NodeDataResource
 
 @export var tilemap_layer_used_cells: Array[Vector2i]

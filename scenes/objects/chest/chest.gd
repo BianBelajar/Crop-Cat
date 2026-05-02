@@ -9,6 +9,7 @@ var tomato_harvest_scene = preload("res://scenes/objects/plants/tomato_harvest.t
 @export var food_drop_height: int = 40
 @export var reward_output_radius: int = 20
 @export var output_reward_scenes: Array[PackedScene] = []
+var food_count: int = 0
 
 @onready var interactable_component: InteractabeComponent = $InteractableComponent
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -80,9 +81,17 @@ func trigger_feed_harvest(inventory_item: String, scene: Resource) -> void:
 		tween.tween_callback(harvest_instance.queue_free)
 		
 		InventoryManager.remove_collectable(inventory_item)
-
+		
 func on_food_received(area: Area2D) -> void:
-	call_deferred("add_reward_scene")
+	# Tambah hitungan makanan setiap kali ada hasil panen yang masuk
+	food_count += 1
+	
+	# Cek apakah sudah mencapai 3 tanaman
+	if food_count >= 2:
+		food_count = 0 # Reset hitungan kembali ke 0 untuk antrian selanjutnya
+		
+		# Panggil hadiah (Susu / Telur)
+		call_deferred("add_reward_scene")
 
 
 func add_reward_scene() -> void:

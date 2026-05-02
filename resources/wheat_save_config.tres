@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SceneDataResource" format=3 uid="uid://dg7bypqxfa3rp"]
+
+[ext_resource type="Script" uid="uid://ch0dau6iuu5mr" path="res://resources/scene_data_resource.gd" id="1_uval3"]
+
+[resource]
+script = ExtResource("1_uval3")
+scene_file_path = "res://scenes/objects/plants/wheat.tscn"
+metadata/_custom_type_script = "uid://ch0dau6iuu5mr"

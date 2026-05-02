@@ -1,6 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://legoom5ka3sy"]
 
 [ext_resource type="Texture2D" uid="uid://cggryi570rotr" path="res://assets/ui/basic_ui_sprite.png" id="1_llw31"]
+[ext_resource type="FontFile" uid="uid://c3g2sp2jgje4u" path="res://assets/ui/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_vqiw0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rr7v1"]
 atlas = ExtResource("1_llw31")
@@ -88,6 +89,7 @@ region_rect = Rect2(0, 0, 26, 28)
 [resource]
 DarkWoodPanel/base_type = &"PanelContainer"
 DarkWoodPanel/styles/panel = SubResource("StyleBoxTexture_s3hsv")
+Label/fonts/font = ExtResource("2_vqiw0")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10

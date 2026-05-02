@@ -14,8 +14,18 @@ func _ready() -> void:
 
 func save_node_data() -> void:
 	var nodes = get_tree().get_nodes_in_group("save_data_component")
-	
 	game_data_resource = SaveGameDataResource.new()
+	
+	game_data_resource.inventory_data = InventoryManager.inventory
+	game_data_resource.game_time = DayAndNightCycleManager.time
+	
+	if nodes != null:
+		for node: SaveDataComponent in nodes:
+			if node is SaveDataComponent:
+				var save_data_resource: NodeDataResource = node._save_data()
+				if save_data_resource != null:
+					var save_final_resource = save_data_resource.duplicate()
+					game_data_resource.save_data_nodes.append(save_final_resource)
 	
 	if nodes != null:
 		for node: SaveDataComponent in nodes:
@@ -43,12 +53,17 @@ func load_game() -> void:
 	
 	if !FileAccess.file_exists(save_game_path):
 		return
-	
-	game_data_resource = ResourceLoader.load(save_game_path)
+		
+	var game_data_resource = ResourceLoader.load(save_game_path)
 	
 	if game_data_resource == null:
 		return
 	
+	# Kembalikan data tas
+	InventoryManager.inventory = game_data_resource.inventory_data
+	InventoryManager.inventory_changed.emit()
+	DayAndNightCycleManager.time = game_data_resource.game_time
+
 	var root_node: Window = get_tree().root
 	
 	for resource in game_data_resource.save_data_nodes:

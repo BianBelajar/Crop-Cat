@@ -1,16 +1,19 @@
 [gd_scene format=4 uid="uid://cl7ulh8ufb5f3"]
 
 [ext_resource type="TileSet" uid="uid://33cjpxlqics6" path="res://Tilesets/game_tile_set.tres" id="1_ksju7"]
+[ext_resource type="PackedScene" uid="uid://dhrwcfmfvlm06" path="res://scenes/component/save_data_component.tscn" id="2_bahl2"]
 [ext_resource type="PackedScene" uid="uid://d0i3br8sqwdc5" path="res://scenes/component/field_cursor_component.tscn" id="2_excbq"]
 [ext_resource type="PackedScene" uid="uid://c6w52lvxjh311" path="res://scenes/characters/chicken/chicken.tscn" id="2_sk5k4"]
 [ext_resource type="PackedScene" uid="uid://cqea4s60gvg7q" path="res://scenes/houses/small_house.tscn" id="2_x42e6"]
 [ext_resource type="PackedScene" uid="uid://bbp0qj5fsqqqe" path="res://scenes/houses/medium_house.tscn" id="3_6761a"]
 [ext_resource type="Script" uid="uid://c4xq6nqgvm6qx" path="res://scenes/component/field_cursor_component.gd" id="3_iav0o"]
+[ext_resource type="Resource" uid="uid://mgvehwh7o23p" path="res://resources/tilemap_layer_data_resource.tres" id="3_np2pn"]
 [ext_resource type="PackedScene" uid="uid://dm3wjpe0lc5h4" path="res://scenes/component/crops_cursor_component.tscn" id="4_dnkej"]
 [ext_resource type="PackedScene" uid="uid://c1cox6nveb2ue" path="res://scenes/characters/guide/guide.tscn" id="4_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://7gon8lv2jdp3" path="res://scenes/houses/large_house.tscn" id="4_sk5k4"]
 [ext_resource type="Script" uid="uid://bitoxbnlht52d" path="res://scenes/component/crops_cursor_component.gd" id="5_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://d2wfxqlbf4ae5" path="res://scenes/characters/cow/cow.tscn" id="6_oc4kc"]
+[ext_resource type="PackedScene" uid="uid://bmkj2gbmv8kwv" path="res://scenes/component/save_level_data_component.tscn" id="7_np2pn"]
 [ext_resource type="PackedScene" uid="uid://cqoffv0swtris" path="res://scenes/component/test_scene_enable_tool_buttons_component.tscn" id="12_iav0o"]
 [ext_resource type="PackedScene" uid="uid://cjjewr376cqwu" path="res://scenes/objects/chest/chest.tscn" id="13_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://20fil0vf13ln" path="res://scenes/objects/milk.tscn" id="14_iwr0g"]
@@ -37,6 +40,8 @@ source_geometry_mode = 2
 [node name="Level1" type="Node2D" unique_id=879936782]
 y_sort_enabled = true
 
+[node name="SaveLevelDataComponent" parent="." unique_id=1404872696 instance=ExtResource("7_np2pn")]
+
 [node name="GameTileMap" type="Node2D" parent="." unique_id=618789815]
 y_sort_enabled = true
 
@@ -50,6 +55,9 @@ tile_set = ExtResource("1_ksju7")
 
 [node name="TilledSoil" type="TileMapLayer" parent="GameTileMap" unique_id=140944246]
 tile_set = ExtResource("1_ksju7")
+
+[node name="SaveDataComponent" parent="GameTileMap/TilledSoil" unique_id=725590635 instance=ExtResource("2_bahl2")]
+save_data_resource = ExtResource("3_np2pn")
 
 [node name="Undergrowth" type="TileMapLayer" parent="GameTileMap" unique_id=1455036457]
 tile_map_data = PackedByteArray("AABBAA8ABAAFAAEAAAAYABEABAAFAAEAAAAZABEABAAFAAEAAAAfABcABAAFAAEAAAAfABgABAAFAAEAAAApABsABAAFAAEAAAAqABMABAAFAAEAAAAxAA0ABAAFAAEAAABLAB4ABAAFAAEAAABOACUABAAFAAEAAABPACUABAAFAAEAAABcACQABAAFAAEAAABcABcABAAFAAEAAABdABcABAAFAAEAAABZABMABAAFAAEAAABYAA0ABAAFAAEAAABHAAIABAAFAAEAAABIAAIABAAFAAEAAABQAPv/BAAFAAEAAABUAP3/BAAFAAEAAABDAPb/BAAFAAEAAABLAPf/BAAFAAEAAABqABMABAAFAAEAAAASAAgABAAFAAEAAAATAAgABAAFAAEAAAAKAAwABAAGAAEAAAARADEABAAFAAEAAAANADcABAAFAAEAAAAXADgABAAFAAEAAAAWADMABAAFAAEAAAAVAC8ABAAFAAEAAAATAC4ABAAFAAEAAAALADEABAAFAAEAAAAfADYABAAFAAEAAAA3ACAABAAFAAEAAAA4ABkABAAFAAEAAAA/ACQABAAFAAEAAABQAAkABAAGAAEAAAA+AAUABAAGAAEAAABCAP//BAAGAAEAAABCAAAABAAGAAEAAAAjAAwABAAGAAEAAAAbAAkABAAGAAEAAAAKAA0ABAAGAAEAAAAHAAUABAAGAAEAAABCAB0ABAAGAAEAAABhABAABAAGAAEAAABiAAUABAAGAAEAAABuABMABAAGAAEAAABuACAABAAGAAEAAABdACEABAAGAAEAAABUACsABAAGAAEAAABGABIABAAGAAEAAAAzAAoABAAGAAEAAAAbADIABAAGAAEAAAA0ABcABAAGAAIAAAA5ABAABAAGAAIAAABRAAYABAAGAAIAAABYABgABAAGAAIAAABJACAABAAGAAIAAAAiABQABAAGAAIAAAAUABUABAAGAAIAAAATAA4ABAAGAAIAAAAPACsABAAHAAIAAAAQACsABAAHAAIAAAAbAC0ABAAHAAIAAAAbAC4ABAAHAAIAAAAgADYABAAHAAIAAAAPADgABAAHAAIAAABDACgABAAHAAIAAABLACcABAAHAAIAAABRACsABAAHAAIAAABvABsABAAHAAIAAABvAA0ABAAHAAIAAABpAAoABAAHAAIAAABbAPz/BAAHAAIAAABYAPf/BAAHAAIAAABDAPr/BAAHAAIAAAAnAAkABAAHAAIAAAAgAAcABAAHAAIAAAAKAAMABAAHAAIAAAAGAAwABAAHAAIAAAAOABMABAAHAAIAAAAZAB8ABAAHAAIAAAAfACAABAAHAAIAAAAuACQABAAHAAIAAABhAAkABAAHAAMAAAAwABAABAAHAAMAAABWAB8ABAAHAAMAAABVAB8ABAAHAAMAAAAkAB8ABAAHAAMAAAA+AAAABAAHAAMAAAASADQABAAHAAMAAABlACAABAAHAAMAAAAlACQABAAHAAQAAABiACcABAAIAAQAAABxAAgABAAIAAQAAAA7ACoABAAIAAQAAAAMABYABAAHAAQAAAAKABQABAAIAAQAAAAOAB8ABAAIAAQAAAAWACMABAAIAAQAAAACAA0ABAAHAAQAAAAWAAAABAAHAAQAAAAqAAEABAAIAAQAAABHAPP/BAAIAAQAAABNAPP/BAAIAAQAAABkAPr/BAAIAAQAAABCACoABAAHAAQAAABEACoABAAHAAQAAABIACsABAAIAAQAAABlACYABAAHAAQAAABuAAkABAAHAAQAAABgAPv/BAAHAAQAAABLAPT/BAAHAAQAAAApAAUABAAHAAQAAAAuAAQABAAHAAQAAAADAAYABAAHAAQAAAAnACMABAAHAAQAAAAnACQABAAIAAQAAAB1ABcABAAIAAQAAAB1ABgABAAHAAQAAABlAAQABAAFAAQAAAA1AAEABAAFAAQAAAA0AP7/BAAGAAQAAAAwAAAABAAGAAQAAABnAAEABAAGAAQAAABoAAEABAAGAAQAAABpAAMABAAGAAQAAABBAC0ABAAGAAQAAABRADEABAAGAAQAAABRADIABAAGAAQAAABWAC4ABAAFAAQAAABRAC4ABAAFAAQAAAAfACMABAAFAAQAAAAiACMABAAGAAQAAAAaACMABAAGAAQAAAAOABQABAAFAAQAAAANABkABAAFAAQAAAAOABkABAAGAAQAAAADAAkABAAGAAQAAAD+/wgABAAGAAQAAAACAA4ABAAGAAQAAAAIAP7/BAAGAAQAAAAOAP7/BAAGAAQAAAANAAEABAAGAAQAAAATAAIABAAGAAQAAAAVAAMABAAFAAQAAAAIAAEABAAFAAQAAAAcAAMABAAFAAQAAAAhAAMABAAGAAQAAAAfAAAABAAGAAQAAAAjAAUABAAIAAQAAAAjAAQABAAHAAQAAABsACQABAAFAAQAAABsACcABAAGAAQAAABsACYABAAGAAQAAABvACQABAAGAAQAAABvACYABAAHAAQAAABwACYABAAIAAQAAAByACcABAAGAAQAAABVAPv/BAABAAMAAABQAPn/BAABAAMAAABLAPz/BAABAAMAAAA/APz/BAABAAMAAABGAPb/BAABAAMAAABZAP//BAABAAMAAABZAPr/BAAAAAMAAABVAPf/BAAAAAMAAABPAP3/BAAAAAMAAABGAPn/BAAAAAMAAABFAP3/BAAAAAMAAAA6AP3/BAAAAAMAAAA8APr/BAAAAAMAAABeAP7/BAAAAAMAAAASACIABwAAAAAAAAASACkABwAAAAIAAAASACgABwAAAAEAAAASACcABwAAAAEAAAASACYABwAAAAEAAAASACUABwAAAAEAAAASACQABwAAAAEAAAASACMABwAAAAEAAAA=")
@@ -71,7 +79,7 @@ tile_set = ExtResource("1_ksju7")
 position = Vector2(276, 900)
 
 [node name="MediumHouse" parent="GameTileMap/Houses" unique_id=347338656 instance=ExtResource("3_6761a")]
-position = Vector2(1184, 636)
+position = Vector2(1180, 338)
 
 [node name="LargeHouse" parent="GameTileMap/Houses" unique_id=1849886197 instance=ExtResource("4_sk5k4")]
 position = Vector2(937, 306)

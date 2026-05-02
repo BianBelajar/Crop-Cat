@@ -8,10 +8,18 @@ var tomato_harvest_scene = preload("res://scenes/objects/plants/tomato_harvest.t
 @onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
 @onready var hurt_component: HurtComponent = $HurtComponent
 
+@export_range(0, 1) var pest_chance: float = 0.20
+
 var growth_state: DataTypes.GrowthStates = DataTypes.GrowthStates.Seed
-var start_tomato_frame_offset: int = 6
+var has_pest: bool = false 
+
+# --- PASTIKAN ADA VARIABEL INI ---
+var start_tomato_frame_offset: int = 6 
 
 func _ready() -> void:
+	if randf() <= pest_chance:
+		spawn_pest()
+		
 	watering_particles.emitting = false
 	flowering_particles.emitting = false
 	
@@ -19,13 +27,22 @@ func _ready() -> void:
 	growth_cycle_component.crop_maturity.connect(on_crop_maturity)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
 
+func spawn_pest() -> void:
+	has_pest = true
+	flowering_particles.emitting = true
+	print("Tomat kena hama Kutu Kebul!") # Ganti jadi Tomat
+
 func _process(delta: float) -> void:
 	growth_state = growth_cycle_component.get_current_growth_state()
+	
+	# --- PERBAIKAN VISUAL: Tambahkan offset 6 agar jadi gambar tomat ---
 	sprite_2d.frame = growth_state + start_tomato_frame_offset
 	
-	
 	if growth_state == DataTypes.GrowthStates.Maturity:
-		flowering_particles.emitting = true
+		if has_pest:
+			flowering_particles.emitting = true
+		else:
+			flowering_particles.emitting = false
 	
 func on_hurt(hit_damage: int) -> void:
 	if !growth_cycle_component.is_watered:
@@ -35,16 +52,19 @@ func on_hurt(hit_damage: int) -> void:
 		growth_cycle_component.is_watered = true
 		
 func on_crop_maturity() -> void:
-	flowering_particles.emitting = true
+	if has_pest:
+		flowering_particles.emitting = true
+	else:
+		flowering_particles.emitting = false
 
 func on_crop_harvesting() -> void:
-	var tomato_harvest_instance = tomato_harvest_scene.instantiate() as Node2D
+	# Sesuaikan drop tomat jika perlu
+	var drop_amount = randi_range(1, 2) 
 	
-	# MASUKKAN KE SCENE DULU!
-	# Gunakan add_child ke parent yang sama atau ke root scene
-	get_parent().add_child(tomato_harvest_instance)
-	
-	# SETELAH ITU, BARU ATUR POSISI GLOBALNYA
-	tomato_harvest_instance.global_position = global_position
-	
-	queue_free() # Hancurkan tanaman aslinya
+	for i in range(drop_amount):
+		var tomato_harvest_instance = tomato_harvest_scene.instantiate() as Node2D
+		get_parent().add_child(tomato_harvest_instance)
+		var random_offset = Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))
+		tomato_harvest_instance.global_position = global_position + random_offset
+		
+	queue_free()

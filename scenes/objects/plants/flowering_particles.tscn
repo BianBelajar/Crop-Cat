@@ -9,6 +9,8 @@ orbit_velocity_max = 1.0000001
 gravity = Vector3(0, -100, 0)
 
 [node name="FloweringParticles" type="GPUParticles2D" unique_id=1726754995]
+modulate = Color(1, 0.99607843, 0.62352943, 1)
+self_modulate = Color(0.92156863, 0.92156863, 1, 1)
 lifetime = 0.6
 speed_scale = 0.4
 explosiveness = 0.5

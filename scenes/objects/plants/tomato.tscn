@@ -7,10 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://b8l3j4qappg5" path="res://scenes/objects/plants/GrowthCycleComponent.tscn" id="4_83wcf"]
 [ext_resource type="PackedScene" uid="uid://b5gn77pahn5x2" path="res://scenes/component/hurt_component.tscn" id="5_wpajg"]
 [ext_resource type="PackedScene" uid="uid://dhrwcfmfvlm06" path="res://scenes/component/save_data_component.tscn" id="7_83wcf"]
-[ext_resource type="Resource" uid="uid://bvbiqvr3ogna" path="res://resources/scene_data_resource.tres" id="8_wpajg"]
+[ext_resource type="Script" uid="uid://ch0dau6iuu5mr" path="res://resources/scene_data_resource.gd" id="8_83wcf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn5rf"]
 size = Vector2(13, 6)
+
+[sub_resource type="Resource" id="Resource_83wcf"]
+script = ExtResource("8_83wcf")
+metadata/_custom_type_script = "uid://ch0dau6iuu5mr"
 
 [node name="Tomato" type="Node2D" unique_id=1389321336]
 script = ExtResource("1_i4hd5")
@@ -25,6 +29,9 @@ frame = 7
 [node name="WateringParticles" parent="." unique_id=475470390 instance=ExtResource("2_i4hd5")]
 
 [node name="FloweringParticles" parent="." unique_id=1726754995 instance=ExtResource("3_huvgt")]
+emitting = false
+amount = 5
+amount_ratio = 0.5
 
 [node name="GrowthCycleComponent" parent="." unique_id=48134484 instance=ExtResource("4_83wcf")]
 
@@ -36,4 +43,4 @@ position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_vn5rf")
 
 [node name="SaveDataComponent" parent="." unique_id=725590635 instance=ExtResource("7_83wcf")]
-save_data_resource = ExtResource("8_wpajg")
+save_data_resource = SubResource("Resource_83wcf")

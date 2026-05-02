@@ -14,6 +14,10 @@ var cell_source_id : int
 var local_cell_position: Vector2
 var distance: float
 
+func _ready() -> void:
+	await get_tree().process_frame
+	player = get_tree().get_first_node_in_group("player")
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("remove_dirt"):
 		if ToolManager.selected_tool == DataTypes.Tools.TillGround:
@@ -32,22 +36,29 @@ func get_cell_under_mouse() -> void:
 	distance = player.global_position.distance_to(tilled_soil_tilemap_layer.to_global(local_cell_position))
 
 func add_crop() -> void:
-	if distance < 20.0:
-		if ToolManager.selected_tool == DataTypes.Tools.PlantWheat:
-			var wheat_instance = wheat_plant_scene.instantiate() as Node2D
-			
-			# MASUKKAN KE SCENE DULU (add_child)
-			get_parent().find_child("CropsFields").add_child(wheat_instance)
-			# BARU ATUR POSISINYA
-			wheat_instance.global_position = tilled_soil_tilemap_layer.to_global(local_cell_position)
+	if distance < 20.0 and cell_source_id != -1:
+		var crops_field = get_parent().find_child("CropsFields")
+		var target_position = tilled_soil_tilemap_layer.to_global(local_cell_position)
 		
-		if ToolManager.selected_tool == DataTypes.Tools.PlantTomato:
-			var tomato_instance = tomato_plant_scene.instantiate() as Node2D
+		# CEK DULU: Apakah sudah ada tanaman di kotak ini?
+		var is_occupied = false
+		for crop in crops_field.get_children():
+			# Kalau ada tanaman yang posisinya sama persis dengan tempat klik kita
+			if crop.global_position == target_position:
+				is_occupied = true
+				break
+		
+		# JIKA KOSONG (Belum ada tanaman), maka baru boleh ditanam
+		if not is_occupied:
+			if ToolManager.selected_tool == DataTypes.Tools.PlantWheat:
+				var wheat_instance = wheat_plant_scene.instantiate() as Node2D
+				crops_field.add_child(wheat_instance)
+				wheat_instance.global_position = target_position
 			
-			# MASUKKAN KE SCENE DULU (add_child)
-			get_parent().find_child("CropsFields").add_child(tomato_instance)
-			# BARU ATUR POSISINYA
-			tomato_instance.global_position = tilled_soil_tilemap_layer.to_global(local_cell_position)
+			if ToolManager.selected_tool == DataTypes.Tools.PlantTomato:
+				var tomato_instance = tomato_plant_scene.instantiate() as Node2D
+				crops_field.add_child(tomato_instance)
+				tomato_instance.global_position = target_position
 
 
 func remove_crop() -> void:

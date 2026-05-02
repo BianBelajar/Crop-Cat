@@ -75,6 +75,78 @@ region = Rect2(504, 131, 35, 18)
 texture = SubResource("AtlasTexture_1jvfr")
 region_rect = Rect2(0, 0, 35, 18)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_su2uq"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y10rl"]
+atlas = SubResource("CompressedTexture2D_su2uq")
+region = Rect2(11, 11, 26, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8dbq0"]
+texture = SubResource("AtlasTexture_y10rl")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 26, 28)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qclwp"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrihc"]
+atlas = SubResource("CompressedTexture2D_qclwp")
+region = Rect2(11, 59, 26, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hvejl"]
+texture = SubResource("AtlasTexture_qrihc")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 26, 28)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3kw81"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c706"]
+atlas = SubResource("CompressedTexture2D_3kw81")
+region = Rect2(11, 59, 26, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3t4va"]
+texture = SubResource("AtlasTexture_1c706")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a24es"]
+atlas = ExtResource("1_r6d4f")
+region = Rect2(11, 155, 26, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o763n"]
+texture = SubResource("AtlasTexture_a24es")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 26, 28)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q0skk"]
+load_path = "res://.godot/imported/basic_ui_sprite.png-92f1c5560423ae5a6949f88bcc2fd8cb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwegf"]
+atlas = SubResource("CompressedTexture2D_q0skk")
+region = Rect2(11, 107, 26, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xl5tq"]
+texture = SubResource("AtlasTexture_qwegf")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 26, 28)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6d4f"]
 atlas = ExtResource("1_r6d4f")
 region = Rect2(107, 59, 26, 26)
@@ -172,6 +244,15 @@ DayAndNightCounterPanel/styles/panel = SubResource("StyleBoxTexture_r2sve")
 DayAndNightLAbel/base_type = &"Label"
 DayAndNightLAbel/font_sizes/font_size = 18
 DayAndNightLAbel/fonts/font = ExtResource("2_s3hsv")
+GameMenuButton/base_type = &"Button"
+GameMenuButton/colors/font_disabled_color = Color(0.32915837, 0.3291584, 0.3291584, 1)
+GameMenuButton/font_sizes/font_size = 18
+GameMenuButton/fonts/font = ExtResource("2_s3hsv")
+GameMenuButton/styles/disabled = SubResource("StyleBoxTexture_8dbq0")
+GameMenuButton/styles/focus = SubResource("StyleBoxTexture_hvejl")
+GameMenuButton/styles/hover = SubResource("StyleBoxTexture_3t4va")
+GameMenuButton/styles/normal = SubResource("StyleBoxTexture_o763n")
+GameMenuButton/styles/pressed = SubResource("StyleBoxTexture_xl5tq")
 InventoryItemPanel/base_type = &"PanelContainer"
 InventoryItemPanel/styles/panel = SubResource("StyleBoxTexture_rr7v1")
 InventoryLabel/base_type = &"Label"

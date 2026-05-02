@@ -8,9 +8,14 @@ var wheat_harvest_scene = preload("res://scenes/objects/plants/wheat_harvest.tsc
 @onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
 @onready var hurt_component: HurtComponent = $HurtComponent
 
+@export_range(0, 1) var pest_chance: float = 0.20 # Sudah 20% mantap!
+
 var growth_state: DataTypes.GrowthStates = DataTypes.GrowthStates.Seed
+var has_pest: bool = false 
 
 func _ready() -> void:
+	if randf() <= pest_chance:
+		spawn_pest()
 	watering_particles.emitting = false
 	flowering_particles.emitting = false
 	
@@ -18,12 +23,21 @@ func _ready() -> void:
 	growth_cycle_component.crop_maturity.connect(on_crop_maturity)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
 
+func spawn_pest() -> void:
+	has_pest = true
+	flowering_particles.emitting = true
+	print("Padi kena hama Kutu Kebul!")
+
 func _process(delta: float) -> void:
 	growth_state = growth_cycle_component.get_current_growth_state()
 	sprite_2d.frame = growth_state
 	
+	# Bagian yang tadi diperbaiki:
 	if growth_state == DataTypes.GrowthStates.Maturity:
-		flowering_particles.emitting = true
+		if has_pest:
+			flowering_particles.emitting = true
+		else:
+			flowering_particles.emitting = false
 	
 func on_hurt(hit_damage: int) -> void:
 	if !growth_cycle_component.is_watered:
@@ -33,15 +47,19 @@ func on_hurt(hit_damage: int) -> void:
 		growth_cycle_component.is_watered = true
 		
 func on_crop_maturity() -> void:
-	flowering_particles.emitting = true
+	if has_pest:
+		flowering_particles.emitting = true
+	else:
+		flowering_particles.emitting = false
 
 func on_crop_harvesting() -> void:
-	var wheat_harvest_instance = wheat_harvest_scene.instantiate() as Node2D
+	var drop_amount = randi_range(1, 1) 
 	
-	# MASUKKAN KE SCENE DULU!
-	get_parent().add_child(wheat_harvest_instance)
-	
-	# SETELAH ITU, BARU ATUR POSISI GLOBALNYA
-	wheat_harvest_instance.global_position = global_position
-	
-	queue_free() # Hancurkan tanaman aslinya
+	for i in range(drop_amount):
+		var wheat_harvest_instance = wheat_harvest_scene.instantiate() as Node2D
+		get_parent().add_child(wheat_harvest_instance)
+		
+		var random_offset = Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))
+		wheat_harvest_instance.global_position = global_position + random_offset
+		
+	queue_free()
