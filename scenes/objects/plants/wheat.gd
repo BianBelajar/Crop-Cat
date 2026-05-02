@@ -37,6 +37,11 @@ func on_crop_maturity() -> void:
 
 func on_crop_harvesting() -> void:
 	var wheat_harvest_instance = wheat_harvest_scene.instantiate() as Node2D
-	wheat_harvest_instance.global_position = global_position
+	
+	# MASUKKAN KE SCENE DULU!
 	get_parent().add_child(wheat_harvest_instance)
-	queue_free()
+	
+	# SETELAH ITU, BARU ATUR POSISI GLOBALNYA
+	wheat_harvest_instance.global_position = global_position
+	
+	queue_free() # Hancurkan tanaman aslinya

@@ -15,6 +15,7 @@ frame = 5
 
 [node name="CollectibleComponent" parent="." unique_id=1480014232 instance=ExtResource("2_of7pp")]
 y_sort_enabled = true
+collision_layer = 160
 collectable_name = "wheat"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectibleComponent" unique_id=1559363345]

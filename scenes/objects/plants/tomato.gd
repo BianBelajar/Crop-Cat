@@ -39,6 +39,12 @@ func on_crop_maturity() -> void:
 
 func on_crop_harvesting() -> void:
 	var tomato_harvest_instance = tomato_harvest_scene.instantiate() as Node2D
-	tomato_harvest_instance.global_position = global_position
+	
+	# MASUKKAN KE SCENE DULU!
+	# Gunakan add_child ke parent yang sama atau ke root scene
 	get_parent().add_child(tomato_harvest_instance)
-	queue_free()
+	
+	# SETELAH ITU, BARU ATUR POSISI GLOBALNYA
+	tomato_harvest_instance.global_position = global_position
+	
+	queue_free() # Hancurkan tanaman aslinya

@@ -29,19 +29,25 @@ func get_cell_under_mouse() -> void:
 	cell_position = tilled_soil_tilemap_layer.local_to_map(mouse_position)
 	cell_source_id = tilled_soil_tilemap_layer.get_cell_source_id(cell_position)
 	local_cell_position = tilled_soil_tilemap_layer.map_to_local(cell_position)
-	distance = player.global_position.distance_to(local_cell_position)
+	distance = player.global_position.distance_to(tilled_soil_tilemap_layer.to_global(local_cell_position))
 
 func add_crop() -> void:
 	if distance < 20.0:
 		if ToolManager.selected_tool == DataTypes.Tools.PlantWheat:
 			var wheat_instance = wheat_plant_scene.instantiate() as Node2D
-			wheat_instance.global_position = local_cell_position
+			
+			# MASUKKAN KE SCENE DULU (add_child)
 			get_parent().find_child("CropsFields").add_child(wheat_instance)
+			# BARU ATUR POSISINYA
+			wheat_instance.global_position = tilled_soil_tilemap_layer.to_global(local_cell_position)
 		
 		if ToolManager.selected_tool == DataTypes.Tools.PlantTomato:
 			var tomato_instance = tomato_plant_scene.instantiate() as Node2D
-			tomato_instance.global_position = local_cell_position
+			
+			# MASUKKAN KE SCENE DULU (add_child)
 			get_parent().find_child("CropsFields").add_child(tomato_instance)
+			# BARU ATUR POSISINYA
+			tomato_instance.global_position = tilled_soil_tilemap_layer.to_global(local_cell_position)
 
 
 func remove_crop() -> void:
