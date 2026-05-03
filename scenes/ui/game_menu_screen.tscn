@@ -329,7 +329,6 @@ text = "Exit
 "
 
 [node name="DifficultyButtons" type="VBoxContainer" parent="MarginContainer" unique_id=933882053]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -343,7 +342,7 @@ text = "Easy"
 [node name="NormalButton" type="Button" parent="MarginContainer/DifficultyButtons" unique_id=578508204]
 layout_mode = 2
 theme_type_variation = &"GameMenuButton"
-text = "Normal"
+text = "  Normal "
 
 [node name="HardButton" type="Button" parent="MarginContainer/DifficultyButtons" unique_id=1861225736]
 layout_mode = 2

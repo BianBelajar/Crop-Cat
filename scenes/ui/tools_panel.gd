@@ -11,21 +11,48 @@ extends PanelContainer
 func _ready() -> void:
 	ToolManager.enable_tool.connect(on_enable_tool_button)
 	
-	# Matikan semua tombol di awal kecuali kapak (sesuai sistem tutorial)
+	# ---> KONEKKAN SINYAL DARI QUEST MANAGER <---
+	QuestManager.quest_loaded_signal.connect(update_tools_based_on_quest)
+	
+	# Panggil fungsi ini sekali saat game baru dimulai
+	update_tools_based_on_quest()
+
+
+# ---> KUMPULKAN LOGIKA NYALAIN ALAT DI FUNGSI BARU INI <---
+func update_tools_based_on_quest() -> void:
+	# 1. MATIKAN SEMUA ALAT DULU SECARA DEFAULT
 	tool_axe.disabled = true
 	tool_tilling.disabled = true
 	tool_watering.disabled = true
 	tool_wheat.disabled = true
 	tool_tomato.disabled = true
-	tool_pesticide.disabled = true # Pestisida juga mati di awal
+	tool_pesticide.disabled = true
 	
-	# Hilangkan fokus agar rapi
 	tool_axe.focus_mode = Control.FOCUS_NONE
 	tool_tilling.focus_mode = Control.FOCUS_NONE
 	tool_watering.focus_mode = Control.FOCUS_NONE
 	tool_wheat.focus_mode = Control.FOCUS_NONE
 	tool_tomato.focus_mode = Control.FOCUS_NONE
 	tool_pesticide.focus_mode = Control.FOCUS_NONE
+	
+	# 2. BUKA KUNCI OTOMATIS BERDASARKAN PROGRESS
+	if QuestManager.quest_step >= 1: # Jika sudah dapat kapak
+		tool_axe.disabled = false
+		tool_axe.focus_mode = Control.FOCUS_ALL
+		
+	if QuestManager.quest_step >= 4: # Jika sudah dapat pacul, siraman & bibit
+		tool_tilling.disabled = false
+		tool_tilling.focus_mode = Control.FOCUS_ALL
+		tool_watering.disabled = false
+		tool_watering.focus_mode = Control.FOCUS_ALL
+		tool_wheat.disabled = false
+		tool_wheat.focus_mode = Control.FOCUS_ALL
+		tool_tomato.disabled = false
+		tool_tomato.focus_mode = Control.FOCUS_ALL
+		
+	if QuestManager.quest_step >= 6: # Jika sudah dapat pestisida
+		tool_pesticide.disabled = false
+		tool_pesticide.focus_mode = Control.FOCUS_ALL
 
 # Fungsi saat tombol ditekan
 func _on_tool_axe_pressed() -> void:

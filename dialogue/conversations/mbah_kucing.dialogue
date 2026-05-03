@@ -46,13 +46,15 @@ elif QuestManager.quest_step == 4:
 	Mbah Kucing: Ingat Meong, Padi dan Tomat itu manja. 
 	Mbah Kucing: Mereka bisa diserang hama "Ulat Kebul". Kalau daunnya menguning, mereka harus disemprot Pestisida.
 	Mbah Kucing: Masalahnya, stok pestisidaku habis.
-	Mbah Kucing: Pergilah ke rumah di bawah, temui pedagang di sana. 
-	Mbah Kucing: Berikan 3 Telur dan 3 Susu padanya untuk menukar Pestisida.
+	Mbah Kucing: Pergilah ke rumah di bawah, temui pedagang di sana untuk menukar 3 Telur dan 3 Susu dengan Pestisida.
+	Mbah Kucing: Oh iya, kalau kamu bingung dari mana mendapatkan telur dan susunya...
+	Mbah Kucing: Kamu harus memanen Padi dan Tomatmu nanti, lalu masukkan hasil panennya ke dalam kotak pakan (Chest) di kandang Sapi dan Ayam!
+	Mbah Kucing: Setelah mereka kenyang, mereka akan menghasilkan Telur dan Susu yang bisa kamu panen.
 	set QuestManager.quest_step = 5
 	=> END
 
 elif QuestManager.quest_step == 5:
 	Mbah Kucing: Padi dan tomatmu terancam ulat kebul, Meong!
-	Mbah Kucing: Cepat bawa 3 Telur dan 3 Susu ke Pedagang di rumah bawah.
-	Mbah Kucing: Dia yang memegang stok Pestisida terakhir di pulau ini.
+	Mbah Kucing: Jangan lupa, masukkan hasil panenmu ke kotak pakan ternak untuk mendapatkan 3 Telur dan 3 Susu.
+	Mbah Kucing: Setelah itu bawa ke Pedagang di rumah bawah. Dia yang memegang stok Pestisida terakhir di pulau ini!
 	=> END

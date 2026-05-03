@@ -1,23 +1,21 @@
 ~ start_cow_pasture_box
 
-Pakan Hewan [[Hi|Hallo]], hewan kamu butuh makanan.
-pakan Hewan: Maukah kamu memberikan sapi nya makan?
-- Iya
-	Cawa: Iya ayo beri makan sapinya!
+Kotak Pakan Sapi: Kotak pakan sapi untuk memberikan sapi makanan.
+Kotak Pakan Sapi: Berikan sapi pakan dan daptkan susu!
+- Beri Pakan
 	do GameDialogueManager.action_feed_animals()
-- Tidak
-	Cawa: Tidak, aku tidak perlu kasih makan sapinya, Aku punya cukup susu.
+- Tidak jadi
+	Player: Tidak, aku tidak perlu kasih makan sapinya, Aku punya cukup susu.
 	
 => END
 
 ~ start_chicken_pasture_box
 
-Pakan Hewan: [[Hi|Hallo]], hewan kamu butuh makanan.
-Pakan Hewan: Maukah kamu memberikan ayam nya makan?
-- Iya
-	Cawa: Iya ayo beri makan ayamnya!
+Kotak Pakan Ayam: Kotak pakan ayam untuk memberikan sapi makanan.
+Kotak Pakan Ayam: Berikan ayam pakan dan daptkan telur!
+- Beri Pakan
 	do GameDialogueManager.action_feed_animals()
-- Tidak
-	Cawa: Tidak, aku tidak perlu kasih makan ayamnya, Aku punya cukup telur.
+- Tidak jadi
+	Player: Tidak, aku tidak perlu kasih makan sapinya, Aku punya cukup susu.
 	
 => END

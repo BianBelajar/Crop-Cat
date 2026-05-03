@@ -1,6 +1,6 @@
 extends Node2D
 
-var balloon_scene = preload("res://dialogue/game_dialogue_balloon.tscn")
+var balloon_scene = preload("res://dialogue/kakek_dialogue_balloon.tscn")
 
 @onready var interactable_component: InteractabeComponent = $InteractableComponent
 @onready var interactable_label_component: Control = $InteractableLabelComponent
@@ -12,9 +12,12 @@ func _ready() -> void:
 	interactable_component.interactable_deactivated.connect(on_interactable_deactivated)
 	interactable_label_component.hide()
 	
-	# Sambungkan sinyal untuk memberikan kapak dari GameDialogManager
+	# Sambungkan sinyal dari GameDialogManager
 	GameDialogueManager.give_axe.connect(on_give_axe)
 	GameDialogueManager.give_hoe.connect(on_give_hoe)
+	
+	# ---> TAMBAHAN BARU UNTUK FARMING KIT <---
+	GameDialogueManager.give_farming_kit.connect(on_give_farming_kit)
 
 
 func on_interactable_activated() -> void:
@@ -38,12 +41,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			balloon.start(load("res://dialogue/conversations/mbah_kucing.dialogue"), "start")
 
 
-# FUNGSI BARU: Hanya mengaktifkan Kapak
+# FUNGSI: Mengaktifkan Kapak
 func on_give_axe() -> void:
 	ToolManager.enable_tool_button(DataTypes.Tools.AxeWood)
 	print("Kapak berhasil didapatkan!")
 
-# FUNGSI BARU: Mengaktifkan Pacul/Tilling
+# FUNGSI: Mengaktifkan Pacul/Tilling
 func on_give_hoe() -> void:
 	ToolManager.enable_tool_button(DataTypes.Tools.TillGround)
 	print("Sinyal Pacul diterima, tombol diaktifkan!")
+
+# ---> FUNGSI BARU: Mengaktifkan Siraman & Bibit <---
+func on_give_farming_kit() -> void:
+	ToolManager.enable_tool_button(DataTypes.Tools.WaterCrops)
+	ToolManager.enable_tool_button(DataTypes.Tools.PlantWheat)
+	ToolManager.enable_tool_button(DataTypes.Tools.PlantTomato)
+	print("Farming kit diterima! Siraman dan bibit menyala!")

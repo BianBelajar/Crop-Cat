@@ -59,5 +59,7 @@ func _on_hard_button_pressed() -> void:
 	start_the_actual_game()
 
 func start_the_actual_game() -> void:
+	QuestManager.quest_step = 0
+	SaveGameManager.save_game()
 	GameManager.start_game()
 	queue_free()

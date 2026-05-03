@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://n4yy8vjhvkqh"]
+[gd_scene format=3 uid="uid://b6l83p0pcyrho"]
 
-[ext_resource type="Script" uid="uid://cd3yp8adygwl7" path="res://dialogue/game_dialogue_balloon.gd" id="1_sjhsj"]
-[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_cindb"]
-[ext_resource type="Theme" uid="uid://bnyertbgquy13" path="res://dialogue/dialogue_balloon_theme.tres" id="2_xkmgq"]
-[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_aimjp"]
-[ext_resource type="PackedScene" uid="uid://2m0ihnjhkphg" path="res://scenes/ui/emotes_panel.tscn" id="4_vwqec"]
+[ext_resource type="Script" uid="uid://cd3yp8adygwl7" path="res://dialogue/game_dialogue_balloon.gd" id="1_e47mc"]
+[ext_resource type="Theme" uid="uid://bnyertbgquy13" path="res://dialogue/dialogue_balloon_theme.tres" id="2_fidsd"]
+[ext_resource type="PackedScene" uid="uid://d23jg8chuv01v" path="res://scenes/ui/pedagang_emotes_panel.tscn" id="3_e47mc"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="4_ohnus"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="5_2oand"]
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
 length = 0.001
@@ -44,7 +44,7 @@ _data = {
 
 [node name="GameDialogueBalloon" type="CanvasLayer" unique_id=1434168376]
 layer = 100
-script = ExtResource("1_sjhsj")
+script = ExtResource("1_e47mc")
 
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
@@ -54,7 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_xkmgq")
+theme = ExtResource("2_fidsd")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon" unique_id=1011109179]
 custom_minimum_size = Vector2(400, 70)
@@ -82,9 +82,8 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=1428277592]
 layout_mode = 2
 
-[node name="EmotesPanel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=715842720 instance=ExtResource("4_vwqec")]
+[node name="EmotesPanel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=715842720 instance=ExtResource("3_e47mc")]
 layout_mode = 2
-size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1624289611]
 layout_mode = 2
@@ -98,12 +97,14 @@ layout_mode = 2
 mouse_filter = 1
 theme_type_variation = &"CharacterNameText"
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 0)
+theme_override_colors/selection_color = Color(0, 0, 0, 0.8)
 bbcode_enabled = true
 text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1225160028 instance=ExtResource("2_cindb")]
+[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1225160028 instance=ExtResource("4_ohnus")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -140,7 +141,7 @@ grow_vertical = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
 alignment = 1
-script = ExtResource("3_aimjp")
+script = ExtResource("5_2oand")
 response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu" unique_id=914537232]
