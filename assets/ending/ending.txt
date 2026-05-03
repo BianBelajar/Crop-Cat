@@ -1,0 +1,42 @@
+### 🏝️ Titik Percabangan (Sebelum Memilih Ending)
+*(Bisa dibuat dalam bentuk dialog biasa dengan Mbah Kucing di dekat perahu yang sudah utuh)*
+
+* **Mbah Kucing:** "Hoo... akhirnya, perahu ini selesai juga diperbaiki. Kayu dan material dari hasil ladangmu benar-benar kuat, Nak."
+* **Mbah Kucing:** "Lautan luas Nusantara sudah memanggilmu kembali. Tapi... melihat ladangmu yang begitu subur, apa kau benar-benar akan pergi?"
+*(Muncul UI Pilihan Layar: **[Naik ke Perahu]** atau **[Kembali ke Ladang]**)*
+
+---
+
+### ⛵ ENDING 1: Sang Penjelajah Samudra (Memilih untuk Pergi)
+
+* **Frame 1**
+	* **Visual:** Gambar Crop-Cat (kucing putih) sedang mengikat tali layar perahu, Mbah Kucing berdiri di pinggir pantai tersenyum bangga.
+	* **Teks Label:** "Perahu kecil ini akhirnya kembali utuh, berkat bantuan Mbah Kucing dan kerja kerasku di ladang."
+* **Frame 2**
+	* **Visual:** Crop-Cat melambaikan tangan dari atas perahu yang mulai berlayar menjauh dari dermaga bambu. Mbah Kucing membalas lambaian tangannya.
+	* **Teks Label:** "Kuucapkan selamat tinggal pada tanah yang subur ini, dan pada kakek yang telah menyelamatkan nyawaku dari badai."
+* **Frame 3**
+	* **Visual:** Perahu kayu membelah ombak lautan Nusantara yang indah, dengan matahari terbit di ufuk timur (bergaya *pixel art*).
+	* **Teks Label:** "Lautan Nusantara memanggilku kembali. Namun, kehangatan pulau ini akan selalu menjadi bagian dari perjalananku. Sampai jumpa lagi!"
+* **Frame 4**
+	* **Visual:** Layar hitam perlahan (*Fade Out*), lalu muncul teks di tengah layar.
+	* **Teks Label:** "ENDING 1: Kucing Sang Penjelajah Samudra."
+
+---
+
+### 🌱 ENDING 2: Akar yang Tumbuh (Memilih untuk Menetap)
+
+* **Frame 1**
+	* **Visual:** Gambar Crop-Cat (kucing putih) berdiri di depan perahu yang sudah jadi, tapi kepalanya menoleh ke belakang melihat ladangnya yang hijau, subur, dan penuh tanaman.
+	* **Teks Label:** "Perahu ini siap untuk berlayar... tapi ketika kumelihat ke belakang, kulihat kehidupan indah yang telah kubangun."
+* **Frame 2**
+	* **Visual:** Crop-Cat melepaskan tali perahu, berjalan kembali ke daratan, dan memeluk Mbah Kucing yang terlihat terkejut namun bahagia.
+	* **Teks Label:** "Petualanganku melintasi ombak mungkin telah usai saat badai itu menghantamku. Namun, petualangan baruku ada di sini."
+* **Frame 3**
+	* **Visual:** Matahari terbenam berwarna jingga. Crop-Cat memakai topi caping sambil memegang cangkul (atau menyiram tanaman) di ladang bersama Mbah Kucing.
+	* **Teks Label:** "Aku memilih untuk menetap. Merawat ladang, menjaga desa, dan hidup damai di pulau yang kini kusebut 'Rumah'."
+* **Frame 4**
+	* **Visual:** Layar hitam perlahan (*Fade Out*), lalu muncul teks di tengah layar.
+	* **Teks Label:** "ENDING 2: Petani Kucing Nusantara."
+
+---

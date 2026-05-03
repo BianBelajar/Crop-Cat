@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://cjkrdk8jkxwys" path="res://scenes/objects/rocks/rock.tscn" id="9_o2x3h"]
 [ext_resource type="Texture2D" uid="uid://bawfc778ldn85" path="res://assets/game/tilesets/fences.png" id="11_tmfy7"]
 [ext_resource type="Texture2D" uid="uid://d2dx00pfow8ps" path="res://assets/game/tilesets/tilled_dirt_wide_cropfield.png" id="12_skfke"]
-[ext_resource type="Texture2D" uid="uid://medxmju7mqf7" path="res://assets/game/objects/wood_bridge.png" id="13_tl0r4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cbdxd"]
 texture = ExtResource("1_m70i2")
@@ -832,12 +831,6 @@ texture = ExtResource("1_m70i2")
 2:0/0 = 0
 3:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qblla"]
-texture = ExtResource("13_tl0r4")
-0:1/0 = 0
-0:2/0 = 0
-0:0/0 = 0
-
 [resource]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
@@ -857,4 +850,3 @@ sources/3 = SubResource("TileSetScenesCollectionSource_ow828")
 sources/5 = SubResource("TileSetAtlasSource_skfke")
 sources/6 = SubResource("TileSetAtlasSource_tl0r4")
 sources/8 = SubResource("TileSetAtlasSource_cv0k1")
-sources/9 = SubResource("TileSetAtlasSource_qblla")
