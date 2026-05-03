@@ -2,20 +2,28 @@ extends Node
 
 const SAVE_PATH = "user://quest_data.save"
 signal quest_loaded_signal
+
+# =====================================================
 # DAFTAR TAHAPAN QUEST:
+# =====================================================
 # 0 = Awal (Belum punya apa-apa, Mbah minta 10 Kayu)
 # 1 = Sedang mengumpulkan 10 Kayu
 # 2 = Kayu terkumpul (Mbah minta 5 Batu untuk bikin Pacul)
 # 3 = Sedang mengumpulkan 5 Batu
 # 4 = Batu terkumpul (Mbah kasih Pacul, Alat Siram, Bibit & suruh ke Pedagang)
 # 5 = Sedang mengumpulkan 3 Telur & 3 Susu untuk Pedagang
-# 6 = Pestisida terbuka (Quest Selesai)
+# 6 = Pestisida terbuka (Quest Awal Selesai)
+# =====================================================
+# 7 = Perbaikan Kapal dimulai ⭐ NEW!
+# 8 = Sedang mengumpulkan resources untuk kapal ⭐ NEW!
+# 9 = Semua resources terkumpul, siap ending ⭐ NEW!
+# =====================================================
 
 var quest_step: int = 0
 var is_intro_done: bool = false
 
 # =========================================================
-# FUNGSI PENGECEKAN (Real Time dari InventoryManager)
+# FUNGSI PENGECEKAN QUEST AWAL (Real Time)
 # =========================================================
 
 # Cek apakah Kayu (log) sudah cukup 10
@@ -32,6 +40,42 @@ func can_exchange_pesticide() -> bool:
 	var has_milk = InventoryManager.inventory.get("milk", 0) >= 3
 	return has_egg and has_milk
 
+
+# =========================================================
+# FUNGSI PENGECEKAN QUEST PERBAIKAN KAPAL ⭐ NEW!
+# =========================================================
+
+# Cek apakah semua resources untuk perbaikan kapal sudah terkumpul
+func can_repair_ship() -> bool:
+	var has_wood = InventoryManager.inventory.get("log", 0) >= 25
+	var has_stone = InventoryManager.inventory.get("stone", 0) >= 15
+	var has_tomato = InventoryManager.inventory.get("tomato", 0) >= 25
+	var has_wheat = InventoryManager.inventory.get("wheat", 0) >= 25
+	var has_milk = InventoryManager.inventory.get("milk", 0) >= 15
+	var has_egg = InventoryManager.inventory.get("egg", 0) >= 15
+	
+	return has_wood and has_stone and has_tomato and has_wheat and has_milk and has_egg
+
+# Cek progress perbaikan kapal (untuk UI display)
+func get_ship_repair_progress() -> Dictionary:
+	return {
+		"wood": InventoryManager.inventory.get("log", 0),
+		"wood_needed": 25,
+		"stone": InventoryManager.inventory.get("stone", 0),
+		"stone_needed": 15,
+		"tomato": InventoryManager.inventory.get("tomato", 0),
+		"tomato_needed": 25,
+		"wheat": InventoryManager.inventory.get("wheat", 0),
+		"wheat_needed": 25,
+		"milk": InventoryManager.inventory.get("milk", 0),
+		"milk_needed": 15,
+		"egg": InventoryManager.inventory.get("egg", 0),
+		"egg_needed": 15,
+	}
+
+# Cek apakah quest perbaikan kapal sedang aktif
+func is_ship_repair_active() -> bool:
+	return quest_step >= 7 and quest_step <= 9
 
 # =========================================================
 # FUNGSI PENGAMBILAN BARANG (MENGURANGI ISI TAS)
@@ -59,6 +103,24 @@ func take_exchange_items() -> void:
 		InventoryManager.inventory_changed.emit() # Update angka di UI Layar
 		print("Quest: Telur & Susu diserahkan ke Pedagang.")
 
+# ⭐ NEW! Mbah Kucing mengambil resources untuk perbaikan kapal
+func take_ship_repair_items() -> void:
+	if can_repair_ship():
+		InventoryManager.inventory["log"] -= 25
+		InventoryManager.inventory["stone"] -= 15
+		InventoryManager.inventory["tomato"] -= 25
+		InventoryManager.inventory["wheat"] -= 25
+		InventoryManager.inventory["milk"] -= 15
+		InventoryManager.inventory["egg"] -= 15
+		InventoryManager.inventory_changed.emit()
+		print("Quest: Semua resources untuk perbaikan kapal diserahkan!")
+	else:
+		print("ERROR: Resources belum cukup untuk perbaikan kapal!")
+
+# =========================================================
+# FUNGSI SAVE & LOAD
+# =========================================================
+
 func save_quest() -> void:
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	file.store_32(quest_step)
@@ -72,5 +134,20 @@ func load_quest() -> void:
 	else:
 		quest_step = 0 
 		
-	# ---> 2. TAMBAHKAN BARIS INI DI PALING BAWAH FUNGSI LOAD:
 	quest_loaded_signal.emit()
+
+# ⭐ NEW! Fungsi untuk start quest perbaikan kapal
+func start_ship_repair_quest() -> void:
+	if quest_step == 6:  # Hanya bisa trigger jika quest awal selesai
+		quest_step = 7
+		save_quest()
+		print("Quest Perbaikan Kapal dimulai! Quest Step: 7")
+
+# ⭐ NEW! Fungsi untuk check dan finish ship repair quest
+func check_and_finish_ship_repair() -> bool:
+	if quest_step == 8 and can_repair_ship():
+		quest_step = 9  # Siap untuk ending
+		save_quest()
+		print("Semua resources terkumpul! Siap untuk ending. Quest Step: 9")
+		return true
+	return false

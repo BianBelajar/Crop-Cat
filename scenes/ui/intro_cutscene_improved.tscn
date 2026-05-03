@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bl2p7cixoaey"]
+
+[ext_resource type="Script" path="res://scenes/ui/intro_cutscene_improved.gd" id="1_r8uw5"]
+
+[node name="IntroCutsceneImproved" type="Control"]
+layout_mode = 3
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r8uw5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 5
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_left = 0.0
+anchors_top = 0.7
+anchors_right = 1.0
+anchors_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_left = 0.05
+anchors_top = 0.1
+anchors_right = 0.95
+anchors_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+text = "Text akan tampil di sini..."
+text_overrun_behavior = 3
+autowrap_mode = 3
+
+[node name="ContinueHint" type="Label" parent="."]
+layout_mode = 1
+anchors_left = 0.0
+anchors_top = 0.9
+anchors_right = 1.0
+anchors_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[Click untuk lanjut]"
+horizontal_alignment = 1
+vertical_alignment = 1
