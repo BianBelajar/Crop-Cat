@@ -57,9 +57,12 @@ func _on_normal_button_pressed() -> void:
 func _on_hard_button_pressed() -> void:
 	DifficultyManager.set_difficulty(DifficultyManager.Level.HARD)
 	start_the_actual_game()
-
+	
 func start_the_actual_game() -> void:
-	QuestManager.quest_step = 0
-	SaveGameManager.save_game()
-	GameManager.start_game()
+	QuestManager.quest_step = 0   
+	SaveGameManager.save_game()   
+	
+	# ---> UBAH BAGIAN INI <---
+	# Alih-alih GameManager.start_game(), kita load cutscene dulu:
+	get_tree().change_scene_to_file("res://scenes/ui/intro_cutscene.tscn")
 	queue_free()

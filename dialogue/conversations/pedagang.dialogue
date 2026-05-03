@@ -1,5 +1,4 @@
 ~ start
-
 if QuestManager.quest_step < 5:
 	Pedagang: Halo Meong! Aku pedagang di sini.
 	Pedagang: Mbah Kucing bilang ada pengelana baru, pasti itu kamu ya?

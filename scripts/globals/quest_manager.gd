@@ -12,6 +12,7 @@ signal quest_loaded_signal
 # 6 = Pestisida terbuka (Quest Selesai)
 
 var quest_step: int = 0
+var is_intro_done: bool = false
 
 # =========================================================
 # FUNGSI PENGECEKAN (Real Time dari InventoryManager)

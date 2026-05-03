@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cl7ulh8ufb5f3" path="res://scenes/levels/level_1.tscn" id="2_gubc5"]
 [ext_resource type="PackedScene" uid="uid://3amrr0hbtm31" path="res://scenes/characters/player/player.tscn" id="3_rt2n2"]
 [ext_resource type="PackedScene" uid="uid://b8spl7guikay3" path="res://scenes/ui/game_screen.tscn" id="4_c16ls"]
+[ext_resource type="PackedScene" uid="uid://c1cox6nveb2ue" path="res://scenes/characters/guide/guide.tscn" id="5_gubc5"]
 
 [node name="MainScene" type="Node" unique_id=1729727061]
 
@@ -21,8 +22,11 @@ position = Vector2(-16, 11)
 
 [node name="Player" parent="GameRoot" unique_id=778784355 instance=ExtResource("3_rt2n2")]
 y_sort_enabled = true
-position = Vector2(1033, 413)
+position = Vector2(1132, 250)
 
 [node name="Camera2D" type="Camera2D" parent="GameRoot/Player" unique_id=1880616026]
+
+[node name="Guide" parent="GameRoot" unique_id=771854522 instance=ExtResource("5_gubc5")]
+position = Vector2(1143, 279)
 
 [node name="GameScreen" parent="." unique_id=1132253970 instance=ExtResource("4_c16ls")]

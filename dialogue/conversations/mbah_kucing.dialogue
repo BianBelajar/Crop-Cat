@@ -1,15 +1,17 @@
+~ intro
+Mbah Kucing: Syukurlah kamu sudah sadar, Meong!
+Mbah Kucing: Aku menemukanmu pingsan di pesisir pantai. Kapalmu hancur berantakan diterjang badai.
+Mbah Kucing: Jangan khawatir, namaku Mbah Kucing. Kamu aman bersamaku di Pulau Harapan ini.
+Mbah Kucing: Aku tahu kamu ingin melanjutkan perjalananmu. Aku bisa membantumu merakit kembali kapalmu itu!
+Mbah Kucing: Tapi karena aku sudah tua, aku butuh bantuanmu mengumpulkan bahan-bahannya.
+Mbah Kucing: Sebagai permulaan, tolong carikan aku 10 Kayu untuk menambal lambung kapal.
+Mbah Kucing: Ini, pakai kapak tuaku ini dan tebanglah beberapa pohon di sekitar sini.
+do GameDialogueManager.action_give_axe()
+set QuestManager.quest_step = 1
+=> END
+
 ~ start
-
-if QuestManager.quest_step == 0:
-	Mbah Kucing: Astaga! Kapalmu hancur lebur diterjang badai, Meong!
-	Mbah Kucing: Aku bisa membantumu memperbaikinya, tapi aku butuh bahan.
-	Mbah Kucing: Tolong carikan aku 10 Kayu untuk menambal lambung kapal.
-	Mbah Kucing: Ini, pakai kapak tuaku ini dan tebanglah beberapa pohon.
-	do GameDialogueManager.action_give_axe()
-	set QuestManager.quest_step = 1
-	=> END
-
-elif QuestManager.quest_step == 1:
+if QuestManager.quest_step == 1:
 	if QuestManager.is_wood_enough() == true:
 		Mbah Kucing: Wah, kamu berhasil mengumpulkan 10 kayu! Sini berikan padaku.
 		do QuestManager.take_wood()
@@ -23,7 +25,6 @@ elif QuestManager.quest_step == 1:
 		Mbah Kucing: Pakai kapak yang kuberikan tadi dan tebang pohon di sana!
 		=> END
 
-# STEP 3: Mbah Kucing menunggu 5 Batu
 elif QuestManager.quest_step == 3:
 	if QuestManager.is_stone_enough() == true:
 		Mbah Kucing: Mantap! Kamu membawa 5 batunya!
@@ -47,14 +48,15 @@ elif QuestManager.quest_step == 4:
 	Mbah Kucing: Mereka bisa diserang hama "Ulat Kebul". Kalau daunnya menguning, mereka harus disemprot Pestisida.
 	Mbah Kucing: Masalahnya, stok pestisidaku habis.
 	Mbah Kucing: Pergilah ke rumah di bawah, temui pedagang di sana untuk menukar 3 Telur dan 3 Susu dengan Pestisida.
-	Mbah Kucing: Oh iya, kalau kamu bingung dari mana mendapatkan telur dan susunya...
-	Mbah Kucing: Kamu harus memanen Padi dan Tomatmu nanti, lalu masukkan hasil panennya ke dalam kotak pakan (Chest) di kandang Sapi dan Ayam!
-	Mbah Kucing: Setelah mereka kenyang, mereka akan menghasilkan Telur dan Susu yang bisa kamu panen.
+	Mbah Kucing: Kamu harus memanen Padi dan Tomatmu nanti, lalu masukkan hasil panennya ke dalam kotak pakan di kandang Sapi dan Ayam!
 	set QuestManager.quest_step = 5
 	=> END
 
 elif QuestManager.quest_step == 5:
 	Mbah Kucing: Padi dan tomatmu terancam ulat kebul, Meong!
-	Mbah Kucing: Jangan lupa, masukkan hasil panenmu ke kotak pakan ternak untuk mendapatkan 3 Telur dan 3 Susu.
-	Mbah Kucing: Setelah itu bawa ke Pedagang di rumah bawah. Dia yang memegang stok Pestisida terakhir di pulau ini!
+	Mbah Kucing: Segera bawa 3 Telur dan 3 Susu ke Pedagang di bawah untuk menukar Pestisida!
+	=> END
+
+else:
+	Mbah Kucing: Semangat mengurus ladangnya, Meong!
 	=> END
