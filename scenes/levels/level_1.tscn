@@ -14,10 +14,11 @@
 [ext_resource type="Script" uid="uid://bitoxbnlht52d" path="res://scenes/component/crops_cursor_component.gd" id="5_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://d2wfxqlbf4ae5" path="res://scenes/characters/cow/cow.tscn" id="6_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://bmkj2gbmv8kwv" path="res://scenes/component/save_level_data_component.tscn" id="7_np2pn"]
-[ext_resource type="PackedScene" uid="uid://cqoffv0swtris" path="res://scenes/component/test_scene_enable_tool_buttons_component.tscn" id="12_iav0o"]
 [ext_resource type="PackedScene" uid="uid://cjjewr376cqwu" path="res://scenes/objects/chest/chest.tscn" id="13_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://20fil0vf13ln" path="res://scenes/objects/milk.tscn" id="14_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://d2m2i46i7bvrd" path="res://scenes/objects/egg.tscn" id="15_bahl2"]
+[ext_resource type="PackedScene" uid="uid://q5xsfyqxgdke" path="res://scenes/objects/trees/log.tscn" id="18_v6ha0"]
+[ext_resource type="PackedScene" uid="uid://bbqb42j08hrpe" path="res://scenes/objects/rocks/stone.tscn" id="19_gmpev"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_s8va5"]
 vertices = PackedVector2Array(108.703125, 230, 108.32031, 218, 108.82031, 218, 273.5, 230, 108.82031, 138, 108.1875, 118, 273.5, 118, 273.5, 170, 108.32031, 202, 108.82031, 202, 108.32031, 186, 108.82031, 186, 273.5, 198, 108.32031, 170, 108.82031, 170, 108.32031, 154, 108.82031, 154, 108.32031, 138, 277.09375, 170, 276.71875, 198)
@@ -203,11 +204,6 @@ position = Vector2(426, 219)
 [node name="Cow6" parent="Cows" unique_id=362814124 instance=ExtResource("6_oc4kc")]
 position = Vector2(333, 214)
 
-[node name="Guide" parent="Cows" unique_id=771854522 instance=ExtResource("4_oc4kc")]
-position = Vector2(608, 189)
-
-[node name="TestSceneEnableToolButtonsComponent" parent="." unique_id=1741117055 instance=ExtResource("12_iav0o")]
-
 [node name="CowPastureBox" parent="." unique_id=2142457819 instance=ExtResource("13_wtwp4")]
 position = Vector2(770, 360)
 dialogue_start_command = "start_cow_pasture_box"
@@ -217,3 +213,89 @@ output_reward_scenes = Array[PackedScene]([ExtResource("14_iwr0g")])
 position = Vector2(534, 410)
 dialogue_start_command = "start_chicken_pasture_box"
 output_reward_scenes = Array[PackedScene]([ExtResource("15_bahl2")])
+
+[node name="Guide" parent="." unique_id=771854522 instance=ExtResource("4_oc4kc")]
+position = Vector2(993, 321)
+
+[node name="log" type="Node" parent="." unique_id=479418116]
+
+[node name="Log" parent="log" unique_id=363625392 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log2" parent="log" unique_id=1080204601 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log3" parent="log" unique_id=1651332234 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log4" parent="log" unique_id=1155305176 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log5" parent="log" unique_id=993279050 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log6" parent="log" unique_id=1011808392 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log7" parent="log" unique_id=194161530 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log8" parent="log" unique_id=1775876918 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log9" parent="log" unique_id=1000657428 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="Log10" parent="log" unique_id=909114851 instance=ExtResource("18_v6ha0")]
+position = Vector2(1026, 369)
+
+[node name="NodeStone" type="Node" parent="." unique_id=974987914]
+
+[node name="Stone" parent="NodeStone" unique_id=1067511969 instance=ExtResource("19_gmpev")]
+position = Vector2(998, 367)
+
+[node name="Stone2" parent="NodeStone" unique_id=2110648126 instance=ExtResource("19_gmpev")]
+position = Vector2(998, 367)
+
+[node name="Stone3" parent="NodeStone" unique_id=298532066 instance=ExtResource("19_gmpev")]
+position = Vector2(998, 367)
+
+[node name="Stone4" parent="NodeStone" unique_id=1381442199 instance=ExtResource("19_gmpev")]
+position = Vector2(998, 367)
+
+[node name="Stone5" parent="NodeStone" unique_id=55486920 instance=ExtResource("19_gmpev")]
+position = Vector2(998, 367)
+
+[node name="NodeEgg" type="Node" parent="." unique_id=1594180462]
+
+[node name="Egg" parent="NodeEgg" unique_id=551635346 instance=ExtResource("15_bahl2")]
+position = Vector2(1068, 366)
+
+[node name="Egg2" parent="NodeEgg" unique_id=437828546 instance=ExtResource("15_bahl2")]
+position = Vector2(1068, 366)
+
+[node name="Egg3" parent="NodeEgg" unique_id=1156360490 instance=ExtResource("15_bahl2")]
+position = Vector2(1068, 366)
+
+[node name="Egg4" parent="NodeEgg" unique_id=1519529316 instance=ExtResource("15_bahl2")]
+position = Vector2(1068, 366)
+
+[node name="Egg5" parent="NodeEgg" unique_id=156198170 instance=ExtResource("15_bahl2")]
+position = Vector2(1068, 366)
+
+[node name="NodeMilk" type="Node" parent="." unique_id=154218942]
+
+[node name="Milk" parent="NodeMilk" unique_id=600335851 instance=ExtResource("14_iwr0g")]
+position = Vector2(1099, 365)
+
+[node name="Milk2" parent="NodeMilk" unique_id=410024265 instance=ExtResource("14_iwr0g")]
+position = Vector2(1099, 365)
+
+[node name="Milk3" parent="NodeMilk" unique_id=513517766 instance=ExtResource("14_iwr0g")]
+position = Vector2(1099, 365)
+
+[node name="Milk4" parent="NodeMilk" unique_id=1690066777 instance=ExtResource("14_iwr0g")]
+position = Vector2(1099, 365)
+
+[node name="Milk5" parent="NodeMilk" unique_id=1673008595 instance=ExtResource("14_iwr0g")]
+position = Vector2(1099, 365)

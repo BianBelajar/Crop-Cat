@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://r0vxhkr73r53" path="res://scenes/characters/player/tilling_state.gd" id="8_xuses"]
 [ext_resource type="Script" uid="uid://bns5sgdtap1s" path="res://scenes/characters/player/watering_state.gd" id="9_42irl"]
 [ext_resource type="PackedScene" uid="uid://b84e3lgwlvway" path="res://scenes/component/hit_components.tscn" id="10_3xnwo"]
+[ext_resource type="Script" uid="uid://8hggw53y50ej" path="res://scenes/characters/player/pesticide_state.gd" id="10_djydg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hss88"]
 atlas = ExtResource("1_t61fv")
@@ -444,6 +445,12 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 script = ExtResource("9_42irl")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+hit_component_collision_shape = NodePath("../../HitComponents/HitComponentCollisionShape2D")
+
+[node name="Pesticide" type="Node" parent="StateMachine" unique_id=127650888 node_paths=PackedStringArray("player", "animated_sprite", "hit_component_collision_shape")]
+script = ExtResource("10_djydg")
+player = NodePath("../..")
+animated_sprite = NodePath("../../AnimatedSprite2D")
 hit_component_collision_shape = NodePath("../../HitComponents/HitComponentCollisionShape2D")
 
 [node name="HitComponents" parent="." unique_id=625718729 instance=ExtResource("10_3xnwo")]

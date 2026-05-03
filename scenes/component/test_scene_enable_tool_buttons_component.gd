@@ -9,3 +9,4 @@ func enable_tool_buttons() -> void:
 	ToolManager.enable_tool_button(DataTypes.Tools.WaterCrops)
 	ToolManager.enable_tool_button(DataTypes.Tools.PlantWheat)
 	ToolManager.enable_tool_button(DataTypes.Tools.PlantTomato)
+	ToolManager.enable_tool.emit(DataTypes.Tools.Pesticide)

@@ -6,7 +6,8 @@ enum Tools {
 	TillGround,
 	WaterCrops,
 	PlantWheat,
-	PlantTomato
+	PlantTomato,
+	Pesticide
 }
 
 enum GrowthStates {

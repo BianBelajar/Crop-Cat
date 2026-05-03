@@ -16,9 +16,15 @@ func on_hurt(hit_damage : int) -> void:
 	material.set_shader_parameter("shake_intensity", 0.0)
 
 func on_max_damage_reached() -> void:
-	call_deferred("add_log_scene")
-	print("Max damaged reached")
-	queue_free()
+	var log_instance = log_scene.instantiate() as Node2D
+	
+	# MASUKKAN KE SCENE DULU
+	get_parent().add_child(log_instance)
+	
+	# BARU ATUR POSISI GLOBALNYA
+	log_instance.global_position = global_position
+	
+	queue_free() # Menghancurkan pohon
 
 func add_log_scene() -> void:
 	var log_instance = log_scene.instantiate() as Node2D

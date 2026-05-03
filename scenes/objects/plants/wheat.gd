@@ -14,7 +14,7 @@ var growth_state: DataTypes.GrowthStates = DataTypes.GrowthStates.Seed
 var has_pest: bool = false 
 
 func _ready() -> void:
-	if randf() <= pest_chance:
+	if randf() <= DifficultyManager.pest_chance:
 		spawn_pest()
 	watering_particles.emitting = false
 	flowering_particles.emitting = false
@@ -25,21 +25,34 @@ func _ready() -> void:
 
 func spawn_pest() -> void:
 	has_pest = true
-	flowering_particles.emitting = true
-	print("Padi kena hama Kutu Kebul!")
+
+func apply_pesticide() -> void:
+	if has_pest:
+		has_pest = false
+		flowering_particles.emitting = false # Matikan kutu
+		modulate = Color(1, 1, 1) # Balikin warna jadi segar (hijau)
 
 func _process(delta: float) -> void:
 	growth_state = growth_cycle_component.get_current_growth_state()
 	sprite_2d.frame = growth_state
 	
-	# Bagian yang tadi diperbaiki:
-	if growth_state == DataTypes.GrowthStates.Maturity:
+	if growth_state >= DataTypes.GrowthStates.Maturity:
 		if has_pest:
 			flowering_particles.emitting = true
+			modulate = Color(0.527, 0.542, 0.211, 1.0) 
 		else:
 			flowering_particles.emitting = false
+			modulate = Color(1, 1, 1)
+	else:
+		flowering_particles.emitting = false
+		modulate = Color(1, 1, 1)
 	
 func on_hurt(hit_damage: int) -> void:
+	if ToolManager.selected_tool == DataTypes.Tools.Pesticide:
+		if has_pest:
+			apply_pesticide()
+		return # Berhenti agar tidak lanjut ke siram air
+		
 	if !growth_cycle_component.is_watered:
 		watering_particles.emitting = true
 		await get_tree().create_timer(5.0).timeout
@@ -53,6 +66,10 @@ func on_crop_maturity() -> void:
 		flowering_particles.emitting = false
 
 func on_crop_harvesting() -> void:
+	if has_pest:
+		queue_free() # Tanaman langsung hilang/hancur
+		return # PENTING: Berhenti di sini, jangan lanjut ke bawah!
+		
 	var drop_amount = randi_range(1, 1) 
 	
 	for i in range(drop_amount):

@@ -1,0 +1,58 @@
+~ start
+
+if QuestManager.quest_step == 0:
+	Mbah Kucing: Astaga! Kapalmu hancur lebur diterjang badai, Meong!
+	Mbah Kucing: Aku bisa membantumu memperbaikinya, tapi aku butuh bahan.
+	Mbah Kucing: Tolong carikan aku 10 Kayu untuk menambal lambung kapal.
+	Mbah Kucing: Ini, pakai kapak tuaku ini dan tebanglah beberapa pohon.
+	do GameDialogueManager.action_give_axe()
+	set QuestManager.quest_step = 1
+	=> END
+
+elif QuestManager.quest_step == 1:
+	if QuestManager.is_wood_enough() == true:
+		Mbah Kucing: Wah, kamu berhasil mengumpulkan 10 kayu! Sini berikan padaku.
+		do QuestManager.take_wood()
+		Mbah Kucing: Kerja bagus! Nah, aku kebetulan punya sisa kayu...
+		Mbah Kucing: Kalau kamu bisa membawakan 5 Batu untuk mata paculnya, aku bisa buatkan cangkul untukmu!
+		Mbah Kucing: Gunakan kapakmu untuk menghancurkan beberapa batu di sana.
+		set QuestManager.quest_step = 3
+		=> END
+	else:
+		Mbah Kucing: Kamu belum mengumpulkan 10 Kayu. 
+		Mbah Kucing: Pakai kapak yang kuberikan tadi dan tebang pohon di sana!
+		=> END
+
+# STEP 3: Mbah Kucing menunggu 5 Batu
+elif QuestManager.quest_step == 3:
+	if QuestManager.is_stone_enough() == true:
+		Mbah Kucing: Mantap! Kamu membawa 5 batunya!
+		do QuestManager.take_stone()
+		Mbah Kucing: Teng... teng... teng... (Mbah Kucing merakit pacul)
+		Mbah Kucing: Ini dia! Pacul baru untukmu. 
+		Mbah Kucing: Cobalah gemburkan tanah di sekitar sini untuk bertani!
+		do GameDialogueManager.action_give_hoe()
+		set QuestManager.quest_step = 4
+		=> END
+	else:
+		Mbah Kucing: Kamu belum mengumpulkan 5 Batu, Meong.
+		Mbah Kucing: Pukul batu-batu dengan kapakmu!
+		=> END
+
+elif QuestManager.quest_step == 4:
+	Mbah Kucing: Wah, tanahnya sudah rapi kamu cangkul!
+	Mbah Kucing: Ini paket bertanimu: Alat Siram, Bibit Padi, dan Bibit Tomat.
+	do GameDialogueManager.action_give_farming_kit()
+	Mbah Kucing: Ingat Meong, Padi dan Tomat itu manja. 
+	Mbah Kucing: Mereka bisa diserang hama "Ulat Kebul". Kalau daunnya menguning, mereka harus disemprot Pestisida.
+	Mbah Kucing: Masalahnya, stok pestisidaku habis.
+	Mbah Kucing: Pergilah ke rumah di bawah, temui pedagang di sana. 
+	Mbah Kucing: Berikan 3 Telur dan 3 Susu padanya untuk menukar Pestisida.
+	set QuestManager.quest_step = 5
+	=> END
+
+elif QuestManager.quest_step == 5:
+	Mbah Kucing: Padi dan tomatmu terancam ulat kebul, Meong!
+	Mbah Kucing: Cepat bawa 3 Telur dan 3 Susu ke Pedagang di rumah bawah.
+	Mbah Kucing: Dia yang memegang stok Pestisida terakhir di pulau ini.
+	=> END

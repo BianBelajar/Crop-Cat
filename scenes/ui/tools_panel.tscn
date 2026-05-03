@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dqoxp30ffrb4p" path="res://scenes/ui/tools_panel.gd" id="2_0jxvs"]
 [ext_resource type="Texture2D" uid="uid://c8a3eq40251gd" path="res://assets/game/objects/basic_tools_material.png" id="2_a7ivs"]
 [ext_resource type="Texture2D" uid="uid://flthx0e4ue6k" path="res://assets/game/objects/basic_plant.png" id="3_0jxvs"]
+[ext_resource type="Texture2D" uid="uid://cddytddo36ecw" path="res://assets/game/objects/Sprayer.png" id="5_gbtgy"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_gbtgy"]
 
@@ -35,6 +36,10 @@ load_path = "res://.godot/imported/basic_plant.png-e5c455570c6f22d005e83c9d1fbe2
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1kta"]
 atlas = SubResource("CompressedTexture2D_icge2")
 region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6726"]
+atlas = ExtResource("5_gbtgy")
+region = Rect2(10, 9, 11, 16)
 
 [node name="ToolsPanel" type="PanelContainer" unique_id=1887696429]
 offset_right = 168.0
@@ -98,8 +103,18 @@ button_group = SubResource("ButtonGroup_gbtgy")
 icon = SubResource("AtlasTexture_n1kta")
 icon_alignment = 1
 
+[node name="ToolPesticide" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1602366039]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_gbtgy")
+icon = SubResource("AtlasTexture_a6726")
+icon_alignment = 1
+
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolAxe" to="." method="_on_tool_axe_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolTilling" to="." method="_on_tool_tilling_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolWatering" to="." method="_on_tool_watering_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolWheat" to="." method="_on_tool_corn_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolTomato" to="." method="_on_tool_tomato_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ToolPesticide" to="." method="_on_tool_pesticide_pressed"]

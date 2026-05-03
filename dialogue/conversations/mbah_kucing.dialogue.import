@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cp8sddmlyrnnn"
+path="res://.godot/imported/mbah_kucing.dialogue-1219cf10105074799fb94ff7ada5cc15.tres"
+
+[deps]
+
+source_file="res://dialogue/conversations/mbah_kucing.dialogue"
+dest_files=["res://.godot/imported/mbah_kucing.dialogue-1219cf10105074799fb94ff7ada5cc15.tres"]
+
+[params]
+
+defaults=true

@@ -10,7 +10,7 @@
 shader = ExtResource("1_rl4q2")
 shader_parameter/original_0 = Color(0.36078432, 0.30588236, 0.57254905, 1)
 shader_parameter/original_1 = Color(0.4627451, 0.42745098, 0.6666667, 1)
-shader_parameter/replace_0 = Color(0.7689851, 0, 0.28670475, 1)
+shader_parameter/replace_0 = Color(0, 0, 0, 1)
 shader_parameter/replace_1 = Color(0.9946006, 0.5223029, 0.55146277, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pdv8u"]

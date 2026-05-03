@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://hdv5rg2xaimy"
+path="res://.godot/imported/pedagang.dialogue-c89d8a23ddf7b7f8f8e246f974be4ab1.tres"
+
+[deps]
+
+source_file="res://dialogue/conversations/pedagang.dialogue"
+dest_files=["res://.godot/imported/pedagang.dialogue-c89d8a23ddf7b7f8f8e246f974be4ab1.tres"]
+
+[params]
+
+defaults=true

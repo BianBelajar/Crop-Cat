@@ -11,39 +11,19 @@ func _ready() -> void:
 	interactable_component.interactable_activated.connect(on_interactable_activated)
 	interactable_component.interactable_deactivated.connect(on_interactable_deactivated)
 	interactable_label_component.hide()
-	
-	# Sambungkan sinyal untuk memberikan kapak dari GameDialogManager
-	GameDialogueManager.give_axe.connect(on_give_axe)
-	GameDialogueManager.give_hoe.connect(on_give_hoe)
-
 
 func on_interactable_activated() -> void:
-	# Munculkan tombol 'E' saat pemain mendekat
 	interactable_label_component.show()
 	in_range = true
 
-
 func on_interactable_deactivated() -> void:
-	# Sembunyikan tombol 'E' saat pemain menjauh
 	interactable_label_component.hide()
 	in_range = false
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if in_range:
 		if event.is_action_pressed("show_dialogue"):
 			var balloon: BaseGameDialogueBalloon = balloon_scene.instantiate()
 			get_tree().root.add_child(balloon)
-			# Ubah jadi "start" agar otomatis membaca logika if/else
-			balloon.start(load("res://dialogue/conversations/mbah_kucing.dialogue"), "start")
-
-
-# FUNGSI BARU: Hanya mengaktifkan Kapak
-func on_give_axe() -> void:
-	ToolManager.enable_tool_button(DataTypes.Tools.AxeWood)
-	print("Kapak berhasil didapatkan!")
-
-# FUNGSI BARU: Mengaktifkan Pacul/Tilling
-func on_give_hoe() -> void:
-	ToolManager.enable_tool_button(DataTypes.Tools.TillGround)
-	print("Sinyal Pacul diterima, tombol diaktifkan!")
+			# PERHATIKAN: Memanggil pedagang.dialogue
+			balloon.start(load("res://dialogue/conversations/pedagang.dialogue"), "start")

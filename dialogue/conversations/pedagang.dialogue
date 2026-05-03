@@ -1,0 +1,27 @@
+~ start
+
+if QuestManager.quest_step < 5:
+	Pedagang: Halo Meong! Aku pedagang di sini.
+	Pedagang: Mbah Kucing bilang ada pengelana baru, pasti itu kamu ya?
+	Pedagang: Kabari aku kalau kamu butuh bantuan nanti!
+	=> END
+
+elif QuestManager.quest_step == 5:
+	if QuestManager.can_exchange_pesticide():
+		Pedagang: Oh! Mbah Kucing sudah memberitahuku kamu butuh Pestisida.
+		Pedagang: Dan kamu sudah membawa 3 Telur dan 3 Susu? Sempurna!
+		do QuestManager.take_exchange_items()
+		Pedagang: Ini, terimalah Pestisida ini. Gunakan untuk mengusir Ulat Kebul di ladangmu.
+		do GameDialogueManager.action_unlock_pesticide()
+		set QuestManager.quest_step = 6
+		Pedagang: Sampaikan salamku pada Mbah Kucing ya!
+		=> END
+	else:
+		Pedagang: Mbah Kucing bilang kamu butuh Pestisida untuk ladangmu.
+		Pedagang: Tapi stoknya terbatas. Aku butuh 3 Telur dan 3 Susu sebagai bayarannya.
+		Pedagang: Cepat urus ayam dan sapimu dulu!
+		=> END
+
+else:
+	Pedagang: Semoga ladangmu subur dan bebas dari hama!
+	=> END

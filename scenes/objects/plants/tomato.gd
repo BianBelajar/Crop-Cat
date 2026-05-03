@@ -17,7 +17,7 @@ var has_pest: bool = false
 var start_tomato_frame_offset: int = 6 
 
 func _ready() -> void:
-	if randf() <= pest_chance:
+	if randf() <= DifficultyManager.pest_chance:
 		spawn_pest()
 		
 	watering_particles.emitting = false
@@ -29,22 +29,36 @@ func _ready() -> void:
 
 func spawn_pest() -> void:
 	has_pest = true
-	flowering_particles.emitting = true
-	print("Tomat kena hama Kutu Kebul!") # Ganti jadi Tomat
+
+func apply_pesticide() -> void:
+	if has_pest:
+		has_pest = false
+		flowering_particles.emitting = false # Matikan kutu
+		modulate = Color(1, 1, 1) # Balikin warna jadi segar (hijau)
 
 func _process(delta: float) -> void:
 	growth_state = growth_cycle_component.get_current_growth_state()
-	
-	# --- PERBAIKAN VISUAL: Tambahkan offset 6 agar jadi gambar tomat ---
 	sprite_2d.frame = growth_state + start_tomato_frame_offset
 	
-	if growth_state == DataTypes.GrowthStates.Maturity:
+	if growth_state >= DataTypes.GrowthStates.Maturity:
 		if has_pest:
 			flowering_particles.emitting = true
+			modulate = Color(0.586, 0.583, 0.253, 1.0) # Menguning saat kutu muncul
 		else:
 			flowering_particles.emitting = false
+			modulate = Color(1, 1, 1) # Tetap segar kalau sehat
+	else:
+		# Masih bibit/vegetatif (fase 0, 1, 2), terlihat sehat meskipun bawa hama
+		flowering_particles.emitting = false
+		modulate = Color(1, 1, 1)
 	
 func on_hurt(hit_damage: int) -> void:
+	
+	if ToolManager.selected_tool == DataTypes.Tools.Pesticide:
+		if has_pest:
+			apply_pesticide()
+		return # Wajib return biar nggak lanjut ke logika nyiram air
+		
 	if !growth_cycle_component.is_watered:
 		watering_particles.emitting = true
 		await get_tree().create_timer(5.0).timeout
@@ -58,8 +72,11 @@ func on_crop_maturity() -> void:
 		flowering_particles.emitting = false
 
 func on_crop_harvesting() -> void:
-	# Sesuaikan drop tomat jika perlu
-	var drop_amount = randi_range(1, 2) 
+	if has_pest:
+		queue_free() # Tanaman langsung hilang/hancur
+		return # PENTING: Berhenti di sini, jangan lanjut ke bawah!
+		
+	var drop_amount = randi_range(1, 1) 
 	
 	for i in range(drop_amount):
 		var tomato_harvest_instance = tomato_harvest_scene.instantiate() as Node2D
