@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dh1up0snk1yt4"
-path="res://.godot/imported/ending1_frame1.png-837a275fce5582f6051b9bed55e15e77.ctex"
+path="res://.godot/imported/jelajah_1.png-85f84804151aa5b260b2cf8db769d65d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ending/ending1_frame1.png"
-dest_files=["res://.godot/imported/ending1_frame1.png-837a275fce5582f6051b9bed55e15e77.ctex"]
+source_file="res://assets/ending/jelajah_1.png"
+dest_files=["res://.godot/imported/jelajah_1.png-85f84804151aa5b260b2cf8db769d65d.ctex"]
 
 [params]
 

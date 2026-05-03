@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgmr0no4shxuq"
-path="res://.godot/imported/ending1_frame3.png-b0e3a8d761ca4a8a6957dbfbe414d8e8.ctex"
+uid="uid://dgx24hdn5ex4a"
+path="res://.godot/imported/tinggal_3.png-880561133a50eacf018499bc9cf10ec4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ending/ending1_frame3.png"
-dest_files=["res://.godot/imported/ending1_frame3.png-b0e3a8d761ca4a8a6957dbfbe414d8e8.ctex"]
+source_file="res://assets/ending/tinggal_3.png"
+dest_files=["res://.godot/imported/tinggal_3.png-880561133a50eacf018499bc9cf10ec4.ctex"]
 
 [params]
 

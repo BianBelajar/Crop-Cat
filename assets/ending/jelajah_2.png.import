@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duvcwbxsg1cju"
-path="res://.godot/imported/ending2_frame1.png-e03c45b921da3f22666374ef05775037.ctex"
+uid="uid://nauiuyujlima"
+path="res://.godot/imported/jelajah_2.png-1a62d8e33a8474dd7eda258213414965.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ending/ending2_frame1.png"
-dest_files=["res://.godot/imported/ending2_frame1.png-e03c45b921da3f22666374ef05775037.ctex"]
+source_file="res://assets/ending/jelajah_2.png"
+dest_files=["res://.godot/imported/jelajah_2.png-1a62d8e33a8474dd7eda258213414965.ctex"]
 
 [params]
 

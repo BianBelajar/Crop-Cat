@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dqexcptuxvjoh"]
+
+[ext_resource type="Texture2D" uid="uid://cbpju33eiip83" path="res://assets/game/objects/ship_unfix.png" id="1_shipbroken"]
+[ext_resource type="Script" uid="uid://d3jbqoe40h4ab" path="res://scenes/objects/broken_ship.gd" id="2_shipscript"]
+
+[node name="BrokenShip" type="Node2D" unique_id=1978301170]
+script = ExtResource("2_shipscript")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=611642708]
+position = Vector2(5, -46)
+scale = Vector2(0.23656847, 0.22055429)
+texture = ExtResource("1_shipbroken")

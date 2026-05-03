@@ -57,6 +57,42 @@ elif QuestManager.quest_step == 5:
 	Mbah Kucing: Segera bawa 3 Telur dan 3 Susu ke Pedagang di bawah untuk menukar Pestisida!
 	=> END
 
+elif QuestManager.quest_step == 6:
+	Mbah Kucing: Hebat sekali, Meong! Kamu sudah berkembang menjadi petani yang luar biasa!
+	Mbah Kucing: ...Ngomong-ngomong, lihat itu... kapalmu yang hancur di tepi pantai.
+	Mbah Kucing: Aku sudah lama memikirkannya. Mungkin sudah waktunya kita memperbaikinya!
+	Mbah Kucing: Tapi kapal yang kuat butuh bahan yang banyak dan berkualitas.
+	Mbah Kucing: Kumpulkan untukku:
+	Mbah Kucing: ⟣ 20 Kayu   ⟣ 15 Batu   ⟣ 20 Tomat
+	Mbah Kucing: ⟣ 20 Padi   ⟣ 10 Susu   ⟣ 10 Telur
+	Mbah Kucing: Kayunya untuk rangka, batu untuk jangkar, padi dan tomat untuk bekal, susu dan telur untuk upah tukang kayu!
+	Mbah Kucing: Ini akan jadi kerja keras yang panjang, Meong. Tapi aku percaya padamu!
+	do GameDialogueManager.action_start_ship_repair()
+	set QuestManager.quest_step = 7
+	=> END
+
+elif QuestManager.quest_step == 7 or QuestManager.quest_step == 8:
+	if QuestManager.can_repair_ship() == true:
+		Mbah Kucing: Meong! Semua bahannya sudah terkumpul! Luar biasa!
+		Mbah Kucing: Kayu, batu, padi, tomat, susu, telur... semuanya ada!
+		Mbah Kucing: Serahkan semuanya padaku, dan aku akan segera mulai memperbaiki kapalmu!
+		Mbah Kucing: Ini mungkin... perpisahan kita, Meong. Atau tidak? Itu pilihanmu nanti.
+		do QuestManager.take_ship_repair_items()
+		set QuestManager.quest_step = 9
+		do GameDialogueManager.trigger_ending.emit()
+		=> END
+	else:
+		Mbah Kucing: Masih kurang bahannya, Meong. Ini daftar yang masih harus kamu kumpulkan:
+		Mbah Kucing: ⟣ 25 Kayu   ⟣ 15 Batu   ⟣ 25 Tomat
+		Mbah Kucing: ⟣ 25 Padi   ⟣ 15 Susu   ⟣ 15 Telur
+		Mbah Kucing: Cek inventarismu dan lengkapi semuanya dulu ya, Meong!
+		set QuestManager.quest_step = 8
+		=> END
+
+elif QuestManager.quest_step >= 9:
+	Mbah Kucing: Semangat mengurus pulau kita, Meong!
+	=> END
+
 else:
 	Mbah Kucing: Semangat mengurus ladangnya, Meong!
 	=> END

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cim1nowremfmw"]
+
+[ext_resource type="Texture2D" uid="uid://bobda1xlb22b1" path="res://assets/game/objects/ship_fix.png" id="1_shipfixed"]
+[ext_resource type="Script" uid="uid://cy21ibroxm0k" path="res://scenes/objects/fixed_ship.gd" id="2_shipscript"]
+
+[node name="FixedShip" type="Node2D" unique_id=456670399]
+script = ExtResource("2_shipscript")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=736635051]
+position = Vector2(2.9999998, -15.999999)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_shipfixed")

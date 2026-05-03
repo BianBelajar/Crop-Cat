@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://dipgm62880dtg"]
+
+[ext_resource type="Script" uid="uid://bep3bi28mll3l" path="res://scenes/ui/ending_cutscene.gd" id="1_ending"]
+
+[node name="EndingCutscene" type="CanvasLayer" unique_id=352803728]
+process_mode = 3
+layer = 100
+script = ExtResource("1_ending")
+
+[node name="BgRect" type="ColorRect" parent="." unique_id=1054482872]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=493472361]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="SubtitlePanel" type="Panel" parent="." unique_id=499283625]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SubtitleLabel" type="Label" parent="SubtitlePanel" unique_id=214513123]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HintLabel" type="Label" parent="." unique_id=216369516]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+autowrap_mode = 3
+
+[node name="ChoicePanel" type="Label" parent="." unique_id=421477800]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="BtnExplore" type="Button" parent="ChoicePanel" unique_id=57156340]
+layout_mode = 0
+offset_left = -78.0
+offset_top = 7.5
+offset_right = 69.0
+offset_bottom = 38.5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Lanjut Menjelajah"
+
+[node name="BtnStay" type="Button" parent="ChoicePanel" unique_id=1195330126]
+layout_mode = 0
+offset_left = -67.0
+offset_top = 41.5
+offset_right = 62.0
+offset_bottom = 72.5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Tetap Di Pulau"
+
+[node name="TamatPanel" type="Control" parent="." unique_id=2080170868]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BgTamat" type="ColorRect" parent="TamatPanel" unique_id=1382820167]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TamatDesc" type="Label" parent="TamatPanel" unique_id=1979846018]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "TAMAT"
+horizontal_alignment = 1
+
+[node name="BtnMenu" type="Button" parent="TamatPanel" unique_id=890267179]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -85.0
+offset_right = 1.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Kembali Ke Menu"
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=809717659]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="ChoicePanel/BtnExplore" to="." method="_on_btn_explore_pressed"]
+[connection signal="pressed" from="ChoicePanel/BtnStay" to="." method="_on_btn_stay_pressed"]

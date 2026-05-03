@@ -25,6 +25,8 @@ DialogueManager="*uid://c3rodes2l3gxb"
 GameDialogueManager="*uid://diht01eickv0s"
 GameManager="*uid://cn7d263snk86r"
 SceneManager="*uid://clipxm6fe8yi7"
+QuestManager="*uid://b6dig27pwlvnw"
+DifficultyManager="*uid://do8wbxqoeyb60"
 
 [display]
 

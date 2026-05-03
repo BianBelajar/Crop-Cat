@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqo6dusrb6erw"
-path="res://.godot/imported/ending2_frame2.png-2c78f1bd7c5825a056ef2bda58f042b3.ctex"
+path="res://.godot/imported/tinggal_2.png-15e40dfe8764504425944da5bfee189d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ending/ending2_frame2.png"
-dest_files=["res://.godot/imported/ending2_frame2.png-2c78f1bd7c5825a056ef2bda58f042b3.ctex"]
+source_file="res://assets/ending/tinggal_2.png"
+dest_files=["res://.godot/imported/tinggal_2.png-15e40dfe8764504425944da5bfee189d.ctex"]
 
 [params]
 
