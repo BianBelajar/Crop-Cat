@@ -321,6 +321,11 @@ layout_mode = 2
 theme_type_variation = &"GameMenuButton"
 text = "Save"
 
+[node name="LogoutButton" type="Button" parent="MarginContainer/MainButtons" unique_id=82576121]
+layout_mode = 2
+theme_type_variation = &"GameMenuButton"
+text = "LOGOUT"
+
 [node name="ExitGameButton" type="Button" parent="MarginContainer/MainButtons" unique_id=1363401469]
 custom_minimum_size = Vector2(100, 29)
 layout_mode = 2
@@ -352,6 +357,7 @@ text = "Hard"
 [connection signal="pressed" from="MarginContainer/MainButtons/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MainButtons/LoadGameButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MainButtons/SaveGameButton" to="." method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MainButtons/LogoutButton" to="." method="_on_logout_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MainButtons/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/DifficultyButtons/EasyButton" to="." method="_on_easy_button_pressed"]
 [connection signal="pressed" from="MarginContainer/DifficultyButtons/NormalButton" to="." method="_on_normal_button_pressed"]

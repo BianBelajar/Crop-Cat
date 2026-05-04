@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ciptm5kl77esy"]
+
+[ext_resource type="Script" uid="uid://v8udb0oqfnfk" path="res://scenes/ui/user_indicator_hud.gd" id="1_script"]
+
+[node name="UserIndicatorHUD" type="CanvasLayer" unique_id=54529092]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1191006338]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_right = 160.0
+grow_vertical = 0
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+
+[node name="UserLabel" type="Label" parent="MarginContainer" unique_id=2019613548]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.6, 0.85)
+theme_override_font_sizes/font_size = 10
+text = "🌾 Login sebagai: ..."

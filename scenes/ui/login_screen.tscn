@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://dub433hef4mtj"]
+
+[ext_resource type="Script" uid="uid://d18hjcitymq27" path="res://scenes/ui/login_screen.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://legoom5ka3sy" path="res://scenes/ui/game_theme_ui.tres" id="2_theme"]
+
+[node name="LoginScreen" type="CanvasLayer" unique_id=52159599]
+script = ExtResource("1_script")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=681927193]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.094, 0.078, 0.122, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1088667655]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=979461494]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel" unique_id=1163493729]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=291218703]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "🌾 Harvest Paws"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=519145208]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Siapa namamu, petani?"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer" unique_id=2063307472]
+layout_mode = 2
+
+[node name="UsernameInput" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer" unique_id=2032363906]
+layout_mode = 2
+placeholder_text = "Masukkan nama..."
+max_length = 20
+
+[node name="ErrorLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=1507953775]
+visible = false
+modulate = Color(1, 0.4, 0.4, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "⚠ Error"
+
+[node name="NewGameLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=1385778156]
+visible = false
+modulate = Color(0.6, 1, 0.6, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "✨ Profil baru"
+
+[node name="LoginButton" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=1536174674]
+layout_mode = 2
+text = "Masuk ke Ladang"
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer" unique_id=223218428]
+layout_mode = 2
+
+[node name="ProfilesContainer" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer" unique_id=1588962772]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ProfilesLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer/ProfilesContainer" unique_id=796418276]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Atau pilih profil yang ada:"
+
+[node name="ProfilesList" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer/ProfilesContainer" unique_id=1164181778]
+layout_mode = 2
+theme_override_constants/separation = 4
