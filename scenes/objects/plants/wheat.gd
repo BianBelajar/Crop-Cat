@@ -1,3 +1,9 @@
+# =============================================================================
+# wheat.gd  —  VERSI DIPERBARUI
+# Lokasi: res://scenes/objects/plants/wheat.gd
+#
+# PERUBAHAN: Sama dengan tomato.gd — lihat komentar di sana.
+# =============================================================================
 extends Node2D
 
 var wheat_harvest_scene = preload("res://scenes/objects/plants/wheat_harvest.tscn")
@@ -8,58 +14,90 @@ var wheat_harvest_scene = preload("res://scenes/objects/plants/wheat_harvest.tsc
 @onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
 @onready var hurt_component: HurtComponent = $HurtComponent
 
-@export_range(0, 1) var pest_chance: float = 0.20 # Sudah 20% mantap!
+@export_range(0, 1) var pest_chance: float = 0.20
 
 var growth_state: DataTypes.GrowthStates = DataTypes.GrowthStates.Seed
-var has_pest: bool = false 
+var has_pest: bool = false
+
+# Frame sprite layu/mati gandum (sesuaikan spritesheet-mu)
+const DEAD_FRAME: int = 6
 
 func _ready() -> void:
 	if randf() <= DifficultyManager.pest_chance:
 		spawn_pest()
+
 	watering_particles.emitting = false
 	flowering_particles.emitting = false
-	
+
 	hurt_component.hurt.connect(on_hurt)
 	growth_cycle_component.crop_maturity.connect(on_crop_maturity)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
 
+	# ── BARU ──────────────────────────────────────────────────────────────
+	growth_cycle_component.plant_died.connect(on_plant_died)
+	call_deferred("_notify_education")
+
+# =============================================================================
+# SPAWN & PESTICIDE
+# =============================================================================
 func spawn_pest() -> void:
 	has_pest = true
 
 func apply_pesticide() -> void:
 	if has_pest:
 		has_pest = false
-		flowering_particles.emitting = false # Matikan kutu
-		modulate = Color(1, 1, 1) # Balikin warna jadi segar (hijau)
+		flowering_particles.emitting = false
+		modulate = Color(1, 1, 1)
 
-func _process(delta: float) -> void:
+# =============================================================================
+# MATI
+# =============================================================================
+func _notify_education() -> void:
+	if EducationManager:
+		EducationManager.notify_first_plant("wheat")
+
+func show_dead_sprite() -> void:
+	flowering_particles.emitting = false
+	watering_particles.emitting = false
+	sprite_2d.frame = DEAD_FRAME
+	modulate = Color(0.6, 0.6, 0.6, 1.0)
+
+func on_plant_died(cause: String) -> void:
+	if EducationManager:
+		EducationManager.notify_plant_death("wheat", cause)
+
+# =============================================================================
+# _process
+# =============================================================================
+func _process(_delta: float) -> void:
 	growth_state = growth_cycle_component.get_current_growth_state()
 	sprite_2d.frame = growth_state
-	
-	if growth_state >= DataTypes.GrowthStates.Maturity:
-		if has_pest:
-			flowering_particles.emitting = true
-			modulate = 	 Color(0.904, 0.589, 0.1, 1.0) # Menguning saat kutu muncul
 
-		else:
-			flowering_particles.emitting = false
-			modulate = Color(1, 1, 1)
+	if has_pest and growth_state >= DataTypes.GrowthStates.Maturity:
+		flowering_particles.emitting = true
+		modulate = Color(0.904, 0.589, 0.1, 1.0)
 	else:
 		flowering_particles.emitting = false
 		modulate = Color(1, 1, 1)
-	
-func on_hurt(hit_damage: int) -> void:
+
+# =============================================================================
+# ON HURT
+# =============================================================================
+func on_hurt(_hit_damage: int) -> void:
 	if ToolManager.selected_tool == DataTypes.Tools.Pesticide:
 		if has_pest:
 			apply_pesticide()
-		return # Berhenti agar tidak lanjut ke siram air
-		
-	if !growth_cycle_component.is_watered:
+		return
+
+	if not growth_cycle_component.is_watered:
 		watering_particles.emitting = true
 		await get_tree().create_timer(5.0).timeout
 		watering_particles.emitting = false
 		growth_cycle_component.is_watered = true
-		
+
+# =============================================================================
+# MATURITY & HARVEST
+# =============================================================================
 func on_crop_maturity() -> void:
 	if has_pest:
 		flowering_particles.emitting = true
@@ -68,16 +106,26 @@ func on_crop_maturity() -> void:
 
 func on_crop_harvesting() -> void:
 	if has_pest:
-		queue_free() # Tanaman langsung hilang/hancur
-		return # PENTING: Berhenti di sini, jangan lanjut ke bawah!
-		
-	var drop_amount = randi_range(1, 1) 
-	
+		queue_free()
+		return
+
+	var drop_amount: int = randi_range(1, 1)
 	for i in range(drop_amount):
-		var wheat_harvest_instance = wheat_harvest_scene.instantiate() as Node2D
-		get_parent().add_child(wheat_harvest_instance)
-		
-		var random_offset = Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))
-		wheat_harvest_instance.global_position = global_position + random_offset
-		
+		var instance = wheat_harvest_scene.instantiate() as Node2D
+		get_parent().add_child(instance)
+		var offset = Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))
+		instance.global_position = global_position + offset
+
 	queue_free()
+
+# =============================================================================
+# SAVE / LOAD
+# =============================================================================
+func get_plant_save_data() -> Dictionary:
+	var data: Dictionary = growth_cycle_component.get_save_data()
+	data["has_pest"] = has_pest
+	return data
+
+func apply_plant_save_data(data: Dictionary) -> void:
+	has_pest = data.get("has_pest", false)
+	growth_cycle_component.apply_save_data(data)

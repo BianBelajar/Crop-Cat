@@ -64,7 +64,7 @@ elif QuestManager.quest_step == 6:
 	Mbah Kucing: Aku sudah lama memikirkannya. Mungkin sudah waktunya kita memperbaikinya!
 	Mbah Kucing: Tapi kapal yang kuat butuh bahan yang banyak dan berkualitas.
 	Mbah Kucing: Kumpulkan untukku:
-	Mbah Kucing: ⟣ 20 Kayu   ⟣ 15 Batu   ⟣ 20 Tomat
+	Mbah Kucing: ⟣ 15 Kayu   ⟣ 10 Batu   ⟣ 20 Tomat
 	Mbah Kucing: ⟣ 20 Padi   ⟣ 10 Susu   ⟣ 10 Telur
 	Mbah Kucing: Kayunya untuk rangka, batu untuk jangkar, padi dan tomat untuk bekal, susu dan telur untuk upah tukang kayu!
 	Mbah Kucing: Ini akan jadi kerja keras yang panjang, Meong. Tapi aku percaya padamu!
@@ -84,8 +84,8 @@ elif QuestManager.quest_step == 7 or QuestManager.quest_step == 8:
 		=> END
 	else:
 		Mbah Kucing: Masih kurang bahannya, Meong. Ini daftar yang masih harus kamu kumpulkan:
-		Mbah Kucing: ⟣ 25 Kayu   ⟣ 15 Batu   ⟣ 25 Tomat
-		Mbah Kucing: ⟣ 25 Padi   ⟣ 15 Susu   ⟣ 15 Telur
+		Mbah Kucing: ⟣ 15 Kayu   ⟣ 10 Batu   ⟣ 20 Tomat
+		Mbah Kucing: ⟣ 20 Padi   ⟣ 10 Susu   ⟣ 10 Telur
 		Mbah Kucing: Cek inventarismu dan lengkapi semuanya dulu ya, Meong!
 		set QuestManager.quest_step = 8
 		=> END

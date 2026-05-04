@@ -28,8 +28,8 @@ func can_exchange_pesticide() -> bool:
 	return has_egg and has_milk
 
 func can_repair_ship() -> bool:
-	var has_wood: bool  = InventoryManager.inventory.get("log",    0) >= 20
-	var has_stone: bool = InventoryManager.inventory.get("stone",  0) >= 15
+	var has_wood: bool  = InventoryManager.inventory.get("log",    0) >= 15
+	var has_stone: bool = InventoryManager.inventory.get("stone",  0) >= 10
 	var has_tomato: bool= InventoryManager.inventory.get("tomato", 0) >= 20
 	var has_wheat: bool = InventoryManager.inventory.get("wheat",  0) >= 20
 	var has_milk: bool  = InventoryManager.inventory.get("milk",   0) >= 10
@@ -73,8 +73,8 @@ func take_exchange_items() -> void:
 
 func take_ship_repair_items() -> void:
 	if can_repair_ship():
-		InventoryManager.inventory["log"]    -= 20
-		InventoryManager.inventory["stone"]  -= 15
+		InventoryManager.inventory["log"]    -= 15
+		InventoryManager.inventory["stone"]  -= 10
 		InventoryManager.inventory["tomato"] -= 20
 		InventoryManager.inventory["wheat"]  -= 20
 		InventoryManager.inventory["milk"]   -= 10
