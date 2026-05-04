@@ -40,6 +40,12 @@ anchor_bottom = 1.0
 offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 3
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -77,7 +83,7 @@ offset_top = -16.5
 offset_right = -110.0
 offset_bottom = 14.5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Lanjut Menjelajah"
+text = "Ending 2 (Menjelajah)"
 
 [node name="BtnStay" type="Button" parent="ChoicePanel" unique_id=1195330126]
 layout_mode = 0
@@ -86,7 +92,7 @@ offset_top = -16.5
 offset_right = 277.0
 offset_bottom = 14.5
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Tetap Di Pulau"
+text = "Ending 1 (Tinggal)"
 
 [node name="Label" type="Label" parent="ChoicePanel" unique_id=1605949842]
 layout_mode = 0
@@ -94,10 +100,11 @@ offset_left = -41.0
 offset_top = -134.5
 offset_right = 64.0
 offset_bottom = -111.5
-text = "Pilih Jalan Mu"
+text = "Pilihan Akhir Tinggal atau Pergi?"
 
 [node name="TamatPanel" type="Control" parent="." unique_id=2080170868]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,10 +159,109 @@ offset_right = 69.0
 offset_bottom = -63.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Kembali Ke Menu"
+text = "Selesai"
+
+[node name="CreditsPanel" type="Control" parent="." unique_id=2020382594]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="BgCredits" type="ColorRect" parent="CreditsPanel" unique_id=732120598]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CreditsText" type="Label" parent="CreditsPanel" unique_id=659061362]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "HARVEST - PAWS
+Sebuah Kisah Kucing Tani
+
+
+
+
+
+— GAME DIRECTOR & DESIGNER —
+Faeyza Zaki
+
+
+
+
+
+— LEAD PROGRAMMER —
+Faeyza Zaki
+
+
+
+
+
+— STORY & NARRATIVE —
+Faeyza Zaki
+
+
+
+
+
+— ART & VISUAL ASSETS —
+Pixel Art Generator by Dreamina AI
+Pixel Art Generator by Gemini AI
+Sprout Lands Asset Pack by Cup Nooble
+
+
+
+
+
+— MUSIC & SOUND EFFECTS —
+Sprout Lands Asset Pack by Cup Nooble
+Demien G Farm Sound by Demien G
+
+
+
+
+
+— CREATED WITH —
+Godot Engine 4.3
+GDScripts
+
+
+
+
+
+— SPECIAL THANKS TO —
+Mbah Kucing, pedagang
+Para Pemain Harvest-Paws
+Pembimbing Proyek Game
+
+...dan KAMU!
+
+
+
+
+
+Terima Kasih Telah Bermain!
+Sampai Jumpa di Petualangan Selanjutnya!"
+horizontal_alignment = 1
+
+[node name="BtnFinalMenu" type="Button" parent="CreditsPanel" unique_id=1615220182]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back to Main Menu"
 
 [node name="FadeOverlay" type="ColorRect" parent="." unique_id=809717659]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

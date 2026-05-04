@@ -45,15 +45,16 @@ elif QuestManager.quest_step == 4:
 	Mbah Kucing: Ini paket bertanimu: Alat Siram, Bibit Padi, dan Bibit Tomat.
 	do GameDialogueManager.action_give_farming_kit()
 	Mbah Kucing: Ingat Meong, Padi dan Tomat itu manja. 
-	Mbah Kucing: Mereka bisa diserang hama "Ulat Kebul". Kalau daunnya menguning, mereka harus disemprot Pestisida.
+	Mbah Kucing: Mereka bisa diserang hama "Kutu Kebul". Kalau daunnya menguning dan muncul kutu putih, mereka harus disemprot Pestisida.
 	Mbah Kucing: Masalahnya, stok pestisidaku habis.
+	Mbah Kucing: Kamu harus memanen Padi dan Tomatmu nanti, lalu masukkan hasil panennya ke dalam kotak pakan di kandang Sapi dan Ayam! untuk mendapatkan susu dan telur.
 	Mbah Kucing: Pergilah ke rumah di bawah, temui pedagang di sana untuk menukar 3 Telur dan 3 Susu dengan Pestisida.
-	Mbah Kucing: Kamu harus memanen Padi dan Tomatmu nanti, lalu masukkan hasil panennya ke dalam kotak pakan di kandang Sapi dan Ayam!
 	set QuestManager.quest_step = 5
 	=> END
 
 elif QuestManager.quest_step == 5:
-	Mbah Kucing: Padi dan tomatmu terancam ulat kebul, Meong!
+	Mbah Kucing: Padi dan tomatmu terancam kutu kebul, Meong!
+	Mbah Kucing: Panen tomat dan padi untuk diberikan ke kotak pakan hewan untuk mendapatkan susu dan telur.
 	Mbah Kucing: Segera bawa 3 Telur dan 3 Susu ke Pedagang di bawah untuk menukar Pestisida!
 	=> END
 

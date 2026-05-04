@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	if growth_state >= DataTypes.GrowthStates.Maturity:
 		if has_pest:
 			flowering_particles.emitting = true
-			modulate = Color(0.586, 0.583, 0.253, 1.0) # Menguning saat kutu muncul
+			modulate = Color(0.904, 0.589, 0.1, 1.0) # Menguning saat kutu muncul
 		else:
 			flowering_particles.emitting = false
 			modulate = Color(1, 1, 1) # Tetap segar kalau sehat
