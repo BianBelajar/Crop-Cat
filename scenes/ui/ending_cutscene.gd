@@ -22,7 +22,7 @@ var stay_slides: Array = [
 ]
 
 # =====================================================
-# STATE & REFERENSI NODE MANUAL
+# STATE & REFERENSI NODE
 # =====================================================
 enum Phase { REPAIR, CHOICE, OUTCOME, TAMAT }
 var current_phase: Phase = Phase.REPAIR
@@ -41,13 +41,16 @@ var chosen_ending: String = ""
 @onready var tamat_desc = $TamatPanel/TamatDesc
 @onready var fade_overlay = $FadeOverlay
 
-# =====================================================
-# AWAL MULAI
-# =====================================================
 func _ready() -> void:
+	# Pastikan node penting tersembunyi di awal
 	choice_panel.visible = false
 	tamat_panel.visible = false
 	hint_label.visible = false
+	
+	# Set warna fade_overlay jadi hitam pekat di awal
+	fade_overlay.color = Color(0, 0, 0, 1)
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	_start_repair_phase()
 
 func _start_repair_phase() -> void:
@@ -56,7 +59,7 @@ func _start_repair_phase() -> void:
 	_show_slide(repair_slides, current_slide_index)
 
 # =====================================================
-# LOGIKA SLIDE & TYPEWRITER
+# LOGIKA TRANSISI SLIDE (Fix Masalah Perpindahan Gambar)
 # =====================================================
 func _show_slide(slides: Array, index: int) -> void:
 	is_transitioning = true
@@ -64,14 +67,16 @@ func _show_slide(slides: Array, index: int) -> void:
 	subtitle_label.text = ""
 	hint_label.visible = false
 
+	# 1. Update gambar
 	var img_path: String = slides[index].get("image", "")
 	if img_path != "" and ResourceLoader.exists(img_path):
 		texture_rect.texture = load(img_path)
 	else:
 		texture_rect.texture = null 
 
+	# 2. Fade In (Hitam -> Terang)
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 0), 0.9).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 0), 0.8)
 	await tween.finished
 
 	is_transitioning = false
@@ -87,58 +92,67 @@ func _start_typewriter(text: String) -> void:
 
 	for i in range(text.length()):
 		typewriter_tween.tween_callback(func(): subtitle_label.text = text.substr(0, i + 1))
-		typewriter_tween.tween_interval(0.038)
+		typewriter_tween.tween_interval(0.04)
 
 	typewriter_tween.tween_callback(func():
 		typewriter_done = true
 		hint_label.visible = true
 	)
 
-func _skip_typewriter(slides: Array) -> void:
-	if typewriter_tween and typewriter_tween.is_valid():
-		typewriter_tween.kill()
-	subtitle_label.text = slides[current_slide_index]["text"]
-	typewriter_done = true
-	hint_label.visible = true
-
 # =====================================================
-# INPUT (KLIK UNTUK LANJUT)
+# INPUT (Fix Masalah Klik Lanjut)
 # =====================================================
 func _input(event: InputEvent) -> void:
 	if is_transitioning or current_phase == Phase.CHOICE or current_phase == Phase.TAMAT:
 		return
 
-	var is_advance = event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT)
+	var is_advance = event.is_action_pressed("ui_accept") or \
+		(event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT)
+	
 	if not is_advance: return
 
-	if current_phase == Phase.REPAIR:
-		if not typewriter_done: _skip_typewriter(repair_slides)
-		else: _next_repair_slide()
-	elif current_phase == Phase.OUTCOME:
-		var slides = explore_slides if chosen_ending == "jelajah" else stay_slides
-		if not typewriter_done: _skip_typewriter(slides)
-		else: _next_outcome_slide()
+	# Ambil data slides yang sedang aktif
+	var current_slides = repair_slides if current_phase == Phase.REPAIR else \
+		(explore_slides if chosen_ending == "jelajah" else stay_slides)
 
-# =====================================================
-# TRANSISI & PILIHAN
-# =====================================================
+	if not typewriter_done:
+		# Jika sedang ngetik, skip biar langsung muncul semua teksnya
+		if typewriter_tween: typewriter_tween.kill()
+		subtitle_label.text = current_slides[current_slide_index]["text"]
+		typewriter_done = true
+		hint_label.visible = true
+	else:
+		# Jika teks sudah muncul semua, pindah ke slide berikutnya
+		_trigger_next_step()
+
+func _trigger_next_step() -> void:
+	if current_phase == Phase.REPAIR:
+		_next_repair_slide()
+	elif current_phase == Phase.OUTCOME:
+		_next_outcome_slide()
+
 func _next_repair_slide() -> void:
 	is_transitioning = true
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 0.65)
+	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 0.6)
 	await tween.finished
 
 	current_slide_index += 1
-	if current_slide_index < repair_slides.size(): _show_slide(repair_slides, current_slide_index)
-	else: _show_choice_screen()
+	if current_slide_index < repair_slides.size():
+		_show_slide(repair_slides, current_slide_index)
+	else:
+		_show_choice_screen()
 
 func _show_choice_screen() -> void:
 	current_phase = Phase.CHOICE
 	subtitle_panel.visible = false
 	hint_label.visible = false
 
+	# Ganti ke gambar background khusus menu pilihan (Opsional)
+	# texture_rect.texture = load("res://assets/ending/pilihan_bg.png")
+
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 0.85), 0.5)
+	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 0.4), 0.5)
 	await tween.finished
 
 	choice_panel.modulate = Color(1, 1, 1, 0)
@@ -147,28 +161,29 @@ func _show_choice_screen() -> void:
 	appear_tween.tween_property(choice_panel, "modulate", Color(1, 1, 1, 1), 0.4)
 
 # =====================================================
-# FUNGSI TOMBOL DI KLIK (Hubungkan via Inspector!)
+# TOMBOL (Fix Masalah Black Screen)
 # =====================================================
-func _on_btn_explore_pressed() -> void: # <- Hubungkan BtnExplore ke sini
+func _on_btn_explore_pressed() -> void:
 	chosen_ending = "jelajah"
 	_start_outcome_phase()
 
-func _on_btn_stay_pressed() -> void: # <- Hubungkan BtnStay ke sini
+func _on_btn_stay_pressed() -> void:
 	chosen_ending = "tinggal"
 	_start_outcome_phase()
 
-func _on_btn_menu_pressed() -> void: # <- Hubungkan BtnMenu ke sini
-	fade_overlay.visible = true
+func _on_btn_menu_pressed() -> void:
+	# 1. Fade out ke hitam pekat
 	var tween = create_tween()
 	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 0.6)
 	await tween.finished
 
-	if chosen_ending == "jelajah": get_tree().change_scene_to_file("res://scenes/ui/game_menu_screen.tscn")
-	else: queue_free()
+	# 2. Pindah scene
+	# GANTI PATH INI sesuai dengan letak file Menu Utama kamu!
+	get_tree().change_scene_to_file("res://scenes/ui/game_menu_screen.tscn")
+	
+	# 3. PENTING: Hapus CanvasLayer ini agar tidak menutupi scene menu baru!
+	queue_free()
 
-# =====================================================
-# ENDING OUTCOME
-# =====================================================
 func _start_outcome_phase() -> void:
 	current_phase = Phase.OUTCOME
 	current_slide_index = 0
@@ -178,24 +193,29 @@ func _start_outcome_phase() -> void:
 	var tween = create_tween()
 	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 0.5)
 	await tween.finished
+	
 	var slides = explore_slides if chosen_ending == "jelajah" else stay_slides
 	_show_slide(slides, current_slide_index)
 
 func _next_outcome_slide() -> void:
 	is_transitioning = true
-	var slides = explore_slides if chosen_ending == "jelajah" else stay_slides
 	var tween = create_tween()
-	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 0.65)
+	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 0.6)
 	await tween.finished
 
 	current_slide_index += 1
-	if current_slide_index < slides.size(): _show_slide(slides, current_slide_index)
-	else: _show_tamat_screen()
+	var slides = explore_slides if chosen_ending == "jelajah" else stay_slides
+	
+	if current_slide_index < slides.size():
+		_show_slide(slides, current_slide_index)
+	else:
+		_show_tamat_screen()
 
 func _show_tamat_screen() -> void:
 	current_phase = Phase.TAMAT
 	subtitle_panel.visible = false
 	
+	# Ganti visibilitas kapal
 	for node in get_tree().get_nodes_in_group("broken_ship"): node.visible = false
 	for node in get_tree().get_nodes_in_group("fixed_ship"): node.visible = true
 
@@ -205,9 +225,12 @@ func _show_tamat_screen() -> void:
 		tamat_desc.text = "Meong memilih Pulau Harapan sebagai rumahnya selamanya.\nTerima kasih sudah bermain Crop Cat!"
 		QuestManager.save_quest()
 
-	var tween = create_tween()
-	tween.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 0.8)
-	await tween.finished
+	# Efek Fade TAMAT
+	var tween_out = create_tween()
+	tween_out.tween_property(fade_overlay, "color", Color(0, 0, 0, 1), 1.0)
+	await tween_out.finished
 
 	tamat_panel.visible = true
-	fade_overlay.visible = false
+	
+	var tween_in = create_tween()
+	tween_in.tween_property(fade_overlay, "color", Color(0, 0, 0, 0), 1.0)

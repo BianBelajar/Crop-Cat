@@ -25,7 +25,7 @@ signal quest_step_changed(new_step: int)  # ⭐ BARU: Dipancarkan saat quest_ste
 # =====================================================
 
 # ⭐ Property setter: otomatis emit sinyal saat quest_step berubah
-var quest_step: int = 0:
+var quest_step: int = 8:
 	set(value):
 		quest_step = value
 		quest_step_changed.emit(value)
