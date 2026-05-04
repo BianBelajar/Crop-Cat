@@ -62,9 +62,14 @@ func add_crop() -> void:
 
 
 func remove_crop() -> void:
+	# Kita tidak perlu mengecek cell_source_id != -1 di sini, 
+	# karena tanahnya mungkin sudah dihapus duluan oleh field_cursor_component!
 	if distance < 20.0:
-		var crop_nodes = get_parent().find_child("CropsFields").get_children()
+		var crops_field = get_parent().find_child("CropsFields")
+		var target_position = tilled_soil_tilemap_layer.to_global(local_cell_position)
 		
-		for node: Node2D in crop_nodes:
-			if node.global_position == local_cell_position:
-				node.queue_free()
+		# Cek semua tanaman yang ada di ladang
+		for crop in crops_field.get_children():
+			# Jika posisi tanaman sama persis dengan kotak tanah yang kita hapus...
+			if crop.global_position == target_position:
+				crop.queue_free() # Hapus tanaman tersebut!
