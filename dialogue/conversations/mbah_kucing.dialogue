@@ -8,6 +8,7 @@ Mbah Kucing: Sebagai permulaan, tolong carikan aku 10 Kayu untuk menambal lambun
 Mbah Kucing: Ini, pakai kapak tuaku ini dan tebanglah beberapa pohon di sekitar sini.
 do GameDialogueManager.action_give_axe()
 set QuestManager.quest_step = 1
+do QuestManager.set_clue_dan_tampilkan("📋 QUEST: Kumpulkan 10 Kayu\n\n📍 LOKASI: Tebang pohon-pohon di sekitar area ini.\n\n🪓 CARA: Gunakan Kapak yang baru kamu terima. Klik kiri pada pohon untuk menebangnya.\n\n🎯 TARGET: 10 buah Kayu (Log) di inventaris.")
 => END
 
 ~ start
@@ -19,6 +20,7 @@ if QuestManager.quest_step == 1:
 		Mbah Kucing: Kalau kamu bisa membawakan 5 Batu untuk mata paculnya, aku bisa buatkan cangkul untukmu!
 		Mbah Kucing: Gunakan kapakmu untuk menghancurkan beberapa batu di sana.
 		set QuestManager.quest_step = 3
+		do QuestManager.set_clue_dan_tampilkan("📋 QUEST: Kumpulkan 5 Batu\n\n📍 LOKASI: Cari tumpukan batu di sekitar pulau (area berbatu/tebing).\n\n🪓 CARA: Gunakan Kapak untuk memecah batu. Klik kiri pada batu.\n\n🎯 TARGET: 5 buah Batu (Stone) di inventaris.\n\n💡 HADIAH: Mbah Kucing akan membuatkan Cangkul untukmu!")
 		=> END
 	else:
 		Mbah Kucing: Kamu belum mengumpulkan 10 Kayu. 
@@ -34,6 +36,7 @@ elif QuestManager.quest_step == 3:
 		Mbah Kucing: Cobalah gemburkan tanah di sekitar sini untuk bertani!
 		do GameDialogueManager.action_give_hoe()
 		set QuestManager.quest_step = 4
+		do QuestManager.set_clue_dan_tampilkan("📋 QUEST: Mulai Bertani!\n\n📍 LOKASI: Lahan tanah cokelat di sekitar pondok.\n\n🔨 CARA: Gunakan Cangkul yang baru kamu terima. Klik lahan untuk mencangkul, lalu tanam bibit.\n\n🎯 TARGET: Cangkul beberapa petak tanah dan siapkan lahan pertanianmu.")
 		=> END
 	else:
 		Mbah Kucing: Kamu belum mengumpulkan 5 Batu, Meong.
@@ -50,6 +53,7 @@ elif QuestManager.quest_step == 4:
 	Mbah Kucing: Kamu harus memanen Padi dan Tomatmu nanti, lalu masukkan hasil panennya ke dalam kotak pakan di kandang Sapi dan Ayam! untuk mendapatkan susu dan telur.
 	Mbah Kucing: Pergilah ke rumah di bawah, temui pedagang di sana untuk menukar 3 Telur dan 3 Susu dengan Pestisida.
 	set QuestManager.quest_step = 5
+	do QuestManager.set_clue_dan_tampilkan("🧴 QUEST: Dapatkan Pestisida\n\n🌾 Tanam & panen Padi dan Tomat.\n🐄 Masukkan ke kotak pakan → dapat Susu & Telur.\n🛒 Tukar 3 Susu + 3 Telur ke Pedagang\n📍 Pedagang: rumah di selatan pulau.")
 	=> END
 
 elif QuestManager.quest_step == 5:
@@ -70,6 +74,7 @@ elif QuestManager.quest_step == 6:
 	Mbah Kucing: Ini akan jadi kerja keras yang panjang, Meong. Tapi aku percaya padamu!
 	do GameDialogueManager.action_start_ship_repair()
 	set QuestManager.quest_step = 7
+	do QuestManager.set_clue_dan_tampilkan("🚢 QUEST AKHIR: Perbaiki Kapal\n\n🪓 15 Kayu + 10 Batu → tebang pohon & batu\n🌾 20 Padi + 20 Tomat → tanam & panen\n🐄 10 Susu + 10 Telur → beri pakan hewan\n\n💬 Kumpul semua lalu temui Mbah Kucing!")
 	=> END
 
 elif QuestManager.quest_step == 7 or QuestManager.quest_step == 8:

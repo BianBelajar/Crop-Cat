@@ -33,9 +33,6 @@ func _ready() -> void:
 	growth_cycle_component.crop_maturity.connect(on_crop_maturity)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
 
-	# ── BARU ──────────────────────────────────────────────────────────────
-	growth_cycle_component.plant_died.connect(on_plant_died)
-	call_deferred("_notify_education")
 
 # =============================================================================
 # SPAWN & PESTICIDE
@@ -52,9 +49,6 @@ func apply_pesticide() -> void:
 # =============================================================================
 # MATI
 # =============================================================================
-func _notify_education() -> void:
-	if EducationManager:
-		EducationManager.notify_first_plant("wheat")
 
 func show_dead_sprite() -> void:
 	flowering_particles.emitting = false
@@ -62,9 +56,6 @@ func show_dead_sprite() -> void:
 	sprite_2d.frame = DEAD_FRAME
 	modulate = Color(0.6, 0.6, 0.6, 1.0)
 
-func on_plant_died(cause: String) -> void:
-	if EducationManager:
-		EducationManager.notify_plant_death("wheat", cause)
 
 # =============================================================================
 # _process

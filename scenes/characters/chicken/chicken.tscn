@@ -108,6 +108,6 @@ navigation_agent_2d = NodePath("../../NavigationAgent2D")
 [node name="ChickenCluckMultipleSFX" parent="." unique_id=598799838 instance=ExtResource("6_hv82h")]
 
 [node name="AudioPlayTimeComponent" parent="." unique_id=332334522 node_paths=PackedStringArray("audio_stream_player_2D") instance=ExtResource("7_wh5lc")]
-wait_time = 7.0
+wait_time = 20.0
 autostart = true
 audio_stream_player_2D = NodePath("../ChickenCluckMultipleSFX")

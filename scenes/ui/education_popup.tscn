@@ -4,67 +4,70 @@
 [ext_resource type="Theme" uid="uid://nq7aolmeo4pm" path="res://game_ui_theme.tres" id="2_p06ct"]
 [ext_resource type="Theme" uid="uid://legoom5ka3sy" path="res://scenes/ui/game_theme_ui.tres" id="3_wxa45"]
 
-[node name="EducationPopup" type="CanvasLayer" unique_id=1185787755]
+[node name="EducationPopup" type="CanvasLayer" unique_id=2028959791]
 script = ExtResource("1_v7lyn")
 
-[node name="Panel" type="Panel" parent="." unique_id=1972270749]
+[node name="Panel" type="Panel" parent="." unique_id=1464431871]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -89.0
-offset_top = -142.0
-offset_right = -56.0
-offset_bottom = -112.0
+offset_left = -116.0
+offset_top = -165.0
+offset_right = 104.0
+offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_p06ct")
 theme_type_variation = &"DarkWoodPanel"
-metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=171405924]
-layout_mode = 0
-offset_left = 9.0
-offset_right = 165.0
-offset_bottom = 31.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=278987981]
-layout_mode = 2
-
-[node name="IconLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1490372747]
-layout_mode = 2
-text = "📚"
-
-[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer" unique_id=75459232]
-layout_mode = 2
-text = " Fakta Pertanian!"
-
-[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=929265541]
-layout_mode = 2
-
-[node name="FactLabel" type="Label" parent="Panel/VBoxContainer/HSeparator" unique_id=2123848409]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=448154819]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -63.0
-offset_top = 5.0
-offset_right = 62.0
-offset_bottom = 165.0
+offset_top = 6.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
-[node name="CloseButton" type="Button" parent="Panel" unique_id=1057983993]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 212.0
-offset_right = 142.0
-offset_bottom = 245.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=259652313]
+layout_mode = 2
+alignment = 1
+
+[node name="IconLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer" unique_id=374254275]
+layout_mode = 2
+text = "📜"
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer" unique_id=97013014]
+layout_mode = 2
+text = " Jurnal Quest"
+
+[node name="FactLabel" type="Label" parent="Panel" unique_id=127952970]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 95.0
+offset_right = -12.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 3
+
+[node name="CloseButton" type="Button" parent="Panel" unique_id=1048897216]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 6.0
+offset_right = -14.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 0
 theme = ExtResource("3_wxa45")
 theme_type_variation = &"ToolButton"
 text = "Oke, Mengerti!"

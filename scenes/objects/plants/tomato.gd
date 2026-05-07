@@ -39,13 +39,6 @@ func _ready() -> void:
 	growth_cycle_component.crop_maturity.connect(on_crop_maturity)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
 
-	# ── BARU: Hubungkan sinyal kematian tanaman ────────────────────────────
-	growth_cycle_component.plant_died.connect(on_plant_died)
-
-	# ── BARU: Kirim fakta edukasi saat tomat PERTAMA kali ditanam ─────────
-	# Pakai call_deferred agar EducationManager dijamin sudah siap
-	call_deferred("_notify_education")
-
 # =============================================================================
 # SPAWN & PESTICIDE
 # =============================================================================
@@ -61,9 +54,6 @@ func apply_pesticide() -> void:
 # =============================================================================
 # MATI — tampilkan sprite layu lalu hilang
 # =============================================================================
-func _notify_education() -> void:
-	if EducationManager:
-		EducationManager.notify_first_plant("tomato")
 
 func show_dead_sprite() -> void:
 	## Dipanggil oleh GrowthCycleComponent._kill_plant() sebelum queue_free.
@@ -72,9 +62,6 @@ func show_dead_sprite() -> void:
 	sprite_2d.frame = DEAD_FRAME
 	modulate = Color(0.6, 0.6, 0.6, 1.0)   # Tampak keabu-abuan / layu
 
-func on_plant_died(cause: String) -> void:
-	if EducationManager:
-		EducationManager.notify_plant_death("tomato", cause)
 
 # =============================================================================
 # _process
