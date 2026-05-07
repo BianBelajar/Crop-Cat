@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://du7yh8spfmjj7"]
+
+[ext_resource type="Script" uid="uid://c4tkc2cyvby2a" path="res://scenes/ui/item_tooltip.gd" id="1_y56yc"]
+[ext_resource type="Theme" uid="uid://legoom5ka3sy" path="res://scenes/ui/game_theme_ui.tres" id="2_jg0uo"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=2023601451]
+layer = 100
+script = ExtResource("1_y56yc")
+
+[node name="TooltipPanel" type="PanelContainer" parent="." unique_id=1964475975]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme = ExtResource("2_jg0uo")
+theme_type_variation = &"DarkWoodPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="TooltipPanel" unique_id=81515609]
+layout_mode = 2
+
+[node name="TooltipLabel" type="Label" parent="TooltipPanel/MarginContainer" unique_id=1977913005]
+layout_mode = 2
+theme = ExtResource("2_jg0uo")
+theme_type_variation = &"InventoryLabel"
+horizontal_alignment = 1

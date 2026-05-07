@@ -10,13 +10,21 @@ extends PanelContainer
 
 func _ready() -> void:
 	ToolManager.enable_tool.connect(on_enable_tool_button)
-	
-	# ---> KONEKKAN SINYAL DARI QUEST MANAGER <---
 	QuestManager.quest_loaded_signal.connect(update_tools_based_on_quest)
-	
-	# Panggil fungsi ini sekali saat game baru dimulai
 	update_tools_based_on_quest()
 
+	_connect_tool_tooltip(tool_axe,       "Kapak")
+	_connect_tool_tooltip(tool_tilling,   "Cangkul")
+	_connect_tool_tooltip(tool_watering,  "Penyiram")
+	_connect_tool_tooltip(tool_wheat,     "Bibit Gandum")
+	_connect_tool_tooltip(tool_tomato,    "Bibit Tomat")
+	_connect_tool_tooltip(tool_pesticide, "Pestisida")
+
+func _connect_tool_tooltip(button: Button, display_name: String) -> void:
+	if button == null:
+		return
+	button.mouse_entered.connect(func(): ItemTooltip.show_tooltip(display_name))
+	button.mouse_exited.connect(func(): ItemTooltip.hide_tooltip())
 
 # ---> KUMPULKAN LOGIKA NYALAIN ALAT DI FUNGSI BARU INI <---
 func update_tools_based_on_quest() -> void:
