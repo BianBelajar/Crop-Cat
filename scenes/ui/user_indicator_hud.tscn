@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ciptm5kl77esy"]
 
 [ext_resource type="Script" uid="uid://v8udb0oqfnfk" path="res://scenes/ui/user_indicator_hud.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://nq7aolmeo4pm" path="res://game_ui_theme.tres" id="2_d6a2b"]
+[ext_resource type="FontVariation" uid="uid://djxury3uvxqqa" path="res://assets/ui/fonts/zx_palm_variation.tres" id="3_d6a2b"]
 
 [node name="UserIndicatorHUD" type="CanvasLayer" unique_id=54529092]
 layer = 10
@@ -18,6 +20,8 @@ theme_override_constants/margin_right = 8
 
 [node name="UserLabel" type="Label" parent="MarginContainer" unique_id=2019613548]
 layout_mode = 2
+theme = ExtResource("2_d6a2b")
 theme_override_colors/font_color = Color(1, 1, 0.6, 0.85)
+theme_override_fonts/font = ExtResource("3_d6a2b")
 theme_override_font_sizes/font_size = 10
-text = "🌾 Login sebagai: ..."
+text = "🌾 Login sebagai : ..."

@@ -37,10 +37,14 @@
 # =============================================================================
 extends CanvasLayer
 
-@onready var panel: PanelContainer         = $Panel
-@onready var fact_label: Label             = $Panel/VBoxContainer/FactLabel
-@onready var close_button: Button          = $Panel/CloseButton
-@onready var title_label: Label            = $Panel/VBoxContainer/HBoxContainer/TitleLabel
+@onready var panel: Panel = $Panel
+@onready var v_box_container: VBoxContainer = $Panel/VBoxContainer
+@onready var h_box_container: HBoxContainer = $Panel/VBoxContainer/HBoxContainer
+@onready var icon_label: Label = $Panel/VBoxContainer/HBoxContainer/IconLabel
+@onready var title_label: Label = $Panel/VBoxContainer/HBoxContainer/TitleLabel
+@onready var h_separator: HSeparator = $Panel/VBoxContainer/HSeparator
+@onready var fact_label: Label = $Panel/VBoxContainer/HSeparator/FactLabel
+@onready var close_button: Button = $Panel/CloseButton
 
 # Durasi animasi masuk/keluar (detik)
 const ANIM_DURATION: float = 0.35

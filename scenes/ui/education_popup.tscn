@@ -7,59 +7,66 @@
 [node name="EducationPopup" type="CanvasLayer" unique_id=1185787755]
 script = ExtResource("1_v7lyn")
 
-[node name="PanelContainer" type="Panel" parent="." unique_id=1972270749]
+[node name="Panel" type="Panel" parent="." unique_id=1972270749]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -91.0
-offset_top = -74.0
-offset_right = -58.0
-offset_bottom = -44.0
+offset_left = -89.0
+offset_top = -142.0
+offset_right = -56.0
+offset_bottom = -112.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_p06ct")
 theme_type_variation = &"DarkWoodPanel"
+metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1086379975]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=171405924]
 layout_mode = 0
-offset_top = -9.0
-offset_right = 167.0
-offset_bottom = 42.0
+offset_left = 9.0
+offset_right = 165.0
+offset_bottom = 31.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=372236004]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=278987981]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=733860331]
-layout_mode = 2
-
-[node name="IconLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=902537219]
+[node name="IconLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1490372747]
 layout_mode = 2
 text = "📚"
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=833185237]
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer" unique_id=75459232]
 layout_mode = 2
-text = "Fakta Pertanian!"
+text = " Fakta Pertanian!"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=993653773]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=929265541]
 layout_mode = 2
 
-[node name="FactLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HSeparator" unique_id=1480210694]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 6.0
-offset_right = 67.0
-offset_bottom = 29.0
+[node name="FactLabel" type="Label" parent="Panel/VBoxContainer/HSeparator" unique_id=2123848409]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = 5.0
+offset_right = 62.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="CloseButton" type="Button" parent="PanelContainer" unique_id=1057983993]
+[node name="CloseButton" type="Button" parent="Panel" unique_id=1057983993]
 layout_mode = 0
-offset_left = 18.0
-offset_top = 90.0
-offset_right = 140.0
-offset_bottom = 123.0
+offset_left = 20.0
+offset_top = 212.0
+offset_right = 142.0
+offset_bottom = 245.0
 theme = ExtResource("3_wxa45")
 theme_type_variation = &"ToolButton"
 text = "Oke, Mengerti!"
 
-[connection signal="pressed" from="PanelContainer/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/CloseButton" to="." method="_on_close_pressed"]

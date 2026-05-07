@@ -26,20 +26,439 @@ tile_set = ExtResource("1_q8h5q")
 y_sort_enabled = true
 position = Vector2(239, 207)
 
-[node name="TomatoHarvest" parent="." unique_id=455444165 instance=ExtResource("2_pkvns")]
-position = Vector2(279, 216)
+[node name="Collectable" type="Node" parent="." unique_id=1224867424]
 
-[node name="WheatHarvest" parent="." unique_id=512185441 instance=ExtResource("3_33f7h")]
-position = Vector2(312, 213)
+[node name="LOG" type="Node" parent="Collectable" unique_id=1502813895]
 
-[node name="Egg" parent="." unique_id=551635346 instance=ExtResource("3_bna32")]
-position = Vector2(281, 187)
-
-[node name="Stone" parent="." unique_id=1067511969 instance=ExtResource("4_0jjdr")]
-position = Vector2(339, 181)
-
-[node name="Log" parent="." unique_id=363625392 instance=ExtResource("5_h30rg")]
+[node name="Log" parent="Collectable/LOG" unique_id=363625392 instance=ExtResource("5_h30rg")]
 position = Vector2(310, 191)
 
-[node name="Milk" parent="." unique_id=600335851 instance=ExtResource("6_0jjdr")]
+[node name="Log2" parent="Collectable/LOG" unique_id=279506241 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log3" parent="Collectable/LOG" unique_id=1837254961 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log4" parent="Collectable/LOG" unique_id=818913265 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log5" parent="Collectable/LOG" unique_id=370968698 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log6" parent="Collectable/LOG" unique_id=1492560651 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log7" parent="Collectable/LOG" unique_id=2095144289 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log8" parent="Collectable/LOG" unique_id=1924187576 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log9" parent="Collectable/LOG" unique_id=508989420 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log10" parent="Collectable/LOG" unique_id=1076425918 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log11" parent="Collectable/LOG" unique_id=997844285 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log12" parent="Collectable/LOG" unique_id=1208076949 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log13" parent="Collectable/LOG" unique_id=1128897234 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log14" parent="Collectable/LOG" unique_id=2146091251 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log15" parent="Collectable/LOG" unique_id=1727707227 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log16" parent="Collectable/LOG" unique_id=833829810 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log17" parent="Collectable/LOG" unique_id=1180386240 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log18" parent="Collectable/LOG" unique_id=281627698 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log19" parent="Collectable/LOG" unique_id=1497073451 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log20" parent="Collectable/LOG" unique_id=1117661657 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log21" parent="Collectable/LOG" unique_id=747563623 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log22" parent="Collectable/LOG" unique_id=231426337 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log23" parent="Collectable/LOG" unique_id=1773015532 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log24" parent="Collectable/LOG" unique_id=2074662063 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log25" parent="Collectable/LOG" unique_id=3195838 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log26" parent="Collectable/LOG" unique_id=296621157 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log27" parent="Collectable/LOG" unique_id=1172316169 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log28" parent="Collectable/LOG" unique_id=752595637 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log29" parent="Collectable/LOG" unique_id=2018314624 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="Log30" parent="Collectable/LOG" unique_id=1928792405 instance=ExtResource("5_h30rg")]
+position = Vector2(310, 191)
+
+[node name="EGG" type="Node" parent="Collectable" unique_id=2069368479]
+
+[node name="Egg" parent="Collectable/EGG" unique_id=551635346 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg2" parent="Collectable/EGG" unique_id=769998535 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg3" parent="Collectable/EGG" unique_id=1145051035 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg4" parent="Collectable/EGG" unique_id=951401845 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg5" parent="Collectable/EGG" unique_id=1093408243 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg6" parent="Collectable/EGG" unique_id=961640767 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg7" parent="Collectable/EGG" unique_id=1870970234 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg8" parent="Collectable/EGG" unique_id=459401305 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg9" parent="Collectable/EGG" unique_id=1878456294 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg10" parent="Collectable/EGG" unique_id=939342276 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg11" parent="Collectable/EGG" unique_id=967639993 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg12" parent="Collectable/EGG" unique_id=866984673 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg13" parent="Collectable/EGG" unique_id=478157558 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg14" parent="Collectable/EGG" unique_id=761484611 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg15" parent="Collectable/EGG" unique_id=1640320450 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg16" parent="Collectable/EGG" unique_id=1139314088 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg17" parent="Collectable/EGG" unique_id=481988435 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg18" parent="Collectable/EGG" unique_id=213914306 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg19" parent="Collectable/EGG" unique_id=2097923054 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="Egg20" parent="Collectable/EGG" unique_id=103341908 instance=ExtResource("3_bna32")]
+position = Vector2(281, 187)
+
+[node name="STONE" type="Node" parent="Collectable" unique_id=1018134597]
+
+[node name="Stone" parent="Collectable/STONE" unique_id=1067511969 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone2" parent="Collectable/STONE" unique_id=1956910469 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone3" parent="Collectable/STONE" unique_id=1051929511 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone4" parent="Collectable/STONE" unique_id=1842438012 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone5" parent="Collectable/STONE" unique_id=92192474 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone6" parent="Collectable/STONE" unique_id=1928236834 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone7" parent="Collectable/STONE" unique_id=1941133486 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone8" parent="Collectable/STONE" unique_id=1123186710 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone9" parent="Collectable/STONE" unique_id=2142567593 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone10" parent="Collectable/STONE" unique_id=1534296302 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone11" parent="Collectable/STONE" unique_id=1732636580 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone12" parent="Collectable/STONE" unique_id=1500436541 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone13" parent="Collectable/STONE" unique_id=299370736 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone14" parent="Collectable/STONE" unique_id=864047328 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone15" parent="Collectable/STONE" unique_id=343504013 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone16" parent="Collectable/STONE" unique_id=1809025995 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone17" parent="Collectable/STONE" unique_id=408442673 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone18" parent="Collectable/STONE" unique_id=1609930356 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone19" parent="Collectable/STONE" unique_id=559460876 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone20" parent="Collectable/STONE" unique_id=197779251 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone21" parent="Collectable/STONE" unique_id=1206274037 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone22" parent="Collectable/STONE" unique_id=333593183 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone23" parent="Collectable/STONE" unique_id=1456754682 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone24" parent="Collectable/STONE" unique_id=2057451513 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="Stone25" parent="Collectable/STONE" unique_id=1826396319 instance=ExtResource("4_0jjdr")]
+position = Vector2(339, 181)
+
+[node name="WHEAT" type="Node" parent="Collectable" unique_id=105723437]
+
+[node name="WheatHarvest" parent="Collectable/WHEAT" unique_id=512185441 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest2" parent="Collectable/WHEAT" unique_id=1431060080 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest3" parent="Collectable/WHEAT" unique_id=1539299731 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest4" parent="Collectable/WHEAT" unique_id=889909199 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest5" parent="Collectable/WHEAT" unique_id=254696537 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest6" parent="Collectable/WHEAT" unique_id=981105011 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest7" parent="Collectable/WHEAT" unique_id=1529208849 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest8" parent="Collectable/WHEAT" unique_id=426049896 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest9" parent="Collectable/WHEAT" unique_id=798602241 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest10" parent="Collectable/WHEAT" unique_id=1111907072 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest11" parent="Collectable/WHEAT" unique_id=1658118589 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest12" parent="Collectable/WHEAT" unique_id=1507763076 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest13" parent="Collectable/WHEAT" unique_id=1577305843 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest14" parent="Collectable/WHEAT" unique_id=322749932 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest15" parent="Collectable/WHEAT" unique_id=227149073 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest16" parent="Collectable/WHEAT" unique_id=1490001953 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest17" parent="Collectable/WHEAT" unique_id=509035857 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest18" parent="Collectable/WHEAT" unique_id=1739875460 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest19" parent="Collectable/WHEAT" unique_id=985322683 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="WheatHarvest20" parent="Collectable/WHEAT" unique_id=1731325748 instance=ExtResource("3_33f7h")]
+position = Vector2(312, 213)
+
+[node name="TOMATO" type="Node" parent="Collectable" unique_id=1694334358]
+
+[node name="TomatoHarvest" parent="Collectable/TOMATO" unique_id=455444165 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest2" parent="Collectable/TOMATO" unique_id=416506252 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest3" parent="Collectable/TOMATO" unique_id=2059641350 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest4" parent="Collectable/TOMATO" unique_id=63676612 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest5" parent="Collectable/TOMATO" unique_id=681302054 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest6" parent="Collectable/TOMATO" unique_id=2108290977 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest7" parent="Collectable/TOMATO" unique_id=2112333664 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest8" parent="Collectable/TOMATO" unique_id=173937286 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest9" parent="Collectable/TOMATO" unique_id=1329172049 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest10" parent="Collectable/TOMATO" unique_id=789568597 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest11" parent="Collectable/TOMATO" unique_id=1990233918 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest12" parent="Collectable/TOMATO" unique_id=1356164797 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest13" parent="Collectable/TOMATO" unique_id=1000990305 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest14" parent="Collectable/TOMATO" unique_id=1764657394 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest15" parent="Collectable/TOMATO" unique_id=1862689787 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest16" parent="Collectable/TOMATO" unique_id=983155300 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest17" parent="Collectable/TOMATO" unique_id=65427384 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest18" parent="Collectable/TOMATO" unique_id=730426932 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest19" parent="Collectable/TOMATO" unique_id=29880650 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest20" parent="Collectable/TOMATO" unique_id=239602977 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest21" parent="Collectable/TOMATO" unique_id=831214492 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest22" parent="Collectable/TOMATO" unique_id=1756545177 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest23" parent="Collectable/TOMATO" unique_id=1486916511 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest24" parent="Collectable/TOMATO" unique_id=620351357 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest25" parent="Collectable/TOMATO" unique_id=1581806499 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="TomatoHarvest26" parent="Collectable/TOMATO" unique_id=392543471 instance=ExtResource("2_pkvns")]
+position = Vector2(279, 216)
+
+[node name="MILK" type="Node" parent="Collectable" unique_id=309657076]
+
+[node name="Milk" parent="Collectable/MILK" unique_id=600335851 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk2" parent="Collectable/MILK" unique_id=1628347629 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk3" parent="Collectable/MILK" unique_id=1515059763 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk4" parent="Collectable/MILK" unique_id=1001468622 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk5" parent="Collectable/MILK" unique_id=1599156199 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk6" parent="Collectable/MILK" unique_id=1941522712 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk7" parent="Collectable/MILK" unique_id=830353833 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk8" parent="Collectable/MILK" unique_id=1838186923 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk9" parent="Collectable/MILK" unique_id=264601912 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk10" parent="Collectable/MILK" unique_id=1205101128 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk11" parent="Collectable/MILK" unique_id=1980430423 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk12" parent="Collectable/MILK" unique_id=1320139288 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk13" parent="Collectable/MILK" unique_id=1554813552 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk14" parent="Collectable/MILK" unique_id=1149193105 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk15" parent="Collectable/MILK" unique_id=1456966969 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk16" parent="Collectable/MILK" unique_id=1387926831 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk17" parent="Collectable/MILK" unique_id=1939124256 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk18" parent="Collectable/MILK" unique_id=984841177 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk19" parent="Collectable/MILK" unique_id=584115613 instance=ExtResource("6_0jjdr")]
+position = Vector2(361, 191)
+
+[node name="Milk20" parent="Collectable/MILK" unique_id=1553857152 instance=ExtResource("6_0jjdr")]
 position = Vector2(361, 191)
