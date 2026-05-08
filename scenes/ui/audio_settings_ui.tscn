@@ -1,17 +1,65 @@
 [gd_scene format=3 uid="uid://bj22tjlllba3u"]
 
 [ext_resource type="Theme" uid="uid://nq7aolmeo4pm" path="res://game_ui_theme.tres" id="1_kynxm"]
+[ext_resource type="Script" uid="uid://cwg4lxow65hd" path="res://scenes/ui/audio_settings_ui.gd" id="1_mhe64"]
 [ext_resource type="Texture2D" uid="uid://cggryi570rotr" path="res://assets/ui/basic_ui_sprite.png" id="2_mhe64"]
+[ext_resource type="FontFile" uid="uid://c3g2sp2jgje4u" path="res://assets/ui/fonts/pixelFont-7-8x14-sproutLands.ttf" id="4_nmojc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmojc"]
 texture = ExtResource("2_mhe64")
-region_rect = Rect2(0, 0, 48, 48)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+region_rect = Rect2(0, 96, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kynxm"]
+texture = ExtResource("2_mhe64")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(2, 194, 44, 12)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mhe64"]
+texture = ExtResource("2_mhe64")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(1, 191, 46, 18)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3rahl"]
+texture = ExtResource("2_mhe64")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(160, 175.5, 96, 33)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lwofw"]
+texture = ExtResource("2_mhe64")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(160, 175.5, 96, 33)
 
 [node name="AudioSettingsUI" type="CanvasLayer" unique_id=35965814]
+script = ExtResource("1_mhe64")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1866492811]
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(300, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -128.0
+offset_right = 111.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_kynxm")
 theme_override_styles/panel = SubResource("StyleBoxTexture_nmojc")
 
@@ -28,6 +76,7 @@ theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1721298113]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "⚙ Pengaturan Audio"
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1103168707]
@@ -45,6 +94,12 @@ text = "🎵 Musik"
 
 [node name="MusicSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=590607270]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/slider = SubResource("StyleBoxTexture_kynxm")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_mhe64")
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=741233549]
 layout_mode = 2
@@ -56,21 +111,41 @@ layout_mode = 2
 layout_mode = 2
 text = "🔊 Efek Suara"
 
-[node name="SFXSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=345066865]
+[node name="SFXSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2064945345]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/slider = SubResource("StyleBoxTexture_kynxm")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_mhe64")
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=825542816]
 layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1860978722]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1239039670]
 layout_mode = 2
+theme = ExtResource("1_kynxm")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_nmojc")
+theme_override_styles/normal = SubResource("StyleBoxTexture_3rahl")
 text = "Tutup
 "
 
 [node name="SaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1671348144]
 layout_mode = 2
+theme = ExtResource("1_kynxm")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_nmojc")
+theme_override_styles/normal = SubResource("StyleBoxTexture_lwofw")
 text = "Simpan
 "
+
+[connection signal="changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MusicSlider" to="." method="_on_music_slider_changed"]
+[connection signal="changed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/SFXSlider" to="." method="_on_sfx_slider_changed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/SaveButton" to="." method="_on_save_button_pressed"]

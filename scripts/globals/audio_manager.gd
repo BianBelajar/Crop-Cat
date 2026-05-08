@@ -45,6 +45,10 @@ func _ready() -> void:
 	_apply_bus_volume(BUS_MUSIC, music_volume)
 	_apply_bus_volume(BUS_SFX,   sfx_volume)
 
+# Bisa dipanggil dari mana saja:
+func show_audio_settings() -> void:
+	var ui := preload("res://scenes/ui/audio_settings_ui.tscn").instantiate()
+	get_tree().root.add_child(ui)
 
 # ═════════════════════════════════════════════════════════════════
 # BGM CONTROL

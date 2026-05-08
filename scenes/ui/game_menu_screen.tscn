@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://mndogi20c2mq" path="res://scenes/ui/game_menu_screen_bg.tscn" id="3_l5nq4"]
 [ext_resource type="Texture2D" uid="uid://cggryi570rotr" path="res://assets/ui/basic_ui_sprite.png" id="3_vrg0q"]
 [ext_resource type="FontVariation" uid="uid://djxury3uvxqqa" path="res://assets/ui/fonts/zx_palm_variation.tres" id="5_ecc0l"]
+[ext_resource type="Theme" uid="uid://nq7aolmeo4pm" path="res://game_ui_theme.tres" id="6_ecc0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rr7v1"]
 atlas = ExtResource("3_vrg0q")
@@ -321,6 +322,13 @@ layout_mode = 2
 theme_type_variation = &"GameMenuButton"
 text = "Save"
 
+[node name="AudioSettingsButton" type="Button" parent="MarginContainer/MainButtons" unique_id=1446906152]
+layout_mode = 2
+theme = ExtResource("6_ecc0l")
+theme_type_variation = &"GameMenuButton"
+text = "SETTING
+"
+
 [node name="LogoutButton" type="Button" parent="MarginContainer/MainButtons" unique_id=82576121]
 layout_mode = 2
 theme_type_variation = &"GameMenuButton"
@@ -357,6 +365,7 @@ text = "Hard"
 [connection signal="pressed" from="MarginContainer/MainButtons/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MainButtons/LoadGameButton" to="." method="_on_load_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MainButtons/SaveGameButton" to="." method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/MainButtons/AudioSettingsButton" to="." method="_on_audio_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MainButtons/LogoutButton" to="." method="_on_logout_button_pressed"]
 [connection signal="pressed" from="MarginContainer/MainButtons/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
 [connection signal="pressed" from="MarginContainer/DifficultyButtons/EasyButton" to="." method="_on_easy_button_pressed"]

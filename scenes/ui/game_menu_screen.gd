@@ -51,6 +51,11 @@ func _on_load_game_button_pressed() -> void:
 	GameManager.load_saved_game()
 	queue_free()
 
+func _on_audio_settings_button_pressed() -> void:
+	var settings_scene := preload("res://scenes/ui/audio_settings_ui.tscn")
+	var instance := settings_scene.instantiate()
+	get_tree().root.add_child(instance)
+
 func _on_exit_game_button_pressed() -> void:
 	GameManager.exit_game()
 
