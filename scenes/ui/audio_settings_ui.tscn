@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://bj22tjlllba3u"]
+
+[ext_resource type="Theme" uid="uid://nq7aolmeo4pm" path="res://game_ui_theme.tres" id="1_kynxm"]
+[ext_resource type="Texture2D" uid="uid://cggryi570rotr" path="res://assets/ui/basic_ui_sprite.png" id="2_mhe64"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmojc"]
+texture = ExtResource("2_mhe64")
+region_rect = Rect2(0, 0, 48, 48)
+
+[node name="AudioSettingsUI" type="CanvasLayer" unique_id=35965814]
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1866492811]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_kynxm")
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmojc")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1223644307]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=697737044]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1721298113]
+layout_mode = 2
+text = "⚙ Pengaturan Audio"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1103168707]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=190439274]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1141728539]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1710264534]
+layout_mode = 2
+text = "🎵 Musik"
+
+[node name="MusicSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=590607270]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=741233549]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=643919178]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=193472662]
+layout_mode = 2
+text = "🔊 Efek Suara"
+
+[node name="SFXSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=345066865]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=825542816]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1860978722]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1239039670]
+layout_mode = 2
+text = "Tutup
+"
+
+[node name="SaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1671348144]
+layout_mode = 2
+text = "Simpan
+"
