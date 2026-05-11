@@ -1,4 +1,4 @@
-# user_indicator_hud.gd
+# user_indicator_hud.gd  [VERSI SUDAH DIPERBAIKI - TUGAS 2]
 extends CanvasLayer
 
 # ── Node References (yang sudah ada) ─────────────────────────────────────────
@@ -10,12 +10,18 @@ extends CanvasLayer
 @onready var minimap_viewport: SubViewport     = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport
 @onready var minimap_camera: Camera2D          = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport/MinimapCamera
 
+# ✨ TAMBAHAN BARU (TUGAS 2): Referensi ikon overlay player di tengah minimap.
+# Node ini adalah TextureRect yang diletakkan SEBAGAI SIBLING dari MinimapViewport
+# di dalam MinimapViewportContainer, bukan di dalam SubViewport.
+# Posisinya: di tengah MinimapViewportContainer, di atas render viewport.
+@onready var player_icon_overlay: TextureRect = $MinimapContainer/VBoxContainer/MinimapViewportContainer/PlayerIconOverlay
+
 const MINIMAP_ZOOM_LEVEL: float = 4.0
 var _player: Node2D = null
 
 # ── READY ─────────────────────────────────────────────────────────────────────
 func _ready() -> void:
-	# === Kode HUD asli ===
+	# === Kode HUD asli (tidak diubah) ===
 	_update_label(SaveGameManager.current_username)
 	SaveGameManager.user_changed.connect(_update_label)
 	jurnal_button.pressed.connect(_on_jurnal_pressed)
@@ -33,8 +39,8 @@ func _setup_minimap() -> void:
 		1.0 / MINIMAP_ZOOM_LEVEL
 	)
 
-	# ← FIX 1: Share world_2d agar SubViewport bisa melihat dunia game!
-	# Tanpa baris ini, minimap akan selalu hitam kosong.
+	# Share world_2d agar SubViewport bisa melihat dunia game
+	# (Tanpa baris ini, minimap akan selalu hitam kosong)
 	minimap_viewport.world_2d = get_tree().root.world_2d
 
 	# Cari player lewat group
@@ -54,7 +60,7 @@ func _refresh_player_reference() -> void:
 
 # ── PROCESS ───────────────────────────────────────────────────────────────────
 func _process(_delta: float) -> void:
-	# ← FIX 2: Guard null check agar tidak error setiap frame
+	# Guard null check agar tidak error setiap frame
 	if not is_instance_valid(minimap_camera):
 		return
 	if is_instance_valid(_player):
@@ -63,7 +69,7 @@ func _process(_delta: float) -> void:
 		# Player belum ditemukan, coba cari lagi (hanya jika benar-benar null)
 		_refresh_player_reference()
 
-# ── Fungsi HUD asli ───────────────────────────────────────────────────────────
+# ── Fungsi HUD asli (tidak diubah) ───────────────────────────────────────────
 func _update_label(username: String) -> void:
 	if username.is_empty():
 		label.text = ""

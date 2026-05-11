@@ -65,7 +65,7 @@ horizontal_alignment = 1
 
 [node name="MinimapViewportContainer" type="SubViewportContainer" parent="MinimapContainer/VBoxContainer" unique_id=1130652450]
 texture_filter = 1
-custom_minimum_size = Vector2(115, 125)
+custom_minimum_size = Vector2(120, 100)
 layout_mode = 2
 stretch = true
 
@@ -74,7 +74,7 @@ transparent_bg = true
 handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 canvas_item_default_texture_filter = 0
-size = Vector2i(115, 125)
+size = Vector2i(120, 100)
 render_target_update_mode = 4
 
 [node name="MinimapCamera" type="Camera2D" parent="MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport" unique_id=657683818]
