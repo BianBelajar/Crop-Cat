@@ -24,6 +24,7 @@ buses/default_bus_layout="uid://bwvv8ewky6rvk"
 ToolManager="*uid://cnmtwmxxhmt6w"
 InventoryManager="*uid://buoubpy0hie8x"
 DayAndNightCycleManager="*uid://hlvpc88lt6vm"
+AchievementManager="*uid://dseodhwf6kdee"
 SaveGameManager="*uid://b4e6x85cxtl10"
 DialogueManager="*uid://c3rodes2l3gxb"
 GameDialogueManager="*uid://diht01eickv0s"
@@ -35,6 +36,7 @@ EducationManager="*uid://becepc07aundw"
 CheatManager="*uid://brcbo1vyp6uol"
 ItemTooltip="*uid://du7yh8spfmjj7"
 AudioManager="*uid://dr6v63md5tfnx"
+AchievementNotification="*uid://bjwbiamd4x7jw"
 
 [display]
 

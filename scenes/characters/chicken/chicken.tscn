@@ -5,8 +5,6 @@
 [ext_resource type="Script" uid="uid://chh7u6vacd8mt" path="res://scripts/state_machine/node_state_machine.gd" id="2_awcwn"]
 [ext_resource type="Script" uid="uid://dobfl4q0r4jyd" path="res://scenes/characters/npc_states/idle_state.gd" id="3_31inw"]
 [ext_resource type="Script" uid="uid://bpswmggldqct1" path="res://scenes/characters/npc_states/walk_state.gd" id="4_31inw"]
-[ext_resource type="PackedScene" uid="uid://nlbfvaabx8kx" path="res://audio/sfx/chicken_cluck_multiple_sfx.tscn" id="6_hv82h"]
-[ext_resource type="PackedScene" uid="uid://dr4jtj8x36fg3" path="res://scenes/component/audio_play_time_component.tscn" id="7_wh5lc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsly8"]
 atlas = ExtResource("1_be5x3")
@@ -104,10 +102,3 @@ script = ExtResource("4_31inw")
 character = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 navigation_agent_2d = NodePath("../../NavigationAgent2D")
-
-[node name="ChickenCluckMultipleSFX" parent="." unique_id=598799838 instance=ExtResource("6_hv82h")]
-
-[node name="AudioPlayTimeComponent" parent="." unique_id=332334522 node_paths=PackedStringArray("audio_stream_player_2D") instance=ExtResource("7_wh5lc")]
-wait_time = 20.0
-autostart = true
-audio_stream_player_2D = NodePath("../ChickenCluckMultipleSFX")
