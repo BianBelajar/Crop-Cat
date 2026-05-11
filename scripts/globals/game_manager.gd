@@ -54,10 +54,33 @@ func load_saved_game() -> void:
 	SaveGameManager.load_game()
 	SaveGameManager.allow_save_game = true
 
-## Keluar dari game (dengan auto-save).
-func exit_game() -> void:
+# game_manager.gd
+# Tambahkan fungsi ini. Fungsi exit_game() dibiarkan seperti aslinya (quit).
+
+## Kembali ke Game Menu (Start/Load/Save) tanpa logout.
+## Dipanggil saat Exit dari dalam game — user tetap login.
+func return_to_game_menu() -> void:
+	# 1. Auto-save sebelum kembali ke menu
 	if SaveGameManager.allow_save_game:
 		SaveGameManager.save_game()
+
+	# 2. Reset flag save agar tombol "Start" muncul lagi (bukan "Resume")
+	SaveGameManager.allow_save_game = false
+
+	# 3. Wajib: matikan pause
+	get_tree().paused = false
+
+	# 4. Bersihkan game scene, tapi JANGAN logout
+	var main_root_path: String = SceneManager.main_scene_root_path
+	if get_tree().root.has_node(main_root_path):
+		get_tree().root.get_node(main_root_path).queue_free()
+		await get_tree().process_frame
+
+	# 5. Tampilkan Game Menu kembali (user masih login)
+	show_game_menu_screen()
+	
+## Keluar dari game (dengan auto-save).
+func exit_game() -> void:
 	get_tree().quit()
 
 ## Kembali ke layar Login (logout + reset scene).

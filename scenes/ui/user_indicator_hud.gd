@@ -1,23 +1,69 @@
+# user_indicator_hud.gd
 extends CanvasLayer
 
-@onready var label: Label = $MarginContainer/UserLabel
+# ── Node References (yang sudah ada) ─────────────────────────────────────────
+@onready var label: Label          = $MarginContainer/UserLabel
 @onready var jurnal_button: Button = $JurnalButton
 
+# ── Node References Minimap ───────────────────────────────────────────────────
+@onready var minimap_container: PanelContainer = $MinimapContainer
+@onready var minimap_viewport: SubViewport     = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport
+@onready var minimap_camera: Camera2D          = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport/MinimapCamera
+
+const MINIMAP_ZOOM_LEVEL: float = 4.0
+var _player: Node2D = null
+
+# ── READY ─────────────────────────────────────────────────────────────────────
 func _ready() -> void:
+	# === Kode HUD asli ===
 	_update_label(SaveGameManager.current_username)
 	SaveGameManager.user_changed.connect(_update_label)
-
 	jurnal_button.pressed.connect(_on_jurnal_pressed)
-
-	# Update visibility setiap quest step berubah
 	QuestManager.quest_step_changed.connect(func(_s): _update_jurnal_button_visibility())
-
-	# Update visibility setelah game di-load (clue sudah terisi)
 	QuestManager.quest_loaded_signal.connect(_update_jurnal_button_visibility)
-
-	# Cek kondisi awal (misalnya resume game yang sudah punya quest)
 	_update_jurnal_button_visibility()
 
+	# === Setup Minimap ===
+	_setup_minimap()
+
+func _setup_minimap() -> void:
+	# Set zoom kamera minimap
+	minimap_camera.zoom = Vector2(
+		1.0 / MINIMAP_ZOOM_LEVEL,
+		1.0 / MINIMAP_ZOOM_LEVEL
+	)
+
+	# ← FIX 1: Share world_2d agar SubViewport bisa melihat dunia game!
+	# Tanpa baris ini, minimap akan selalu hitam kosong.
+	minimap_viewport.world_2d = get_tree().root.world_2d
+
+	# Cari player lewat group
+	_refresh_player_reference()
+
+func _refresh_player_reference() -> void:
+	var players := get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		_player = players[0] as Node2D
+		return
+
+	# Jika belum ada, tunggu 1 frame dan coba lagi sekali
+	await get_tree().process_frame
+	players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		_player = players[0] as Node2D
+
+# ── PROCESS ───────────────────────────────────────────────────────────────────
+func _process(_delta: float) -> void:
+	# ← FIX 2: Guard null check agar tidak error setiap frame
+	if not is_instance_valid(minimap_camera):
+		return
+	if is_instance_valid(_player):
+		minimap_camera.global_position = _player.global_position
+	elif _player == null:
+		# Player belum ditemukan, coba cari lagi (hanya jika benar-benar null)
+		_refresh_player_reference()
+
+# ── Fungsi HUD asli ───────────────────────────────────────────────────────────
 func _update_label(username: String) -> void:
 	if username.is_empty():
 		label.text = ""
@@ -30,5 +76,4 @@ func _on_jurnal_pressed() -> void:
 	QuestManager.tampilkan_jurnal()
 
 func _update_jurnal_button_visibility() -> void:
-	# Tombol muncul jika sudah ada quest (step >= 1) DAN ada teks clue tersimpan
 	jurnal_button.visible = QuestManager.quest_step >= 1 and not QuestManager.clue_quest_aktif.is_empty()

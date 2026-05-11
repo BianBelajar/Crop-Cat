@@ -8,6 +8,7 @@ extends CharacterBody2D
 var player_direction : Vector2
 
 func _ready() -> void:
+	add_to_group("player")        # ← TAMBAH BARIS INI
 	ToolManager.tool_selected.connect(on_tool_selected)
 
 func on_tool_selected(tool: DataTypes.Tools) -> void:
