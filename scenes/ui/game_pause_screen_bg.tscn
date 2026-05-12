@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://2td8pod4frwo"]
 
+[ext_resource type="Script" uid="uid://c1ltyu8wh60ie" path="res://scenes/ui/game_pause_screen_bg.gd" id="1_hr448"]
 [ext_resource type="TileSet" uid="uid://33cjpxlqics6" path="res://Tilesets/game_tile_set.tres" id="1_smvuo"]
 [ext_resource type="PackedScene" uid="uid://3amrr0hbtm31" path="res://scenes/characters/player/player.tscn" id="2_hr448"]
 [ext_resource type="PackedScene" uid="uid://d2wfxqlbf4ae5" path="res://scenes/characters/cow/cow.tscn" id="3_xp3hy"]
@@ -7,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c6w52lvxjh311" path="res://scenes/characters/chicken/chicken.tscn" id="5_ufid3"]
 
 [node name="GamePauseScreenBackground" type="Node2D" unique_id=337216546]
+script = ExtResource("1_hr448")
 
 [node name="GameTileMap" type="Node2D" parent="." unique_id=1251333768]
 y_sort_enabled = true

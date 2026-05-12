@@ -5,7 +5,7 @@
 extends CanvasLayer
 
 # ─────────────────────────────────────────────
-# NODE REFERENCES — path baru karena ada ScrollContainer
+# NODE REFERENCES
 # ─────────────────────────────────────────────
 @onready var username_input     : LineEdit      = $CenterContainer/Panel/MarginContainer/MainVBox/UsernameInput
 @onready var login_button       : Button        = $CenterContainer/Panel/MarginContainer/MainVBox/LoginButton
@@ -54,7 +54,7 @@ func _on_exit_button_pressed() -> void:
 
 
 # ─────────────────────────────────────────────
-# LOGIC LOGIN
+# LOGIKA LOGIN
 # ─────────────────────────────────────────────
 
 func _attempt_login(raw_username: String) -> void:
@@ -76,8 +76,6 @@ func _attempt_login(raw_username: String) -> void:
 
 
 func _proceed_to_main_menu() -> void:
-	# Gunakan main_menu.tscn (scene baru) atau game_menu_screen.tscn (scene lama)
-	# Sesuaikan path di bawah dengan nama scene yang kamu pakai
 	var main_menu: PackedScene = preload("res://scenes/ui/game_menu_screen.tscn")
 	var instance: Node = main_menu.instantiate()
 	get_tree().root.add_child(instance)
@@ -151,7 +149,6 @@ func _start_logo_float_animation() -> void:
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 func _animate_screen_in() -> void:
-	# CanvasLayer tidak punya modulate — animasikan child pertama (Background)
 	var root_control: CanvasItem = get_child(0)
 	if not is_instance_valid(root_control):
 		return

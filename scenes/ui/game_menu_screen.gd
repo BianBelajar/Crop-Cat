@@ -1,19 +1,9 @@
-## main_menu.gd
-## Scene  : res://scenes/ui/main_menu.tscn
+## game_menu_screen.gd
+## Scene  : res://scenes/ui/game_menu_screen.tscn
 ## Extends: CanvasLayer
 ##
-## Gunakan scene asli game_menu_screen.tscn sebagai basis,
-## lalu ganti script-nya dengan file ini.
-## Struktur node yang dipakai:
-##   MarginContainer/MainButtons/StartGameButton
-##   MarginContainer/MainButtons/LoadGameButton
-##   MarginContainer/MainButtons/SaveGameButton
-##   MarginContainer/MainButtons/AudioSettingsButton
-##   MarginContainer/MainButtons/LogoutButton
-##   MarginContainer/DifficultyButtons/EasyButton
-##   MarginContainer/DifficultyButtons/NormalButton
-##   MarginContainer/DifficultyButtons/HardButton
-##   MarginContainer/MarginContainer/Label   ← judul/nama user
+## FIX: Path title_label diperbaiki dari path login_screen (SALAH)
+##      menjadi $MarginContainer/TitleLabel (BENAR sesuai .tscn).
 
 extends CanvasLayer
 
@@ -27,7 +17,9 @@ extends CanvasLayer
 @onready var logout_button  : Button        = $MarginContainer/MainButtons/LogoutButton
 @onready var difficulty_box : VBoxContainer = $MarginContainer/DifficultyButtons
 @onready var main_box       : VBoxContainer = $MarginContainer/MainButtons
-@onready var title_label: Label = $CenterContainer/Panel/MarginContainer/MainVBox/TitleLabel
+
+# ✅ FIX: Path title_label diperbaiki — sebelumnya menunjuk ke path login_screen!
+@onready var title_label    : Label         = $MarginContainer/TitleLabel
 
 # ─────────────────────────────────────────────
 # LIFECYCLE
@@ -52,7 +44,7 @@ func _ready() -> void:
 
 
 # ─────────────────────────────────────────────
-# TOMBOL — nama fungsi harus cocok dengan sinyal di scene
+# TOMBOL UTAMA
 # ─────────────────────────────────────────────
 
 func _on_start_game_button_pressed() -> void:
@@ -83,6 +75,7 @@ func _on_logout_button_pressed() -> void:
 	queue_free()
 	GameManager.return_to_login()
 
+
 # ─────────────────────────────────────────────
 # DIFFICULTY
 # ─────────────────────────────────────────────
@@ -105,12 +98,12 @@ func _start_the_actual_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/intro_cutscene.tscn")
 	queue_free()
 
+
 # ─────────────────────────────────────────────
 # ANIMASI
 # ─────────────────────────────────────────────
 
 func _animate_in() -> void:
-	# CanvasLayer tidak punya modulate — pakai child pertama
 	var root_control: CanvasItem = get_child(0)
 	if not is_instance_valid(root_control):
 		return

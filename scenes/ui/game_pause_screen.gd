@@ -1,33 +1,42 @@
-## pause_menu.gd
-## Scene  : res://scenes/ui/pause_menu.tscn
+## game_pause_screen.gd
+## Scene  : res://scenes/ui/game_pause_screen.tscn
 ## Extends: CanvasLayer
 ##
-## Pause Menu — muncul saat game sedang berjalan dan pemain menekan tombol
-## pause (aksi "game_menu"). Hanya berisi: Resume, Save, Setting, Main Menu.
+## FIX 1: Semua path node tombol diperbaiki agar cocok dengan nama di .tscn:
+##         ResumeButton     → ResumeGameButton
+##         SaveButton       → SaveGameButton
+##         SettingButton    → AudioSettingsButton
+## FIX 2: Sinyal tombol dihubungkan via kode di _ready() karena .tscn
+##         tidak memiliki [connection] sama sekali.
 ##
 ## ⚠ INSPECTOR — WAJIB diatur:
-##   • CanvasLayer > Process Mode = "Always"
-##     (agar menu tetap responsif walau get_tree().paused = true)
-##   • CanvasLayer > Layer = 10  (atau nilai di atas HUD)
+##   • CanvasLayer > Process Mode = "Always"   (sudah benar di .tscn: process_mode = 3)
+##   • CanvasLayer > Layer = 10                (sudah benar di .tscn: layer = 10)
 
 extends CanvasLayer
 
 # ─────────────────────────────────────────────
 # NODE REFERENCES
-# Sesuaikan path dengan struktur scene-mu.
+# ✅ Nama node disesuaikan dengan yang ada di .tscn
 # ─────────────────────────────────────────────
-@onready var resume_button    : Button = $MarginContainer/VBoxContainer/ResumeButton
-@onready var save_button      : Button = $MarginContainer/VBoxContainer/SaveButton
-@onready var setting_button   : Button = $MarginContainer/VBoxContainer/SettingButton
-@onready var main_menu_button : Button = $MarginContainer/VBoxContainer/MainMenuButton
+@onready var resume_button    : Button  = $MarginContainer/VBoxContainer/ResumeGameButton
+@onready var save_button      : Button  = $MarginContainer/VBoxContainer/SaveGameButton
+@onready var setting_button   : Button  = $MarginContainer/VBoxContainer/AudioSettingsButton
+@onready var main_menu_button : Button  = $MarginContainer/VBoxContainer/MainMenuButton
 
-# Panel animasi (opsional — bisa null jika belum ada)
+# Panel untuk animasi slide
 @onready var panel : Control = $MarginContainer
 
 # ─────────────────────────────────────────────
 # LIFECYCLE
 # ─────────────────────────────────────────────
 func _ready() -> void:
+	# ✅ FIX: Hubungkan sinyal secara manual karena .tscn tidak punya [connection]
+	resume_button.pressed.connect(_on_resume_button_pressed)
+	save_button.pressed.connect(_on_save_button_pressed)
+	setting_button.pressed.connect(_on_setting_button_pressed)
+	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
+
 	# Pastikan game benar-benar terpause saat menu ini muncul
 	get_tree().paused = true
 
@@ -68,6 +77,9 @@ func _on_save_button_pressed() -> void:
 		save_button.disabled = true
 		save_button.text = "Tersimpan ✓"
 		await get_tree().create_timer(1.5).timeout
+		# Cek apakah node masih valid setelah await (bisa saja sudah queue_free)
+		if not is_instance_valid(save_button):
+			return
 		save_button.disabled = false
 		save_button.text = "Save"
 
@@ -84,7 +96,7 @@ func _on_setting_button_pressed() -> void:
 func _on_main_menu_button_pressed() -> void:
 	main_menu_button.disabled = true
 
-	# ⚠ PENTING: Unpause DULU sebelum GameManager melakukan apa pun.
+	# ✅ PENTING: Unpause DULU sebelum GameManager melakukan apa pun.
 	#   Jika tidak, semua proses (termasuk fade Tween) akan freeze.
 	get_tree().paused = false
 
