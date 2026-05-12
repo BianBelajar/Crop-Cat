@@ -85,7 +85,7 @@ elif QuestManager.quest_step == 7 or QuestManager.quest_step == 8:
 		Mbah Kucing: Ini mungkin... perpisahan kita, Meong. Atau tidak? Itu pilihanmu nanti.
 		do QuestManager.take_ship_repair_items()
 		set QuestManager.quest_step = 9
-		do GameDialogueManager.trigger_ending.emit()
+		do GameDialogueManager.action_trigger_ending()
 		=> END
 	else:
 		Mbah Kucing: Masih kurang bahannya, Meong. Ini daftar yang masih harus kamu kumpulkan:

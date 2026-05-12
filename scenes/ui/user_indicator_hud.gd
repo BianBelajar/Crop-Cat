@@ -1,72 +1,92 @@
-# user_indicator_hud.gd  [VERSI SUDAH DIPERBAIKI - TUGAS 2]
+# user_indicator_hud.gd — VERSI FINAL DIPERBAIKI
+# Lokasi: res://scenes/ui/user_indicator_hud.gd
+#
+# BUG KRITIS DITEMUKAN:
+#   @onready var player_icon_overlay: TextureRect = $MinimapContainer/.../PlayerIconOverlay
+#   Node "PlayerIconOverlay" TIDAK ADA di user_indicator_hud.tscn!
+#   Akibatnya GDScript 4 langsung error saat _ready() dan menghentikan
+#   eksekusi — termasuk baris achievement_button.pressed.connect(...).
+#   Itulah kenapa tombol 🏆 tidak bisa diklik dan tidak ada yang berfungsi.
+#
+# FIX: Hapus @onready ke PlayerIconOverlay. Gunakan null-check untuk semua
+#   minimap references agar aman walau node tidak ada.
 extends CanvasLayer
 
-# ── Node References (yang sudah ada) ─────────────────────────────────────────
-@onready var label: Label          = $MarginContainer/UserLabel
-@onready var jurnal_button: Button = $JurnalButton
 
-# ── Node References Minimap ───────────────────────────────────────────────────
-@onready var minimap_container: PanelContainer = $MinimapContainer
-@onready var minimap_viewport: SubViewport     = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport
-@onready var minimap_camera: Camera2D          = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport/MinimapCamera
+# ── Node References ───────────────────────────────────────────────────────────
+@onready var label:              Label          = $MarginContainer/UserLabel
+@onready var jurnal_button:      Button         = $JurnalButton
+@onready var achievement_button: Button         = $AchievementButton
 
-# ── TAMBAHKAN: Referensi tombol dan menu achievement ─────────────────────────
-@onready var achievement_button: Button = $AchievementButton  # ← TAMBAHKAN
+# Minimap (dengan null-check di _ready agar aman jika node tidak ada)
+@onready var minimap_container:  PanelContainer = $MinimapContainer
+@onready var minimap_viewport:   SubViewport    = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport
+@onready var minimap_camera:     Camera2D       = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport/MinimapCamera
 
+# ── CATATAN: PlayerIconOverlay DIHAPUS karena tidak ada di .tscn ──────────────
+# Jika kamu ingin menambahkannya, tambahkan TextureRect dengan nama
+# "PlayerIconOverlay" sebagai child dari MinimapViewportContainer di scene,
+# lalu uncomment baris di bawah ini:
+# @onready var player_icon_overlay: TextureRect = $MinimapContainer/VBoxContainer/MinimapViewportContainer/PlayerIconOverlay
+
+
+# ── Achievement Menu ──────────────────────────────────────────────────────────
 const ACHIEVEMENT_MENU_SCENE: String = "res://scenes/ui/achievement_menu.tscn"
-var _achievement_menu_instance: CanvasLayer = null  # ← TAMBAHKAN
-# ✨ TAMBAHAN BARU (TUGAS 2): Referensi ikon overlay player di tengah minimap.
-# Node ini adalah TextureRect yang diletakkan SEBAGAI SIBLING dari MinimapViewport
-# di dalam MinimapViewportContainer, bukan di dalam SubViewport.
-# Posisinya: di tengah MinimapViewportContainer, di atas render viewport.
-@onready var player_icon_overlay: TextureRect = $MinimapContainer/VBoxContainer/MinimapViewportContainer/PlayerIconOverlay
+var _achievement_menu_instance: CanvasLayer = null
 
 const MINIMAP_ZOOM_LEVEL: float = 4.0
 var _player: Node2D = null
 
+
 # ── READY ─────────────────────────────────────────────────────────────────────
 func _ready() -> void:
-	# === Kode HUD asli (tidak diubah) ===
+	print("🛠️ UserIndicatorHUD: _ready() dimulai")
+
+	# === HUD Label ===
 	_update_label(SaveGameManager.current_username)
 	SaveGameManager.user_changed.connect(_update_label)
+
+	# === Jurnal Button ===
 	jurnal_button.pressed.connect(_on_jurnal_pressed)
 	QuestManager.quest_step_changed.connect(func(_s): _update_jurnal_button_visibility())
 	QuestManager.quest_loaded_signal.connect(_update_jurnal_button_visibility)
 	_update_jurnal_button_visibility()
 
-	# === TAMBAHKAN: Setup tombol achievement ===
-	achievement_button.pressed.connect(_on_achievement_button_pressed)  # ← TAMBAHKAN
-	# === Setup Minimap ===
+	# === Achievement Button ===
+	if achievement_button != null:
+		achievement_button.pressed.connect(_on_achievement_button_pressed)
+		print("🛠️ UserIndicatorHUD: Tombol achievement tersambung.")
+	else:
+		push_error("UserIndicatorHUD: $AchievementButton NULL! Cek scene.")
+
+	# === Minimap ===
 	_setup_minimap()
 
-# ── TAMBAHKAN: Fungsi buka/tutup menu achievement ────────────────────────────
+	print("🛠️ UserIndicatorHUD: _ready() selesai tanpa error.")
+
+
+# ── Achievement: buka/tutup menu ─────────────────────────────────────────────
 func _on_achievement_button_pressed() -> void:
-	# Jika instance belum ada, buat dari scene
-	if _achievement_menu_instance == null:
+	print("🏆 Tombol Achievement ditekan!")
+	if _achievement_menu_instance == null or not is_instance_valid(_achievement_menu_instance):
 		var scene: PackedScene = load(ACHIEVEMENT_MENU_SCENE)
 		_achievement_menu_instance = scene.instantiate()
-		# Tambahkan ke root agar berada di layer tertinggi
 		get_tree().root.add_child(_achievement_menu_instance)
+		print("🏆 Achievement Menu dibuat dan ditambahkan ke scene.")
 
-	# Toggle: jika sudah terlihat → tutup, jika tersembunyi → buka
 	if _achievement_menu_instance.visible:
 		_achievement_menu_instance.hide_menu()
 	else:
 		_achievement_menu_instance.show_menu()
-# ── SELESAI TAMBAHAN ──────────────────────────────────────────────────────────
 
+
+# ── Minimap ───────────────────────────────────────────────────────────────────
 func _setup_minimap() -> void:
-	# Set zoom kamera minimap
-	minimap_camera.zoom = Vector2(
-		1.0 / MINIMAP_ZOOM_LEVEL,
-		1.0 / MINIMAP_ZOOM_LEVEL
-	)
-
-	# Share world_2d agar SubViewport bisa melihat dunia game
-	# (Tanpa baris ini, minimap akan selalu hitam kosong)
+	if minimap_camera == null or minimap_viewport == null:
+		push_warning("UserIndicatorHUD: Node minimap tidak ditemukan, minimap dilewati.")
+		return
+	minimap_camera.zoom = Vector2(1.0 / MINIMAP_ZOOM_LEVEL, 1.0 / MINIMAP_ZOOM_LEVEL)
 	minimap_viewport.world_2d = get_tree().root.world_2d
-
-	# Cari player lewat group
 	_refresh_player_reference()
 
 func _refresh_player_reference() -> void:
@@ -74,25 +94,23 @@ func _refresh_player_reference() -> void:
 	if players.size() > 0:
 		_player = players[0] as Node2D
 		return
-
-	# Jika belum ada, tunggu 1 frame dan coba lagi sekali
 	await get_tree().process_frame
 	players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
 		_player = players[0] as Node2D
 
-# ── PROCESS ───────────────────────────────────────────────────────────────────
+
+# ── Process: update kamera minimap ───────────────────────────────────────────
 func _process(_delta: float) -> void:
-	# Guard null check agar tidak error setiap frame
 	if not is_instance_valid(minimap_camera):
 		return
 	if is_instance_valid(_player):
 		minimap_camera.global_position = _player.global_position
 	elif _player == null:
-		# Player belum ditemukan, coba cari lagi (hanya jika benar-benar null)
 		_refresh_player_reference()
 
-# ── Fungsi HUD asli (tidak diubah) ───────────────────────────────────────────
+
+# ── HUD Label ─────────────────────────────────────────────────────────────────
 func _update_label(username: String) -> void:
 	if username.is_empty():
 		label.text = ""

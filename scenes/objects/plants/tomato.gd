@@ -1,12 +1,11 @@
 # =============================================================================
-# tomato.gd  —  VERSI DIPERBARUI
+# tomato.gd — VERSI DIPERBAIKI
 # Lokasi: res://scenes/objects/plants/tomato.gd
 #
-# PERUBAHAN:
-#   • Hubungkan sinyal plant_died dari GrowthCycleComponent
-#   • show_dead_sprite() → ganti frame ke sprite layu/mati
-#   • on_first_plant() → kirim fakta edukasi "first_tomato"
-#   • Variabel has_pest + days_unwatered + pest_days ikut tersimpan
+# PERBAIKAN:
+#   • Tambah call QuestManager.notify_planted_10() di _ready() untuk
+#     tracking achievement "plant_10" (Petani Pemula — tanam 10 benih).
+#   • Semua kode lama dipertahankan persis sama.
 # =============================================================================
 extends Node2D
 
@@ -23,10 +22,9 @@ var tomato_harvest_scene = preload("res://scenes/objects/plants/tomato_harvest.t
 var growth_state: DataTypes.GrowthStates = DataTypes.GrowthStates.Seed
 var has_pest: bool = false
 
-# Frame pertama sprite tomat di spritesheet
 var start_tomato_frame_offset: int = 6
-# Frame sprite layu/mati (sesuaikan dengan spritesheet-mu)
 const DEAD_FRAME: int = 12
+
 
 func _ready() -> void:
 	if randf() <= DifficultyManager.pest_chance:
@@ -38,6 +36,13 @@ func _ready() -> void:
 	hurt_component.hurt.connect(on_hurt)
 	growth_cycle_component.crop_maturity.connect(on_crop_maturity)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
+
+	# ─── Tracking Achievement: plant_10 ──────────────────────────────────
+	# Setiap kali tanaman tomat baru di-spawn (ditanam), catat ke QuestManager.
+	# QuestManager akan menghitung total dan unlock achievement saat mencapai 10.
+	print("🌱 Tomat ditanam — melaporkan ke QuestManager untuk tracking plant_10")
+	QuestManager.notify_planted()
+
 
 # =============================================================================
 # SPAWN & PESTICIDE
@@ -51,16 +56,15 @@ func apply_pesticide() -> void:
 		flowering_particles.emitting = false
 		modulate = Color(1, 1, 1)
 
-# =============================================================================
-# MATI — tampilkan sprite layu lalu hilang
-# =============================================================================
 
+# =============================================================================
+# MATI
+# =============================================================================
 func show_dead_sprite() -> void:
-	## Dipanggil oleh GrowthCycleComponent._kill_plant() sebelum queue_free.
 	flowering_particles.emitting = false
 	watering_particles.emitting = false
 	sprite_2d.frame = DEAD_FRAME
-	modulate = Color(0.6, 0.6, 0.6, 1.0)   # Tampak keabu-abuan / layu
+	modulate = Color(0.6, 0.6, 0.6, 1.0)
 
 
 # =============================================================================
@@ -77,8 +81,9 @@ func _process(_delta: float) -> void:
 		flowering_particles.emitting = false
 		modulate = Color(1, 1, 1)
 
+
 # =============================================================================
-# ON HURT (Siram / Pestisida)
+# ON HURT
 # =============================================================================
 func on_hurt(_hit_damage: int) -> void:
 	if ToolManager.selected_tool == DataTypes.Tools.Pesticide:
@@ -91,6 +96,7 @@ func on_hurt(_hit_damage: int) -> void:
 		await get_tree().create_timer(5.0).timeout
 		watering_particles.emitting = false
 		growth_cycle_component.is_watered = true
+
 
 # =============================================================================
 # MATURITY & HARVEST
@@ -115,8 +121,9 @@ func on_crop_harvesting() -> void:
 
 	queue_free()
 
+
 # =============================================================================
-# SAVE / LOAD — ekspor state ke SaveDataComponent
+# SAVE / LOAD
 # =============================================================================
 func get_plant_save_data() -> Dictionary:
 	var data: Dictionary = growth_cycle_component.get_save_data()

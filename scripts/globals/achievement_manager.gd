@@ -1,6 +1,12 @@
-## AchievementManager.gd
+## AchievementManager.gd — VERSI DIPERBAIKI
 ## Autoload — Mengelola semua data dan logika Achievement.
+## Lokasi: res://scripts/globals/achievement_manager.gd
+##
+## PERBAIKAN:
+##   • Tambah print debugging ekstrem di unlock_achievement()
+##   • Konfirmasi sinyal dipancarkan dengan print sebelum .emit()
 extends Node
+
 
 # ─────────────────────────────────────────────
 # SINYAL
@@ -15,49 +21,50 @@ signal achievement_unlocked(id: String, data: Dictionary)
 # ─────────────────────────────────────────────
 # DATABASE ACHIEVEMENT
 # ─────────────────────────────────────────────
-## Kunci = ID unik achievement (String).
-## Nilai = Dictionary berisi semua properti.
-##
-## Untuk locked_icon: gunakan path ikon gembok/misteri.
-## Untuk unlocked_icon: gunakan path ikon asli item/aksi.
-## Ganti path ikon sesuai aset yang ada di project-mu.
 var achievements: Dictionary = {
 	"first_harvest": {
-		"id":             "first_harvest",
-		"title":          "Panen Pertama",
-		"description":    "Berhasil memanen tanaman untuk pertama kalinya.",
-		"is_unlocked":    false,
-		"unlocked_icon":  "res://assets/ui/icons/harvest_icon.png"
+		"id":            "first_harvest",
+		"title":         "Panen Pertama",
+		"description":   "Berhasil memanen tanaman untuk pertama kalinya.",
+		"is_unlocked":   false,
+		"unlocked_icon": "res://assets/ui/icons/harvest_icon.png"
 	},
 	"plant_10": {
-		"id":             "plant_10",
-		"title":          "Petani Pemula",
-		"description":    "Tanam 10 benih di ladang.",
-		"is_unlocked":    false,
-		"unlocked_icon":  "res://assets/ui/icons/seed_icon.png"
+		"id":            "plant_10",
+		"title":         "Petani Pemula",
+		"description":   "Tanam 10 benih di ladang.",
+		"is_unlocked":   false,
+		"unlocked_icon": "res://assets/ui/icons/seed_icon.png"
 	},
 	"collect_wood": {
-		"id":             "collect_wood",
-		"title":          "Penebang Hutan",
-		"description":    "Kumpulkan kayu untuk pertama kalinya.",
-		"is_unlocked":    false,
-		"unlocked_icon":  "res://assets/ui/icons/wood_icon.png"
+		"id":            "collect_wood",
+		"title":         "Penebang Hutan",
+		"description":   "Kumpulkan kayu untuk pertama kalinya.",
+		"is_unlocked":   false,
+		"unlocked_icon": "res://assets/ui/icons/wood_icon.png"
 	},
 	"fix_ship": {
-		"id":             "fix_ship",
-		"title":          "Kapten Pulang",
-		"description":    "Berhasil memperbaiki kapal dan menyelesaikan game.",
-		"is_unlocked":    false,
-		"unlocked_icon":  "res://assets/ui/icons/ship_icon.png"
+		"id":            "fix_ship",
+		"title":         "Kapten Pulang",
+		"description":   "Berhasil memperbaiki kapal dan menyelesaikan game.",
+		"is_unlocked":   false,
+		"unlocked_icon": "res://assets/ui/icons/ship_icon.png"
 	},
 	"feed_animal": {
-		"id":             "feed_animal",
-		"title":          "Sahabat Hewan",
-		"description":    "Beri makan hewan peliharaan untuk pertama kalinya.",
-		"is_unlocked":    false,
-		"unlocked_icon":  "res://assets/ui/icons/feed_icon.png"
+		"id":            "feed_animal",
+		"title":         "Sahabat Hewan",
+		"description":   "Beri makan hewan peliharaan untuk pertama kalinya.",
+		"is_unlocked":   false,
+		"unlocked_icon": "res://assets/ui/icons/feed_icon.png"
 	},
 }
+
+
+# ─────────────────────────────────────────────
+# READY
+# ─────────────────────────────────────────────
+func _ready() -> void:
+	print("🛠️ AchievementManager: _ready() dipanggil. Siap menerima perintah unlock.")
 
 
 # ─────────────────────────────────────────────
@@ -67,16 +74,25 @@ var achievements: Dictionary = {
 ## Membuka (unlock) sebuah achievement berdasarkan ID-nya.
 ## Aman dipanggil berulang kali — tidak akan emit sinyal jika sudah unlock.
 func unlock_achievement(id: String) -> void:
+	print("🏆 Mencoba unlock Achievement: ", id)
+
+	# Guard: ID tidak dikenal
 	if not achievements.has(id):
-		push_warning("AchievementManager: ID '%s' tidak ditemukan!" % id)
+		push_warning("AchievementManager: ID '%s' tidak ditemukan dalam database! Cek typo/case." % id)
+		print("❌ Achievement ID '", id, "' TIDAK ADA dalam database. Daftar ID valid: ", achievements.keys())
 		return
 
-	# Guard: jangan lakukan apa-apa jika sudah di-unlock sebelumnya
+	# Guard: sudah di-unlock sebelumnya
 	if achievements[id]["is_unlocked"]:
+		print("ℹ️ Achievement '", id, "' sudah pernah di-unlock sebelumnya. Skip.")
 		return
 
+	# Lakukan unlock
 	achievements[id]["is_unlocked"] = true
-	print("[AchievementManager] Achievement terbuka: '%s'" % achievements[id]["title"])
+	print("✅ Quest [", achievements[id]["title"], "] dinyatakan Selesai")
+	print("📡 Sinyal achievement_unlocked dipancarkan! — ID: '", id, "', Judul: '", achievements[id]["title"], "'")
+
+	# Pancarkan sinyal → akan diterima oleh AchievementNotification
 	achievement_unlocked.emit(id, achievements[id])
 
 
@@ -91,8 +107,7 @@ func is_unlocked(id: String) -> bool:
 # SAVE & LOAD (dipanggil oleh SaveGameManager)
 # ─────────────────────────────────────────────
 
-## Mengambil data yang perlu disimpan: hanya status is_unlocked tiap achievement.
-## Mengembalikan Dictionary { "first_harvest": true, "plant_10": false, ... }
+## Mengambil data yang perlu disimpan.
 func get_save_data() -> Dictionary:
 	var data: Dictionary = {}
 	for id in achievements:
@@ -101,18 +116,16 @@ func get_save_data() -> Dictionary:
 
 
 ## Memuat status is_unlocked dari data yang sudah tersimpan.
-## @param data: Dictionary dari get_save_data()
 func load_save_data(data: Dictionary) -> void:
 	if data.is_empty():
 		return
 	for id in data:
 		if achievements.has(id):
-			# Muat status langsung tanpa emit sinyal (ini proses load, bukan unlock baru)
 			achievements[id]["is_unlocked"] = data[id]
 	print("[AchievementManager] Data achievement berhasil dimuat.")
 
 
-## Menyimpan ke file. Dipanggil oleh SaveGameManager.save_game().
+## Menyimpan ke file.
 func save_to_path(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
@@ -123,7 +136,7 @@ func save_to_path(path: String) -> void:
 	print("[AchievementManager] Achievement tersimpan ke: %s" % path)
 
 
-## Memuat dari file. Dipanggil oleh SaveGameManager.load_game().
+## Memuat dari file.
 func load_from_path(path: String) -> void:
 	if not FileAccess.file_exists(path):
 		print("[AchievementManager] File save tidak ada (pemain baru): %s" % path)

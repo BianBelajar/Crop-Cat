@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://nq7aolmeo4pm" path="res://game_ui_theme.tres" id="1_gu32q"]
 
 [node name="AchievementNotification" type="CanvasLayer" unique_id=409901658]
-layer = 20
+layer = 1000
 script = ExtResource("1_3sc0y")
 
 [node name="NotifPanel" type="PanelContainer" parent="." unique_id=216216113]
