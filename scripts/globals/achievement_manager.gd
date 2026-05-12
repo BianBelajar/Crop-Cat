@@ -27,40 +27,35 @@ var achievements: Dictionary = {
 		"title":          "Panen Pertama",
 		"description":    "Berhasil memanen tanaman untuk pertama kalinya.",
 		"is_unlocked":    false,
-		"locked_icon":    "res://assets/ui/icons/achievement_locked.png",
-		"unlocked_icon":  "res://assets/ui/icons/harvest_icon.png",
+		"unlocked_icon":  "res://assets/ui/icons/harvest_icon.png"
 	},
 	"plant_10": {
 		"id":             "plant_10",
 		"title":          "Petani Pemula",
 		"description":    "Tanam 10 benih di ladang.",
 		"is_unlocked":    false,
-		"locked_icon":    "res://assets/ui/icons/achievement_locked.png",
-		"unlocked_icon":  "res://assets/ui/icons/seed_icon.png",
+		"unlocked_icon":  "res://assets/ui/icons/seed_icon.png"
 	},
 	"collect_wood": {
 		"id":             "collect_wood",
 		"title":          "Penebang Hutan",
 		"description":    "Kumpulkan kayu untuk pertama kalinya.",
 		"is_unlocked":    false,
-		"locked_icon":    "res://assets/ui/icons/achievement_locked.png",
-		"unlocked_icon":  "res://assets/ui/icons/wood_icon.png",
+		"unlocked_icon":  "res://assets/ui/icons/wood_icon.png"
 	},
 	"fix_ship": {
 		"id":             "fix_ship",
 		"title":          "Kapten Pulang",
 		"description":    "Berhasil memperbaiki kapal dan menyelesaikan game.",
 		"is_unlocked":    false,
-		"locked_icon":    "res://assets/ui/icons/achievement_locked.png",
-		"unlocked_icon":  "res://assets/ui/icons/ship_icon.png",
+		"unlocked_icon":  "res://assets/ui/icons/ship_icon.png"
 	},
 	"feed_animal": {
 		"id":             "feed_animal",
 		"title":          "Sahabat Hewan",
 		"description":    "Beri makan hewan peliharaan untuk pertama kalinya.",
 		"is_unlocked":    false,
-		"locked_icon":    "res://assets/ui/icons/achievement_locked.png",
-		"unlocked_icon":  "res://assets/ui/icons/feed_icon.png",
+		"unlocked_icon":  "res://assets/ui/icons/feed_icon.png"
 	},
 }
 
