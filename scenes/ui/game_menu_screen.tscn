@@ -272,7 +272,8 @@ ToolButton/styles/hover = SubResource("StyleBoxTexture_2rfw1")
 ToolButton/styles/normal = SubResource("StyleBoxTexture_ul4rf")
 ToolButton/styles/pressed = SubResource("StyleBoxTexture_auge4")
 
-[node name="GameMenuScreen" type="CanvasLayer" unique_id=1307111517]
+[node name="MainMenu" type="CanvasLayer" unique_id=1307111517]
+process_mode = 3
 script = ExtResource("1_jk4o3")
 
 [node name="GameMenuScreenBackground" parent="." unique_id=367558805 instance=ExtResource("3_l5nq4")]
@@ -285,13 +286,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_16g87")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer" unique_id=1267239288]
+[node name="TitleLabel" type="Label" parent="MarginContainer" unique_id=1635099829]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer" unique_id=1635099829]
-layout_mode = 2
 theme_override_colors/font_color = Color(0.82045984, 0.42259875, 0, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/shadow_offset_x = 2

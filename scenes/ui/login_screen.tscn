@@ -3,18 +3,130 @@
 [ext_resource type="Script" uid="uid://d18hjcitymq27" path="res://scenes/ui/login_screen.gd" id="1_script"]
 [ext_resource type="Theme" uid="uid://legoom5ka3sy" path="res://scenes/ui/game_theme_ui.tres" id="2_theme"]
 
-[node name="LoginScreen" type="CanvasLayer" unique_id=52159599]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.11, 0.16, 0.1, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.72, 0.3, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lineedit"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.07, 0.1, 0.06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.55, 0.22, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_login_normal"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.24, 0.55, 0.18, 1)
+border_width_bottom = 3
+border_color = Color(0.14, 0.35, 0.1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_login_pressed"]
+content_margin_left = 12.0
+content_margin_top = 11.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.18, 0.42, 0.13, 1)
+border_width_top = 3
+border_color = Color(0.14, 0.35, 0.1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_login_hover"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.32, 0.68, 0.24, 1)
+border_width_bottom = 3
+border_color = Color(0.14, 0.35, 0.1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_exit_normal"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.4, 0.16, 0.12, 1)
+border_width_bottom = 3
+border_color = Color(0.25, 0.08, 0.06, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_exit_pressed"]
+content_margin_left = 12.0
+content_margin_top = 11.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.3, 0.1, 0.08, 1)
+border_width_top = 3
+border_color = Color(0.25, 0.08, 0.06, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_exit_hover"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.55, 0.22, 0.16, 1)
+border_width_bottom = 3
+border_color = Color(0.25, 0.08, 0.06, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="LoginScreen" type="CanvasLayer" unique_id=1218550135]
+process_mode = 3
+layer = 10
 script = ExtResource("1_script")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=681927193]
+[node name="Background" type="ColorRect" parent="." unique_id=1668522710]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.094, 0.078, 0.122, 1)
+color = Color(0.075, 0.063, 0.118, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1088667655]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2115269325]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,70 +134,105 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_theme")
 
-[node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=979461494]
-custom_minimum_size = Vector2(280, 0)
+[node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=1905929476]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel" unique_id=397416968]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel" unique_id=1163493729]
+[node name="MainVBox" type="VBoxContainer" parent="CenterContainer/Panel/MarginContainer" unique_id=1766925559]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=291218703]
+[node name="LogoContainer" type="CenterContainer" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1507487676]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "🌾 Harvest Paws"
+
+[node name="LogoTexture" type="Label" parent="CenterContainer/Panel/MarginContainer/MainVBox/LogoContainer" unique_id=1353125693]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "🐱"
 horizontal_alignment = 1
 
-[node name="SubtitleLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=519145208]
+[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1809337438]
 layout_mode = 2
-theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.88, 0.98, 0.6, 1)
+theme_override_font_sizes/font_size = 26
+text = "🌾 Crop Cat"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1797471375]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.8, 0.5, 1)
+theme_override_font_sizes/font_size = 12
 text = "Siapa namamu, petani?"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer" unique_id=2063307472]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1176880041]
 layout_mode = 2
 
-[node name="UsernameInput" type="LineEdit" parent="CenterContainer/Panel/VBoxContainer" unique_id=2032363906]
+[node name="UsernameInput" type="LineEdit" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=2078007728]
 layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.45, 0.55, 0.38, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_lineedit")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lineedit")
 placeholder_text = "Masukkan nama..."
 max_length = 20
 
-[node name="ErrorLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=1507953775]
-visible = false
-modulate = Color(1, 0.4, 0.4, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "⚠ Error"
-
-[node name="NewGameLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer" unique_id=1385778156]
+[node name="NewGameLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1880584898]
 visible = false
 modulate = Color(0.6, 1, 0.6, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "✨ Profil baru"
+horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="LoginButton" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=1536174674]
+[node name="ErrorLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1107421513]
+visible = false
+modulate = Color(1, 0.42, 0.42, 1)
 layout_mode = 2
-text = "Masuk ke Ladang"
+theme_override_font_sizes/font_size = 11
+text = "⚠ Error"
+horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="ExitGameButton" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=530673283]
+[node name="LoginButton" type="Button" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1430459376]
 layout_mode = 2
-text = "Quit Game
-"
+theme_override_colors/font_color = Color(0.92, 1, 0.75, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_login_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_login_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_login_hover")
+text = "▶  Masuk ke Ladang"
 
-[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer" unique_id=223218428]
+[node name="ExitButton" type="Button" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=330768084]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.75, 0.7, 1)
+theme_override_colors/font_hover_color = Color(1, 0.88, 0.85, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_exit_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_exit_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_exit_hover")
+text = "✕  Keluar"
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=2012491348]
 layout_mode = 2
 
-[node name="ProfilesContainer" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer" unique_id=1588962772]
+[node name="ProfilesContainer" type="VBoxContainer" parent="CenterContainer/Panel/MarginContainer/MainVBox" unique_id=1752098115]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="ProfilesLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer/ProfilesContainer" unique_id=796418276]
+[node name="ProfilesLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/MainVBox/ProfilesContainer" unique_id=1345321011]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.8, 0.5, 1)
 theme_override_font_sizes/font_size = 11
 text = "Atau pilih profil yang ada:"
 
-[node name="ProfilesList" type="VBoxContainer" parent="CenterContainer/Panel/VBoxContainer/ProfilesContainer" unique_id=1164181778]
+[node name="ProfilesList" type="VBoxContainer" parent="CenterContainer/Panel/MarginContainer/MainVBox/ProfilesContainer" unique_id=1928208126]
 layout_mode = 2
 theme_override_constants/separation = 4

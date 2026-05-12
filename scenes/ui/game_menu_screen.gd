@@ -1,77 +1,77 @@
-## game_menu_screen.gd
+## main_menu.gd
+## Scene  : res://scenes/ui/main_menu.tscn
+## Extends: CanvasLayer
+##
+## Gunakan scene asli game_menu_screen.tscn sebagai basis,
+## lalu ganti script-nya dengan file ini.
+## Struktur node yang dipakai:
+##   MarginContainer/MainButtons/StartGameButton
+##   MarginContainer/MainButtons/LoadGameButton
+##   MarginContainer/MainButtons/SaveGameButton
+##   MarginContainer/MainButtons/AudioSettingsButton
+##   MarginContainer/MainButtons/LogoutButton
+##   MarginContainer/DifficultyButtons/EasyButton
+##   MarginContainer/DifficultyButtons/NormalButton
+##   MarginContainer/DifficultyButtons/HardButton
+##   MarginContainer/MarginContainer/Label   ← judul/nama user
+
 extends CanvasLayer
 
-@onready var save_game_button: Button          = $MarginContainer/MainButtons/SaveGameButton
-@onready var start_game_button: Button         = $MarginContainer/MainButtons/StartGameButton
-@onready var load_game_button: Button          = $MarginContainer/MainButtons/LoadGameButton
-@onready var logout_button: Button             = $MarginContainer/MainButtons/LogoutButton
-@onready var exit_game_button: Button          = $MarginContainer/MainButtons/ExitGameButton
-@onready var main_buttons: VBoxContainer       = $MarginContainer/MainButtons
-@onready var difficulty_buttons: VBoxContainer = $MarginContainer/DifficultyButtons
+# ─────────────────────────────────────────────
+# NODE REFERENCES — cocok dengan struktur game_menu_screen.tscn
+# ─────────────────────────────────────────────
+@onready var start_button   : Button        = $MarginContainer/MainButtons/StartGameButton
+@onready var load_button    : Button        = $MarginContainer/MainButtons/LoadGameButton
+@onready var save_button    : Button        = $MarginContainer/MainButtons/SaveGameButton
+@onready var setting_button : Button        = $MarginContainer/MainButtons/AudioSettingsButton
+@onready var logout_button  : Button        = $MarginContainer/MainButtons/LogoutButton
+@onready var difficulty_box : VBoxContainer = $MarginContainer/DifficultyButtons
+@onready var main_box       : VBoxContainer = $MarginContainer/MainButtons
+@onready var title_label: Label = $CenterContainer/Panel/MarginContainer/MainVBox/TitleLabel
 
+# ─────────────────────────────────────────────
+# LIFECYCLE
+# ─────────────────────────────────────────────
 func _ready() -> void:
-	save_game_button.disabled   = not SaveGameManager.allow_save_game
-	save_game_button.focus_mode = Control.FOCUS_ALL if SaveGameManager.allow_save_game else Control.FOCUS_NONE
-
-	if SaveGameManager.allow_save_game:
-		start_game_button.text = "Resume"
-
-	var has_save: bool = SaveGameManager.current_user_has_any_save()
-	load_game_button.disabled = not has_save
+	difficulty_box.hide()
+	main_box.show()
 
 	if not SaveGameManager.current_username.is_empty():
-		var title: Label = get_node_or_null("MarginContainer/TitleLabel")
-		if title:
-			title.text = "Menu — " + SaveGameManager.current_username
+		title_label.text = SaveGameManager.current_username
 
-	difficulty_buttons.hide()
-	main_buttons.show()
+	save_button.disabled   = not SaveGameManager.allow_save_game
+	save_button.focus_mode = Control.FOCUS_ALL if SaveGameManager.allow_save_game \
+							 else Control.FOCUS_NONE
 
-	if SaveGameManager.allow_save_game:
-		exit_game_button.text = "Main Menu"
-	else:
-		exit_game_button.text = "Exit"
+	var has_save: bool = SaveGameManager.current_user_has_any_save()
+	load_button.disabled   = not has_save
+	load_button.focus_mode = Control.FOCUS_ALL if has_save else Control.FOCUS_NONE
 
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud:
-		hud.hide()
+	_animate_in()
+	start_button.grab_focus()
 
-func _exit_tree() -> void:
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud:
-		hud.show()
 
-# ── Tombol Exit / Main Menu ──────────────────────────────────────────────────
-func _on_exit_game_button_pressed() -> void:
-	if SaveGameManager.allow_save_game:
-		exit_game_button.disabled = true
+# ─────────────────────────────────────────────
+# TOMBOL — nama fungsi harus cocok dengan sinyal di scene
+# ─────────────────────────────────────────────
 
-		# Matikan pause dulu agar semua proses berjalan normal
-		get_tree().paused = false
-
-		# Serahkan seluruh proses ke GameManager.
-		# GameManager yang akan handle: fade -> bersihkan scene -> tampilkan menu.
-		GameManager.return_to_game_menu()
-
-		# Hapus diri sendiri setelah GameManager dipanggil
-		queue_free()
-	else:
-		get_tree().quit()
-
-# ── Fungsi lainnya (tidak diubah) ────────────────────────────────────────────
 func _on_start_game_button_pressed() -> void:
-	if SaveGameManager.allow_save_game:
-		queue_free()
-	else:
-		main_buttons.hide()
-		difficulty_buttons.show()
-
-func _on_save_game_button_pressed() -> void:
-	SaveGameManager.save_game()
+	main_box.hide()
+	difficulty_box.show()
 
 func _on_load_game_button_pressed() -> void:
+	load_button.disabled = true
 	GameManager.load_saved_game()
 	queue_free()
+
+func _on_save_game_button_pressed() -> void:
+	if SaveGameManager.allow_save_game:
+		SaveGameManager.save_game()
+		save_button.text = "Tersimpan ✓"
+		save_button.disabled = true
+		await get_tree().create_timer(1.5).timeout
+		save_button.disabled = false
+		save_button.text = "Save"
 
 func _on_audio_settings_button_pressed() -> void:
 	var settings_scene := preload("res://scenes/ui/audio_settings_ui.tscn")
@@ -79,8 +79,13 @@ func _on_audio_settings_button_pressed() -> void:
 	get_tree().root.add_child(instance)
 
 func _on_logout_button_pressed() -> void:
+	logout_button.disabled = true
 	queue_free()
 	GameManager.return_to_login()
+
+# ─────────────────────────────────────────────
+# DIFFICULTY
+# ─────────────────────────────────────────────
 
 func _on_easy_button_pressed() -> void:
 	DifficultyManager.set_difficulty(DifficultyManager.Level.EASY)
@@ -99,3 +104,17 @@ func _start_the_actual_game() -> void:
 	SaveGameManager.save_game()
 	get_tree().change_scene_to_file("res://scenes/ui/intro_cutscene.tscn")
 	queue_free()
+
+# ─────────────────────────────────────────────
+# ANIMASI
+# ─────────────────────────────────────────────
+
+func _animate_in() -> void:
+	# CanvasLayer tidak punya modulate — pakai child pertama
+	var root_control: CanvasItem = get_child(0)
+	if not is_instance_valid(root_control):
+		return
+	root_control.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(root_control, "modulate:a", 1.0, 0.3) \
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
