@@ -68,6 +68,11 @@ text = "✨ Profil baru"
 layout_mode = 2
 text = "Masuk ke Ladang"
 
+[node name="ExitGameButton" type="Button" parent="CenterContainer/Panel/VBoxContainer" unique_id=530673283]
+layout_mode = 2
+text = "Quit Game
+"
+
 [node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/VBoxContainer" unique_id=223218428]
 layout_mode = 2
 
