@@ -1,15 +1,11 @@
-# user_indicator_hud.gd — VERSI FINAL DIPERBAIKI
+# user_indicator_hud.gd — VERSI FINAL + FITUR ZOOM MINIMAP
 # Lokasi: res://scenes/ui/user_indicator_hud.gd
 #
-# BUG KRITIS DITEMUKAN:
-#   @onready var player_icon_overlay: TextureRect = $MinimapContainer/.../PlayerIconOverlay
-#   Node "PlayerIconOverlay" TIDAK ADA di user_indicator_hud.tscn!
-#   Akibatnya GDScript 4 langsung error saat _ready() dan menghentikan
-#   eksekusi — termasuk baris achievement_button.pressed.connect(...).
-#   Itulah kenapa tombol 🏆 tidak bisa diklik dan tidak ada yang berfungsi.
-#
-# FIX: Hapus @onready ke PlayerIconOverlay. Gunakan null-check untuk semua
-#   minimap references agar aman walau node tidak ada.
+# PERUBAHAN dari versi sebelumnya:
+#   • Tambah sistem zoom minimap: tombol + dan - di bawah peta
+#   • Zoom berubah bertahap lewat array ZOOM_STEPS
+#   • ZoomLabel menampilkan persentase zoom saat ini
+#   • Tombol + / - otomatis di-disable di batas min/max zoom
 extends CanvasLayer
 
 
@@ -23,17 +19,35 @@ extends CanvasLayer
 @onready var minimap_viewport:   SubViewport    = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport
 @onready var minimap_camera:     Camera2D       = $MinimapContainer/VBoxContainer/MinimapViewportContainer/MinimapViewport/MinimapCamera
 
-# ── CATATAN: PlayerIconOverlay DIHAPUS karena tidak ada di .tscn ──────────────
-# Jika kamu ingin menambahkannya, tambahkan TextureRect dengan nama
-# "PlayerIconOverlay" sebagai child dari MinimapViewportContainer di scene,
-# lalu uncomment baris di bawah ini:
-# @onready var player_icon_overlay: TextureRect = $MinimapContainer/VBoxContainer/MinimapViewportContainer/PlayerIconOverlay
+# Tombol Zoom (node baru)
+@onready var zoom_in_button:  Button = $MinimapContainer/VBoxContainer/ZoomButtonsRow/ZoomInButton
+@onready var zoom_out_button: Button = $MinimapContainer/VBoxContainer/ZoomButtonsRow/ZoomOutButton
+@onready var zoom_label:      Label  = $MinimapContainer/VBoxContainer/ZoomButtonsRow/ZoomLabel
+
+
+# ── Konfigurasi Zoom Minimap ──────────────────────────────────────────────────
+#
+# Setiap elemen adalah nilai camera.zoom langsung (Vector2 scalar).
+# Indeks kecil = lebih jauh (zoom out), indeks besar = lebih dekat (zoom in).
+#
+#   0.08  → kamera zoom 0.08x → tampilkan area sangat luas  (12.5x dari default)
+#   0.13  → kamera zoom 0.13x → zoom out sedang
+#   0.25  → kamera zoom 0.25x → DEFAULT (sama dengan MINIMAP_ZOOM_LEVEL = 4.0)
+#   0.40  → kamera zoom 0.40x → zoom in sedang
+#   0.60  → kamera zoom 0.60x → zoom in maksimum (detail tinggi)
+#
+const ZOOM_STEPS:  Array[float]  = [0.08, 0.13, 0.25, 0.40, 0.60]
+const ZOOM_LABELS: Array[String] = ["33%", "50%", "100%", "160%", "240%"]
+const ZOOM_DEFAULT_INDEX: int    = 2   # index 2 = 0.25 = nilai default
+
+var _zoom_index: int = ZOOM_DEFAULT_INDEX
 
 
 # ── Achievement Menu ──────────────────────────────────────────────────────────
 const ACHIEVEMENT_MENU_SCENE: String = "res://scenes/ui/achievement_menu.tscn"
 var _achievement_menu_instance: CanvasLayer = null
 
+# Tetap disimpan untuk kompatibilitas — tidak dipakai langsung setelah refactor zoom
 const MINIMAP_ZOOM_LEVEL: float = 4.0
 var _player: Node2D = null
 
@@ -59,7 +73,7 @@ func _ready() -> void:
 	else:
 		push_error("UserIndicatorHUD: $AchievementButton NULL! Cek scene.")
 
-	# === Minimap ===
+	# === Minimap + Zoom ===
 	_setup_minimap()
 
 	print("🛠️ UserIndicatorHUD: _ready() selesai tanpa error.")
@@ -80,15 +94,77 @@ func _on_achievement_button_pressed() -> void:
 		_achievement_menu_instance.show_menu()
 
 
-# ── Minimap ───────────────────────────────────────────────────────────────────
+# ── Minimap Setup ─────────────────────────────────────────────────────────────
 func _setup_minimap() -> void:
 	if minimap_camera == null or minimap_viewport == null:
 		push_warning("UserIndicatorHUD: Node minimap tidak ditemukan, minimap dilewati.")
 		return
-	minimap_camera.zoom = Vector2(1.0 / MINIMAP_ZOOM_LEVEL, 1.0 / MINIMAP_ZOOM_LEVEL)
-	minimap_viewport.world_2d = get_tree().root.world_2d
-	_refresh_player_reference()
 
+	# ── FIX BLUR: paksa Nearest-Neighbor filter untuk pixel art ──────────────
+	var viewport_container: SubViewportContainer = minimap_viewport.get_parent()
+	if viewport_container != null:
+		viewport_container.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	minimap_viewport.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
+
+	# ── Terapkan zoom default ─────────────────────────────────────────────────
+	_zoom_index = ZOOM_DEFAULT_INDEX
+	_apply_zoom()
+
+	# ── Bagikan World2D dengan scene utama ────────────────────────────────────
+	minimap_viewport.world_2d = get_tree().root.world_2d
+
+	# ── Sambungkan tombol zoom ────────────────────────────────────────────────
+	if zoom_in_button != null and zoom_out_button != null:
+		zoom_in_button.pressed.connect(_on_zoom_in_pressed)
+		zoom_out_button.pressed.connect(_on_zoom_out_pressed)
+		print("🗺️ Minimap: Tombol zoom tersambung.")
+	else:
+		push_warning("UserIndicatorHUD: Node ZoomInButton / ZoomOutButton tidak ditemukan. Pastikan sudah ditambahkan ke scene.")
+
+	_refresh_player_reference()
+	print("🗺️ Minimap setup selesai.")
+
+
+# ── Zoom Logic ────────────────────────────────────────────────────────────────
+
+## Terapkan nilai zoom dari array ZOOM_STEPS ke kamera minimap.
+func _apply_zoom() -> void:
+	if minimap_camera == null:
+		return
+
+	var zoom_value: float = ZOOM_STEPS[_zoom_index]
+	minimap_camera.zoom = Vector2(zoom_value, zoom_value)
+
+	# Update label teks
+	if zoom_label != null:
+		zoom_label.text = ZOOM_LABELS[_zoom_index]
+
+	# Enable/disable tombol di batas
+	if zoom_in_button != null:
+		zoom_in_button.disabled = (_zoom_index >= ZOOM_STEPS.size() - 1)
+	if zoom_out_button != null:
+		zoom_out_button.disabled = (_zoom_index <= 0)
+
+	print("🗺️ Minimap zoom → indeks %d | camera zoom %.2f | label %s" % [
+		_zoom_index, zoom_value, ZOOM_LABELS[_zoom_index]
+	])
+
+
+## Tombol "+" ditekan → zoom in (tampilkan area lebih kecil, lebih detail).
+func _on_zoom_in_pressed() -> void:
+	if _zoom_index < ZOOM_STEPS.size() - 1:
+		_zoom_index += 1
+		_apply_zoom()
+
+
+## Tombol "−" ditekan → zoom out (tampilkan area lebih luas).
+func _on_zoom_out_pressed() -> void:
+	if _zoom_index > 0:
+		_zoom_index -= 1
+		_apply_zoom()
+
+
+# ── Player Reference ──────────────────────────────────────────────────────────
 func _refresh_player_reference() -> void:
 	var players := get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
@@ -100,7 +176,7 @@ func _refresh_player_reference() -> void:
 		_player = players[0] as Node2D
 
 
-# ── Process: update kamera minimap ───────────────────────────────────────────
+# ── Process: update kamera minimap ikuti pemain ───────────────────────────────
 func _process(_delta: float) -> void:
 	if not is_instance_valid(minimap_camera):
 		return

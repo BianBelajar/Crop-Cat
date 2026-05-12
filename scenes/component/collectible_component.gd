@@ -1,31 +1,34 @@
+# =============================================================================
+# collectible_component.gd — VERSI DIPERBAIKI (BUG collect_wood FIXED)
+# Lokasi: res://scenes/component/collectible_component.gd
+# =============================================================================
 class_name CollectibleComponent
 extends Area2D
-# =============================================================================
-# collectible_component.gd — VERSI DIPERBAIKI
-# Lokasi: res://scenes/component/collectible_component.gd
-#
-# PERBAIKAN:
-#   • Tambah trigger achievement "first_harvest" saat item hasil panen diambil.
-#     Item panen yang relevan: "tomato" dan "wheat".
-#   • Tambah tracking counter bibit yang ditanam untuk achievement "plant_10"
-#     (lihat catatan di bawah — plant_10 lebih baik ditaruh di tomato.gd/wheat.gd)
-# =============================================================================
 
 @export var collectable_name: String
 
-## Nama-nama item yang dianggap sebagai "hasil panen" untuk achievement first_harvest
+## Item yang dianggap sebagai "hasil panen" → achievement first_harvest
 const HARVEST_ITEMS: Array[String] = ["tomato", "wheat"]
+
+## Item yang dianggap sebagai "kayu" → achievement collect_wood
+## "log" adalah collectable_name yang diset di log.tscn
+const WOOD_ITEMS: Array[String] = ["log"]
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		InventoryManager.add_collectable(collectable_name)
-		print("Collected:", collectable_name)
+		print("Collected: ", collectable_name)
 
-		# ─── Cek Achievement: first_harvest ──────────────────────────────
+		# ─── Achievement: first_harvest (Panen Pertama) ───────────────────────
 		if collectable_name in HARVEST_ITEMS:
 			print("✅ Quest [Panen Pertama] dicatat — item: ", collectable_name)
-			print("🏆 Mencoba unlock Achievement: first_harvest")
 			AchievementManager.unlock_achievement("first_harvest")
+
+		# ─── Achievement: collect_wood (Penebang Hutan) ───────────────────────
+		# "log" adalah nama yang di-set di log.tscn pada node CollectibleComponent
+		if collectable_name in WOOD_ITEMS:
+			print("🏆 Achievement Kayu dipicu!")  # ← Debug print sesuai permintaan
+			AchievementManager.unlock_achievement("collect_wood")
 
 		get_parent().queue_free()
